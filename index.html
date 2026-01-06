@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costify - Hitung HPP Produk Jadi Lebih Mudah</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .landing-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .hero-section {
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .feature-section {
+            background: white;
+            padding: 80px 0;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .app-container {
+            display: none;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .navbar-custom {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: #667eea !important;
+            font-size: 1.5rem;
+        }
+        
+        .main-content {
+            padding: 30px 0;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 20px;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .table {
+            margin-top: 20px;
+        }
+        
+        .result-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+        
+        .login-container {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .auth-card h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Landing Page -->
+    <div id="landingPage" class="landing-page">
+        <section class="hero-section">
+            <div class="container">
+                <h1>Costify – Hitung HPP Produk Jadi Lebih Mudah</h1>
+                <p>Aplikasi web sederhana untuk menghitung biaya produksi, mengetahui modal sebenarnya, dan menentukan harga jual dengan tepat.</p>
+                <button class="btn btn-light btn-lg me-3" onclick="showLogin()">
+                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                </button>
+                <button class="btn btn-outline-light btn-lg" onclick="showRegister()">
+                    <i class="fas fa-user-plus me-2"></i>Daftar Akun
+                </button>
+            </div>
+        </section>
+
+        <section class="feature-section">
+            <div class="container">
+                <h2 class="text-center mb-5">Mengapa Memilih Costify?</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-calculator"></i></div>
+                            <h4>Perhitungan Otomatis</h4>
+                            <p>Menghitung HPP secara otomatis dan akurat dengan konversi satuan yang tepat</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                            <h4>Tentukan Harga Jual</h4>
+                            <p>Menentukan harga jual berdasarkan margin keuntungan yang Anda inginkan</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <h4>Mudah Digunakan</h4>
+                            <p>Tampilan sederhana dan responsif, cocok untuk semua perangkat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="auth-card">
+            <h2 class="text-center"><i class="fas fa-sign-in-alt me-2"></i>Login</h2>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="loginEmail" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember Me</label>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+                <p class="text-center">Belum punya akun? <a href="#" onclick="showRegister()">Daftar di sini</a></p>
+                <p class="text-center"><a href="#" onclick="showLanding()">Kembali ke Beranda</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="registerPage" class="login-container">
+        <div class="auth-card">
+            <h2 class="text-center"><i class="fas fa-user-plus me-2"></i>Daftar Akun</h2>
+            <form id="registerForm">
+                <div class="mb-3">
+                    <label class="form-label">Nama</label>
+                    <input type="text" class="form-control" id="registerName" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="registerEmail" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="registerPassword" required minlength="6">
+                    <small class="text-muted">Minimal 6 karakter</small>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mb-3">Daftar</button>
+                <p class="text-center">Sudah punya akun? <a href="#" onclick="showLogin()">Login di sini</a></p>
+                <p class="text-center"><a href="#" onclick="showLanding()">Kembali ke Beranda</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="appContainer" class="app-container">
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="fas fa-calculator me-2"></i>Costify</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showDashboard()">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showProducts()">Produk</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showHistory()">Riwayat</a>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link" id="userNameNav"></span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="main-content">
+            <div class="container">
+                <!-- Dashboard -->
+                <div id="dashboardSection">
+                    <div class="card mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
+                        <div class="card-body text-white text-center py-4">
+                            <h2 class="mb-3">👋 Selamat Datang di Costify</h2>
+                            <p class="mb-0" style="font-size: 1.1rem;">Aplikasi sederhana untuk membantu menghitung Harga Pokok Produksi (HPP) secara lebih rapi dan terstruktur dengan konversi satuan yang akurat.</p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4" style="border-left: 4px solid #667eea;">
+                        <div class="card-body">
+                            <h5 class="mb-3"><i class="fas fa-lightbulb text-warning me-2"></i>Cara menggunakan Costify:</h5>
+                            <ol class="mb-0">
+                                <li class="mb-2">Tambahkan produk terlebih dahulu</li>
+                                <li class="mb-2">Klik tombol "Hitung HPP" pada produk</li>
+                                <li class="mb-2">Isi biaya bahan baku dengan satuan yang sesuai</li>
+                                <li class="mb-2">Sistem akan otomatis melakukan konversi satuan</li>
+                                <li>Dapatkan estimasi HPP produk Anda</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <h3 class="mb-3">📊 Statistik</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <i class="fas fa-box fa-3x text-primary mb-3"></i>
+                                    <h5>Total Produk</h5>
+                                    <h2 id="totalProducts">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <i class="fas fa-history fa-3x text-success mb-3"></i>
+                                    <h5>Total Perhitungan</h5>
+                                    <h2 id="totalCalculations">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <i class="fas fa-chart-line fa-3x text-warning mb-3"></i>
+                                    <h5>Rata-rata HPP</h5>
+                                    <h2 id="avgHPP">Rp 0</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="emptyState" class="card text-center" style="display:none;">
+                        <div class="card-body py-5">
+                            <i class="fas fa-chart-pie fa-4x text-muted mb-3"></i>
+                            <h5 class="text-muted">Belum ada perhitungan HPP</h5>
+                            <p class="text-muted">Mulai dengan menambahkan produk dan menghitung biaya produksinya.</p>
+                            <button class="btn btn-primary mt-2" onclick="showProducts()">
+                                <i class="fas fa-plus me-2"></i>Tambah Produk Sekarang
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div id="productsSection" style="display:none;">
+                    <h2 class="mb-4">Kelola Produk</h2>
+                    
+                    <div class="card">
+                        <div class="card-header">Tambah Produk Baru</div>
+                        <div class="card-body">
+                            <form id="productForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nama Produk</label>
+                                        <input type="text" class="form-control" id="productName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Jumlah Produksi (per batch)</label>
+                                        <input type="number" class="form-control" id="productQuantity" required min="1">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-plus me-2"></i>Tambah Produk
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header">Daftar Produk</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Produk</th>
+                                            <th>Jumlah Produksi</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productList"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculate HPP Section -->
+                <div id="calculateSection" style="display:none;">
+                    <button class="btn btn-secondary mb-3" onclick="showProducts()">
+                        <i class="fas fa-arrow-left me-2"></i>Kembali
+                    </button>
+                    <h2 class="mb-4">Hitung HPP: <span id="calcProductName"></span></h2>
+
+                    <!-- Bahan Baku -->
+                    <div class="card">
+                        <div class="card-header">1. Biaya Bahan Baku</div>
+                        <div class="card-body">
+                            <div class="alert alert-info mb-3">
+                                <strong><i class="fas fa-info-circle me-2"></i>Informasi:</strong> 
+                                Sistem akan otomatis melakukan konversi satuan. Anda bisa memasukkan harga dalam satuan berbeda dari jumlah pemakaian.
+                            </div>
+
+                            <form id="materialForm">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Nama Bahan</label>
+                                        <input type="text" class="form-control" id="materialName" required>
+                                    </div>
+                                    
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Tipe Harga</label>
+                                        <select class="form-select" id="priceType" onchange="togglePackageInput()">
+                                            <option value="murni">Per Satuan Murni</option>
+                                            <option value="kemasan">Per Kemasan</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Satuan Harga</label>
+                                        <select class="form-select" id="priceUnit" required>
+                                            <option value="kg">Kilogram (kg)</option>
+                                            <option value="gram">Gram (g)</option>
+                                            <option value="liter">Liter (l)</option>
+                                            <option value="ml">Mililiter (ml)</option>
+                                            <option value="pcs">Pieces (pcs)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Harga Beli (Rp)</label>
+                                        <input type="number" class="form-control" id="materialPrice" required min="0" step="0.01">
+                                    </div>
+
+                                    <div class="col-md-3 mb-3" id="packageContentDiv" style="display:none;">
+                                        <label class="form-label">Isi Kemasan</label>
+                                        <input type="number" class="form-control" id="packageContent" min="0" step="0.01" placeholder="Contoh: 7.5">
+                                        <small class="text-muted">Isi per kemasan</small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Satuan Pemakaian</label>
+                                        <select class="form-select" id="usageUnit" required>
+                                            <option value="kg">Kilogram (kg)</option>
+                                            <option value="gram">Gram (g)</option>
+                                            <option value="liter">Liter (l)</option>
+                                            <option value="ml">Mililiter (ml)</option>
+                                            <option value="pcs">Pieces (pcs)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Jumlah Pakai</label>
+                                        <input type="number" class="form-control" id="materialQty" required min="0" step="0.001">
+                                    </div>
+
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">&nbsp;</label>
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <i class="fas fa-plus"></i> Tambah
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div id="materialTableContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- Tenaga Kerja -->
+                    <div class="card mt-4">
+                        <div class="card-header">2. Biaya Tenaga Kerja</div>
+                        <div class="card-body">
+                            <form id="laborForm">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Jenis Tenaga Kerja</label>
+                                        <input type="text" class="form-control" id="laborType" required>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Jenis Biaya</label>
+                                        <select class="form-select" id="laborCostType">
+                                            <option value="per_jam">Per Jam</option>
+                                            <option value="per_unit">Per Unit</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Biaya (Rp)</label>
+                                        <input type="number" class="form-control" id="laborCost" required min="0">
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Waktu/Jumlah</label>
+                                        <input type="number" class="form-control" id="laborTime" required min="0" step="0.01">
+                                    </div>
+                                    <div class="col-md-1 mb-3">
+                                        <label class="form-label">Satuan</label>
+                                        <select class="form-select" id="laborTimeUnit">
+                                            <option value="jam">Jam</option>
+                                            <option value="menit">Menit</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">&nbsp;</label>
+                                        <button type="submit" class="btn btn-primary w-100">Tambah</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Jenis</th>
+                                            <th>Tipe Biaya</th>
+                                            <th>Biaya</th>
+                                            <th>Waktu/Jumlah</th>
+                                            <th>Total</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="laborList"></tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="4">Total Biaya Tenaga Kerja</th>
+                                            <th id="totalLabor">Rp 0</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overhead -->
+                    <div class="card mt-4">
+                        <div class="card-header">3. Biaya Overhead</div>
+                        <div class="card-body">
+                            <form id="overheadForm">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Jenis Overhead</label>
+                                        <select class="form-select" id="overheadType">
+                                            <option value="Listrik">Listrik</option>
+                                            <option value="Air">Air</option>
+                                            <option value="Gas">Gas</option>
+                                            <option value="Sewa Tempat">Sewa Tempat</option>
+                                            <option value="Penyusutan Alat">Penyusutan Alat</option>
+                                            <option value="Lain-lain">Lain-lain</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Metode</label>
+                                        <select class="form-select" id="overheadMethod" onchange="toggleOverheadInput()">
+                                            <option value="manual">Manual (Rp)</option>
+                                            <option value="persentase">Persentase (%)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label" id="overheadValueLabel">Nominal (Rp)</label>
+                                        <input type="number" class="form-control" id="overheadValue" required min="0" step="0.01">
+                                    </div>
+                                    <div class="col-md-2 mb-3" id="overheadBaseDiv" style="display:none;">
+                                        <label class="form-label">Basis Persentase</label>
+                                        <select class="form-select" id="overheadBase">
+                                            <option value="material">Total Bahan Baku</option>
+                                            <option value="production">Total Produksi</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">&nbsp;</label>
+                                        <button type="submit" class="btn btn-primary w-100">Tambah</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Jenis</th>
+                                            <th>Metode</th>
+                                            <th>Nilai</th>
+                                            <th>Total</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="overheadList"></tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="3">Total Biaya Overhead</th>
+                                            <th id="totalOverhead">Rp 0</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hasil HPP -->
+                    <div class="card mt-4">
+                        <div class="card-header">Hasil Perhitungan HPP</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="result-box">
+                                        <h5>Total HPP Produksi</h5>
+                                        <div class="result-value" id="totalHPP">Rp 0</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="result-box">
+                                        <h5>HPP per Unit</h5>
+                                        <div class="result-value" id="hppPerUnit">Rp 0</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5 class="mt-4 mb-3">Estimasi Harga Jual</h5>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Margin Keuntungan (%)</label>
+                                    <input type="number" class="form-control" id="profitMargin" min="0" value="30" oninput="calculateSellingPrice()">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Harga Jual per Unit</label>
+                                    <input type="text" class="form-control" id="sellingPrice" readonly>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Laba per Unit</label>
+                                    <input type="text" class="form-control" id="profitPerUnit" readonly>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-success btn-lg w-100 mt-4" onclick="saveCalculation()">
+                                <i class="fas fa-save me-2"></i>Simpan Perhitungan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Section -->
+                <div id="historySection" style="display:none;">
+                    <h2 class="mb-4">Riwayat Perhitungan</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Produk</th>
+                                            <th>Jumlah Produksi</th>
+                                            <th>Total HPP</th>
+                                            <th>HPP per Unit</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="historyList"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        let currentUser = null;
+        let currentProductId = null;
+        let materials = [];
+        let labors = [];
+        let overheads = [];
+
+        window.onload = function() {
+            checkAutoLogin();
+        };
+
+        function checkAutoLogin() {
+            const session = sessionStorage.getItem('costify_session');
+            if (session) {
+                const user = JSON.parse(session);
+                currentUser = user;
+                showApp();
+            } else {
+                showLanding();
+            }
+        }
+
+        function showLanding() {
+            hideAll();
+            document.getElementById('landingPage').style.display = 'block';
+        }
+
+        function showLogin() {
+            hideAll();
+            document.getElementById('loginPage').style.display = 'flex';
+        }
+
+        function showRegister() {
+            hideAll();
+            document.getElementById('registerPage').style.display = 'flex';
+        }
+
+        function showApp() {
+            hideAll();
+            document.getElementById('appContainer').style.display = 'block';
+            document.getElementById('userNameNav').textContent = 'Hi, ' + currentUser.name;
+            showDashboard();
+            updateDashboard();
+        }
+
+        function hideAll() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('registerPage').style.display = 'none';
+            document.getElementById('appContainer').style.display = 'none';
+        }
+
+        function togglePackageInput() {
+            const priceType = document.getElementById('priceType').value;
+            const packageDiv = document.getElementById('packageContentDiv');
+            const packageInput = document.getElementById('packageContent');
+            
+            if (priceType === 'kemasan') {
+                packageDiv.style.display = 'block';
+                packageInput.required = true;
+            } else {
+                packageDiv.style.display = 'none';
+                packageInput.required = false;
+                packageInput.value = '';
+            }
+        }
+
+        // ========== FUNGSI KONVERSI SATUAN (SISTEM REVISI) ==========
+        
+        function calculateMaterialCost(priceType, priceUnit, price, packageContent, usageUnit, usageQty) {
+            let hargaSatuan = price;
+            let satuanHarga = priceUnit;
+            
+            if (priceType === 'kemasan' && packageContent > 0) {
+                hargaSatuan = price / packageContent;
+            }
+            
+            let hargaSetara = hargaSatuan;
+            let jumlahSetara = usageQty;
+            
+            if (satuanHarga === 'kg' && usageUnit === 'gram') {
+                hargaSetara = hargaSatuan / 1000;
+                jumlahSetara = usageQty;
+            }
+            else if (satuanHarga === 'liter' && usageUnit === 'ml') {
+                hargaSetara = hargaSatuan / 1000;
+                jumlahSetara = usageQty;
+            }
+            else if (satuanHarga === 'gram' && usageUnit === 'kg') {
+                hargaSetara = hargaSatuan;
+                jumlahSetara = usageQty * 1000;
+            }
+            else if (satuanHarga === 'ml' && usageUnit === 'liter') {
+                hargaSetara = hargaSatuan;
+                jumlahSetara = usageQty * 1000;
+            }
+            else if (satuanHarga === usageUnit) {
+                hargaSetara = hargaSatuan;
+                jumlahSetara = usageQty;
+            }
+            else if (satuanHarga === 'pcs' && usageUnit === 'pcs') {
+                hargaSetara = hargaSatuan;
+                jumlahSetara = usageQty;
+            }
+            
+            const totalBiaya = hargaSetara * jumlahSetara;
+            
+            return {
+                total: totalBiaya,
+                normalizedPrice: hargaSatuan,
+                finalPrice: hargaSetara,
+                finalQty: jumlahSetara
+            };
+        }
+
+        document.getElementById('registerForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            if (password.length < 6) {
+                alert('Password minimal 6 karakter!');
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('costify_users') || '[]');
+            
+            if (users.find(u => u.email === email)) {
+                alert('Email sudah terdaftar!');
+                return;
+            }
+
+            const newUser = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                password: btoa(password)
+            };
+
+            users.push(newUser);
+            localStorage.setItem('costify_users', JSON.stringify(users));
+            alert('Registrasi berhasil! Silakan login.');
+            showLogin();
+        };
+
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const remember = document.getElementById('rememberMe').checked;
+
+            let users = JSON.parse(localStorage.getItem('costify_users') || '[]');
+            const user = users.find(u => u.email === email && u.password === btoa(password));
+
+            if (!user) {
+                alert('Email atau password salah!');
+                return;
+            }
+
+            currentUser = user;
+            if (remember) {
+                sessionStorage.setItem('costify_session', JSON.stringify(user));
+            }
+            
+            showApp();
+        };
+
+        function logout() {
+            if (confirm('Yakin ingin logout?')) {
+                sessionStorage.removeItem('costify_session');
+                currentUser = null;
+                showLanding();
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('dashboardSection').style.display = 'block';
+            document.getElementById('productsSection').style.display = 'none';
+            document.getElementById('calculateSection').style.display = 'none';
+            document.getElementById('historySection').style.display = 'none';
+            updateDashboard();
+        }
+
+        function updateDashboard() {
+            const products = getProducts();
+            const history = getHistory();
+            
+            document.getElementById('totalProducts').textContent = products.length;
+            document.getElementById('totalCalculations').textContent = history.length;
+            
+            const emptyState = document.getElementById('emptyState');
+            
+            if (history.length > 0) {
+                const avgHpp = history.reduce((sum, h) => sum + h.hppPerUnit, 0) / history.length;
+                document.getElementById('avgHPP').textContent = formatRupiah(avgHpp);
+                if (emptyState) emptyState.style.display = 'none';
+            } else {
+                if (emptyState) emptyState.style.display = 'block';
+            }
+        }
+
+        function showProducts() {
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('productsSection').style.display = 'block';
+            document.getElementById('calculateSection').style.display = 'none';
+            document.getElementById('historySection').style.display = 'none';
+            loadProducts();
+        }
+
+        function showHistory() {
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('productsSection').style.display = 'none';
+            document.getElementById('calculateSection').style.display = 'none';
+            document.getElementById('historySection').style.display = 'block';
+            loadHistory();
+        }
+
+        document.getElementById('productForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('productName').value;
+            const quantity = parseInt(document.getElementById('productQuantity').value);
+
+            const product = {
+                id: Date.now(),
+                userId: currentUser.id,
+                name: name,
+                quantity: quantity,
+                createdAt: new Date().toISOString()
+            };
+
+            let products = getProducts();
+            products.push(product);
+            localStorage.setItem('costify_products', JSON.stringify(products));
+            
+            this.reset();
+            loadProducts();
+            updateDashboard();
+            alert('Produk berhasil ditambahkan!');
+        };
+
+        function getProducts() {
+            const all = JSON.parse(localStorage.getItem('costify_products') || '[]');
+            return all.filter(p => p.userId === currentUser.id);
+        }
+
+        function loadProducts() {
+            const products = getProducts();
+            const tbody = document.getElementById('productList');
+            tbody.innerHTML = '';
+
+            if (products.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="text-center">Belum ada produk</td></tr>';
+                return;
+            }
+
+            products.forEach(p => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${p.name}</td>
+                        <td>${p.quantity} unit</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" onclick="calculateHPP(${p.id})">
+                                <i class="fas fa-calculator"></i> Hitung HPP
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteProduct(${p.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Yakin ingin menghapus produk ini?')) {
+                let products = JSON.parse(localStorage.getItem('costify_products') || '[]');
+                products = products.filter(p => p.id !== id);
+                localStorage.setItem('costify_products', JSON.stringify(products));
+                loadProducts();
+                updateDashboard();
+            }
+        }
+
+        function calculateHPP(productId) {
+            currentProductId = productId;
+            const products = JSON.parse(localStorage.getItem('costify_products') || '[]');
+            const product = products.find(p => p.id === productId);
+            
+            document.getElementById('calcProductName').textContent = product.name;
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('productsSection').style.display = 'none';
+            document.getElementById('calculateSection').style.display = 'block';
+            document.getElementById('historySection').style.display = 'none';
+            
+            materials = [];
+            labors = [];
+            overheads = [];
+            loadMaterials();
+            loadLabors();
+            loadOverheads();
+            updateTotals();
+        }
+
+        document.getElementById('materialForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const priceType = document.getElementById('priceType').value;
+            const priceUnit = document.getElementById('priceUnit').value;
+            const price = parseFloat(document.getElementById('materialPrice').value);
+            const packageContent = priceType === 'kemasan' ? parseFloat(document.getElementById('packageContent').value) : 0;
+            const usageUnit = document.getElementById('usageUnit').value;
+            const usageQty = parseFloat(document.getElementById('materialQty').value);
+            
+            const result = calculateMaterialCost(priceType, priceUnit, price, packageContent, usageUnit, usageQty);
+            
+            const material = {
+                id: Date.now(),
+                name: document.getElementById('materialName').value,
+                priceType: priceType,
+                priceUnit: priceUnit,
+                price: price,
+                packageContent: packageContent,
+                usageUnit: usageUnit,
+                quantity: usageQty,
+                total: result.total,
+                calculation: result
+            };
+            
+            materials.push(material);
+            this.reset();
+            togglePackageInput();
+            loadMaterials();
+            updateTotals();
+        };
+
+        function loadMaterials() {
+            const container = document.getElementById('materialTableContainer');
+            
+            if (materials.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-inbox fa-3x mb-3"></i>
+                        <p>Belum ada bahan baku yang ditambahkan.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let tableHTML = `<table class="table">
+                <thead>
+                    <tr>
+                        <th>Nama Bahan</th>
+                        <th>Harga</th>
+                        <th>Pemakaian</th>
+                        <th>Total</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            
+            materials.forEach((m, idx) => {
+                let priceDisplay = '';
+                if (m.priceType === 'kemasan') {
+                    priceDisplay = `${formatRupiah(m.price)} / ${m.packageContent} ${m.priceUnit}`;
+                } else {
+                    priceDisplay = `${formatRupiah(m.price)} / ${m.priceUnit}`;
+                }
+                
+                tableHTML += `
+                    <tr>
+                        <td>${m.name}</td>
+                        <td>${priceDisplay}</td>
+                        <td>${m.quantity} ${m.usageUnit}</td>
+                        <td>${formatRupiah(m.total)}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="deleteMaterial(${idx})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `</tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3">Total Biaya Bahan Baku</th>
+                        <th id="totalMaterial">Rp 0</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>`;
+            
+            container.innerHTML = tableHTML;
+        }
+
+        function deleteMaterial(idx) {
+            materials.splice(idx, 1);
+            loadMaterials();
+            updateTotals();
+        }
+
+        document.getElementById('laborForm').onsubmit = function(e) {
+            e.preventDefault();
+            const labor = {
+                id: Date.now(),
+                type: document.getElementById('laborType').value,
+                costType: document.getElementById('laborCostType').value,
+                cost: parseFloat(document.getElementById('laborCost').value),
+                time: parseFloat(document.getElementById('laborTime').value),
+                timeUnit: document.getElementById('laborTimeUnit').value
+            };
+            
+            let multiplier = labor.time;
+            if (labor.timeUnit === 'menit') {
+                multiplier = labor.time / 60;
+            }
+            
+            labor.total = labor.cost * multiplier;
+            
+            labors.push(labor);
+            this.reset();
+            loadLabors();
+            updateTotals();
+        };
+
+        function loadLabors() {
+            const tbody = document.getElementById('laborList');
+            tbody.innerHTML = '';
+            
+            if (labors.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Belum ada tenaga kerja</td></tr>';
+                return;
+            }
+            
+            labors.forEach((l, idx) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${l.type}</td>
+                        <td>${l.costType === 'per_jam' ? 'Per Jam' : 'Per Unit'}</td>
+                        <td>${formatRupiah(l.cost)}</td>
+                        <td>${l.time} ${l.timeUnit}</td>
+                        <td>${formatRupiah(l.total)}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="deleteLabor(${idx})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteLabor(idx) {
+            labors.splice(idx, 1);
+            loadLabors();
+            updateTotals();
+        }
+
+        function toggleOverheadInput() {
+            const method = document.getElementById('overheadMethod').value;
+            const label = document.getElementById('overheadValueLabel');
+            const baseDiv = document.getElementById('overheadBaseDiv');
+            
+            if (method === 'persentase') {
+                label.textContent = 'Persentase (%)';
+                baseDiv.style.display = 'block';
+            } else {
+                label.textContent = 'Nominal (Rp)';
+                baseDiv.style.display = 'none';
+            }
+        }
+
+        document.getElementById('overheadForm').onsubmit = function(e) {
+            e.preventDefault();
+            const overhead = {
+                id: Date.now(),
+                type: document.getElementById('overheadType').value,
+                method: document.getElementById('overheadMethod').value,
+                value: parseFloat(document.getElementById('overheadValue').value),
+                base: document.getElementById('overheadBase').value
+            };
+            
+            overheads.push(overhead);
+            this.reset();
+            toggleOverheadInput();
+            loadOverheads();
+            updateTotals();
+        };
+
+        function loadOverheads() {
+            const tbody = document.getElementById('overheadList');
+            tbody.innerHTML = '';
+            
+            if (overheads.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Belum ada overhead</td></tr>';
+                return;
+            }
+            
+            overheads.forEach((o, idx) => {
+                const total = calculateOverheadTotal(o);
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${o.type}</td>
+                        <td>${o.method === 'manual' ? 'Manual' : 'Persentase'}</td>
+                        <td>${o.method === 'manual' ? formatRupiah(o.value) : o.value + '%'}</td>
+                        <td>${formatRupiah(total)}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="deleteOverhead(${idx})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteOverhead(idx) {
+            overheads.splice(idx, 1);
+            loadOverheads();
+            updateTotals();
+        }
+
+        function calculateOverheadTotal(overhead) {
+            if (overhead.method === 'manual') {
+                return overhead.value;
+            } else {
+                const totalMaterial = materials.reduce((sum, m) => sum + m.total, 0);
+                const totalLabor = labors.reduce((sum, l) => sum + l.total, 0);
+                const base = overhead.base === 'material' ? totalMaterial : (totalMaterial + totalLabor);
+                return (overhead.value / 100) * base;
+            }
+        }
+
+        function updateTotals() {
+            const totalMaterial = materials.reduce((sum, m) => sum + m.total, 0);
+            const totalLabor = labors.reduce((sum, l) => sum + l.total, 0);
+            const totalOverhead = overheads.reduce((sum, o) => sum + calculateOverheadTotal(o), 0);
+            
+            const materialEl = document.getElementById('totalMaterial');
+            if (materialEl) materialEl.textContent = formatRupiah(totalMaterial);
+            
+            document.getElementById('totalLabor').textContent = formatRupiah(totalLabor);
+            document.getElementById('totalOverhead').textContent = formatRupiah(totalOverhead);
+            
+            const totalHPP = totalMaterial + totalLabor + totalOverhead;
+            document.getElementById('totalHPP').textContent = formatRupiah(totalHPP);
+            
+            const products = JSON.parse(localStorage.getItem('costify_products') || '[]');
+            const product = products.find(p => p.id === currentProductId);
+            const hppPerUnit = totalHPP / product.quantity;
+            document.getElementById('hppPerUnit').textContent = formatRupiah(hppPerUnit);
+            
+            calculateSellingPrice();
+        }
+
+        function calculateSellingPrice() {
+            const hppText = document.getElementById('hppPerUnit').textContent;
+            const hpp = parseRupiah(hppText);
+            const margin = parseFloat(document.getElementById('profitMargin').value || 0);
+            
+            const sellingPrice = hpp + (hpp * margin / 100);
+            const profit = sellingPrice - hpp;
+            
+            document.getElementById('sellingPrice').value = formatRupiah(sellingPrice);
+            document.getElementById('profitPerUnit').value = formatRupiah(profit);
+        }
+
+        function saveCalculation() {
+            if (materials.length === 0) {
+                alert('Tambahkan minimal 1 bahan baku!');
+                return;
+            }
+
+            const products = JSON.parse(localStorage.getItem('costify_products') || '[]');
+            const product = products.find(p => p.id === currentProductId);
+            
+            const totalMaterial = materials.reduce((sum, m) => sum + m.total, 0);
+            const totalLabor = labors.reduce((sum, l) => sum + l.total, 0);
+            const totalOverhead = overheads.reduce((sum, o) => sum + calculateOverheadTotal(o), 0);
+            const totalHPP = totalMaterial + totalLabor + totalOverhead;
+            const hppPerUnit = totalHPP / product.quantity;
+            
+            const calculation = {
+                id: Date.now(),
+                userId: currentUser.id,
+                productId: product.id,
+                productName: product.name,
+                quantity: product.quantity,
+                materials: materials,
+                labors: labors,
+                overheads: overheads,
+                totalMaterial: totalMaterial,
+                totalLabor: totalLabor,
+                totalOverhead: totalOverhead,
+                totalHPP: totalHPP,
+                hppPerUnit: hppPerUnit,
+                profitMargin: parseFloat(document.getElementById('profitMargin').value),
+                sellingPrice: parseRupiah(document.getElementById('sellingPrice').value),
+                date: new Date().toISOString()
+            };
+            
+            let history = JSON.parse(localStorage.getItem('costify_history') || '[]');
+            history.push(calculation);
+            localStorage.setItem('costify_history', JSON.stringify(history));
+            
+            alert('Perhitungan berhasil disimpan!');
+            showProducts();
+            updateDashboard();
+        }
+
+        function getHistory() {
+            const all = JSON.parse(localStorage.getItem('costify_history') || '[]');
+            return all.filter(h => h.userId === currentUser.id);
+        }
+
+        function loadHistory() {
+            const history = getHistory();
+            const tbody = document.getElementById('historyList');
+            tbody.innerHTML = '';
+
+            if (history.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center">Belum ada riwayat perhitungan</td></tr>';
+                return;
+            }
+
+            history.reverse().forEach(h => {
+                const date = new Date(h.date).toLocaleDateString('id-ID');
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${date}</td>
+                        <td>${h.productName}</td>
+                        <td>${h.quantity} unit</td>
+                        <td>${formatRupiah(h.totalHPP)}</td>
+                        <td>${formatRupiah(h.hppPerUnit)}</td>
+                        <td>
+                            <button class="btn btn-sm btn-info" onclick="viewDetail(${h.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-success" onclick="exportToExcel(${h.id})">
+                                <i class="fas fa-file-excel"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function viewDetail(id) {
+            const history = JSON.parse(localStorage.getItem('costify_history') || '[]');
+            const calc = history.find(h => h.id === id);
+            
+            let detail = `=== DETAIL PERHITUNGAN HPP ===\n`;
+            detail += `Produk: ${calc.productName}\n`;
+            detail += `Jumlah Produksi: ${calc.quantity} unit\n`;
+            detail += `Tanggal: ${new Date(calc.date).toLocaleString('id-ID')}\n\n`;
+
+            detail += `BAHAN BAKU:\n`;
+            calc.materials.forEach(m => {
+                let priceInfo = '';
+                if (m.priceType === 'kemasan') {
+                    priceInfo = `${formatRupiah(m.price)} / ${m.packageContent} ${m.priceUnit}`;
+                } else {
+                    priceInfo = `${formatRupiah(m.price)} / ${m.priceUnit}`;
+                }
+                detail += `- ${m.name}: ${m.quantity} ${m.usageUnit} × ${priceInfo} = ${formatRupiah(m.total)}\n`;
+            });
+            detail += `Total Bahan Baku: ${formatRupiah(calc.totalMaterial)}\n\n`;
+
+            detail += `TENAGA KERJA:\n`;
+            calc.labors.forEach(l => {
+                detail += `- ${l.type}: ${formatRupiah(l.total)}\n`;
+            });
+            detail += `Total Tenaga Kerja: ${formatRupiah(calc.totalLabor)}\n\n`;
+
+            detail += `OVERHEAD:\n`;
+            calc.overheads.forEach(o => {
+                const total = o.method === 'manual' ? o.value : (o.value + '% dari ' + (o.base === 'material' ? 'Bahan' : 'Produksi'));
+                detail += `- ${o.type}: ${total}\n`;
+            });
+            detail += `Total Overhead: ${formatRupiah(calc.totalOverhead)}\n\n`;
+
+            detail += `=== RINGKASAN ===\n`;
+            detail += `Total HPP: ${formatRupiah(calc.totalHPP)}\n`;
+            detail += `HPP per Unit: ${formatRupiah(calc.hppPerUnit)}\n`;
+            detail += `Margin: ${calc.profitMargin}%\n`;
+            detail += `Harga Jual: ${formatRupiah(calc.sellingPrice)}\n`;
+
+            alert(detail);
+        }
+
+        function exportToExcel(id) {
+            const history = JSON.parse(localStorage.getItem('costify_history') || '[]');
+            const calc = history.find(h => h.id === id);
+            
+            const workbook = XLSX.utils.book_new();
+            
+            // Sheet 1: Bahan Baku
+            const materials = calc.materials.map(m => ({
+                'Nama Bahan': m.name,
+                'Harga': formatRupiah(m.price),
+                'Satuan Harga': m.priceUnit,
+                'Isi Kemasan': m.packageContent || '-',
+                'Jumlah Pakai': m.quantity,
+                'Satuan Pakai': m.usageUnit,
+                'Total': formatRupiah(m.total)
+            }));
+            const ws1 = XLSX.utils.json_to_sheet(materials);
+            XLSX.utils.book_append_sheet(workbook, ws1, 'Bahan Baku');
+            
+            // Sheet 2: Summary
+            const summary = [
+                ['Produk', calc.productName],
+                ['Jumlah Produksi', calc.quantity + ' unit'],
+                ['Tanggal', new Date(calc.date).toLocaleString('id-ID')],
+                [],
+                ['Total Bahan Baku', formatRupiah(calc.totalMaterial)],
+                ['Total Tenaga Kerja', formatRupiah(calc.totalLabor)],
+                ['Total Overhead', formatRupiah(calc.totalOverhead)],
+                [],
+                ['TOTAL HPP', formatRupiah(calc.totalHPP)],
+                ['HPP per Unit', formatRupiah(calc.hppPerUnit)],
+                ['Margin Keuntungan', calc.profitMargin + '%'],
+                ['Harga Jual', formatRupiah(calc.sellingPrice)]
+            ];
+            const ws2 = XLSX.utils.aoa_to_sheet(summary);
+            XLSX.utils.book_append_sheet(workbook, ws2, 'Ringkasan');
+            
+            XLSX.writeFile(workbook, `HPP_${calc.productName}_${new Date().getTime()}.xlsx`);
+        }
+
+        // Helper functions
+        function formatRupiah(number) {
+            return 'Rp ' + Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        function parseRupiah(rupiah) {
+            return parseInt(rupiah.replace(/[^0-9]/g, '')) || 0;
+        }
+    </script>
+</body>
+</html>
