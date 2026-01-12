@@ -8,12 +8,289 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
+        * * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+        }
+
+        /* Container untuk Demo */
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .demo-header h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .demo-header p {
+            color: #666;
+            font-size: 14px;
+        }
+ .cta-section {
+            margin-top: 50px;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative Elements */
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-icon i {
+            font-size: 32px;
+            color: white;
+        }
+
+        .cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            background: white;
+            color: #667eea;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            background: #f8f9ff;
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        .cta-button i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover i {
+            transform: translateX(3px);
+        }
+
+        .cta-footer-note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .cta-footer-note i {
+            margin-right: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cta-section {
+                padding: 40px 20px;
+                margin-top: 30px;
+            }
+
+            .cta-title {
+                font-size: 24px;
+            }
+
+            .cta-subtitle {
+                font-size: 14px;
+            }
+
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .cta-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .cta-icon i {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cta-section {
+                padding: 30px 15px;
+            }
+
+            .cta-title {
+                font-size: 22px;
+            }
+
+            .cta-subtitle {
+                font-size: 13px;
+            }
+        }
+
+        /* Animation untuk loading state */
+        .cta-button.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .cta-button.loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+         /* Demo Section */
+        .demo-info {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .demo-info h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .demo-info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .demo-info code {
+            background: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #667eea;
+            font-size: 13px;
+        }
+
+        .demo-code-block {
+            margin-top: 30px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .demo-code-block .comment {
+            color: #6a9955;
+        }
+
+        .demo-code-block .keyword {
+            color: #569cd6;
+        }
+
+        .demo-code-block .string {
+            color: #ce9178;
+        }
+
+        .demo-code-block .function {
+            color: #dcdcaa;
+        }
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -23,10 +300,12 @@
         .landing-page {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         .hero-section {
-            padding: 100px 0;
+            padding: 100px 0 60px;
             color: white;
             text-align: center;
         }
@@ -63,6 +342,187 @@
             font-size: 3rem;
             color: #667eea;
             margin-bottom: 20px;
+        }
+
+        /* New Featured Features Section */
+        .featured-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .featured-section h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .featured-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .featured-item:hover {
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .featured-icon-box {
+            min-width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+        }
+
+        .featured-icon-box i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .featured-content h4 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .featured-content p {
+            color: #666;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Footer Styles */
+        .landing-footer {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-description {
+            font-size: 0.95rem;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #764ba2;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #888;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a3e;
+        }
+
+        .footer-copyright .heart {
+            color: #e74c3c;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body.dark-mode .landing-page {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body.dark-mode .feature-section {
+            background: #0f3460;
+        }
+
+        body.dark-mode .feature-card {
+            background: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .feature-card h4 {
+            color: #667eea;
+        }
+
+        body.dark-mode .featured-section {
+            background: #16213e;
+        }
+
+        body.dark-mode .featured-section h2 {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .featured-item {
+            background: #1a1a2e;
+        }
+
+        body.dark-mode .featured-content h4 {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .featured-content p {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .landing-footer {
+            background: #0f0f1e;
         }
         
         .app-container {
@@ -165,13 +625,40 @@
             .hero-section p {
                 font-size: 1rem;
             }
+
+            .featured-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .featured-icon-box {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .footer-links a {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .dark-mode-toggle {
+                width: 45px;
+                height: 45px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Landing Page -->
-    <div id="landingPage" class="landing-page">
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+        <i class="fas fa-moon" id="darkModeIcon"></i>
+    </div>
+    </style>
+</head>
+<body>
+
+     <div id="landingPage" class="landing-page">
         <section class="hero-section">
             <div class="container">
                 <h1>Costify – Hitung HPP Produk Jadi Lebih Mudah</h1>
@@ -213,6 +700,92 @@
                 </div>
             </div>
         </section>
+
+        <!-- New Featured Features Section -->
+        <section class="featured-section">
+            <div class="container">
+                <h2>Fitur Unggulan Costify</h2>
+                
+                <div class="featured-item">
+                    <div class="featured-icon-box">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="featured-content">
+                        <h4>Konversi Satuan Otomatis</h4>
+                        <p>Sistem pintar yang otomatis mengkonversi berbagai satuan (kg, gram, liter, ml, pcs) sehingga Anda tidak perlu repot menghitung manual. Input harga dalam satuan apa saja, sistem akan menyesuaikan dengan pemakaian.</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <div class="featured-icon-box">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <div class="featured-content">
+                        <h4>Support Harga Kemasan</h4>
+                        <p>Mendukung perhitungan bahan baku yang dibeli per kemasan. Misalnya: tepung 1 kg isi 7.5 kg, sistem akan otomatis menghitung harga per satuan yang sebenarnya.</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <div class="featured-icon-box">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="featured-content">
+                        <h4>Perhitungan Komprehensif</h4>
+                        <p>Mencakup semua komponen biaya: Bahan Baku, Tenaga Kerja (per jam/unit), dan Overhead (listrik, sewa, penyusutan). Hasil HPP lebih akurat dan detail.</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <div class="featured-icon-box">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="featured-content">
+                        <h4>Riwayat & Export Excel</h4>
+                        <p>Semua perhitungan tersimpan otomatis dan dapat dilihat kembali kapan saja. Export hasil ke Excel untuk dokumentasi atau laporan ke pihak lain.</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <div class="featured-icon-box">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <div class="featured-content">
+                        <h4>Simulasi Harga Jual</h4>
+                        <p>Tentukan margin keuntungan yang diinginkan, sistem akan otomatis menghitung harga jual ideal dan proyeksi laba per unit produk Anda.</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <div class="featured-icon-box">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                    <div class="featured-content">
+                        <h4>Overhead Fleksibel</h4>
+                        <p>Hitung biaya overhead dengan dua metode: nominal manual (Rp) atau persentase dari total bahan baku/produksi. Sesuaikan dengan kebutuhan bisnis Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="landing-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-description">
+                        Costify adalah solusi digital untuk UMKM Indonesia dalam menghitung Harga Pokok Produksi (HPP) secara akurat, membantu pelaku usaha menentukan harga jual yang tepat dan mengoptimalkan profitabilitas bisnis.
+                    </div>
+                    <div class="footer-links">
+                        <a href="#" onclick="alert('Privacy Policy - Coming Soon')">Privacy Policy</a>
+                        <span style="color: #555;">|</span>
+                        <a href="#" onclick="alert('Terms of Service - Coming Soon')">Terms of Service</a>
+                    </div>
+                    <div class="footer-copyright">
+                        © 2026 Costify — Dibuat dengan <span class="heart">❤️</span> untuk UMKM Indonesia
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- Login Page -->
@@ -360,6 +933,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="cta-section" id="dashboardCTA">
+            <div class="cta-content">
+                <div class="cta-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h2 class="cta-title">Mulai Hitung HPP Produk</h2>
+                <p class="cta-subtitle">
+                    Kelola produk dan hitung biaya produksi dengan mudah dalam satu platform
+                </p>
+                <button class="cta-button" onclick="handleCTAClick()">
+                    <span>Mulai Sekarang</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <p class="cta-footer-note">
+                    <i class="fas fa-lock"></i>
+                    Data Anda tersimpan aman di browser
+                </p>
+            </div>
+        </div>
 
                 <!-- Products Section -->
                 <div id="productsSection" style="display:none;">
@@ -1428,6 +2020,33 @@
         function parseRupiah(rupiah) {
             return parseInt(rupiah.replace(/[^0-9]/g, '')) || 0;
         }
+        
+function handleCTAClick() {
+// Ambil data produk user dari localStorage
+const products = getProducts();
+// Jika user belum punya produk → arahkan ke halaman Tambah Produk
+if (products.length === 0) { showProducts();
+// Scroll ke form tambah produk
+setTimeout(() => { const productForm = document.getElementById('productForm'); if (productForm) { productForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+// Highlight form dengan animasi
+productForm.style.animation = 'pulse 0.5s ease-in-out 2'; } }, 300);
+// Tampilkan notifikasi friendly
+showNotification( 'Tambahkan produk pertama Anda untuk mulai menghitung HPP', 'info' ); }
+// Jika sudah ada produk → arahkan ke produk pertama untuk hitung HPP
+else {
+// Ambil produk pertama / terakhir yang dibuat
+const latestProduct = products[products.length - 1];
+// Langsung ke halaman hitung HPP
+calculateHPP(latestProduct.id);
+// Tampilkan notifikasi
+showNotification( `Menghitung HPP untuk ${latestProduct.name}`, 'success' ); } }
+// Fungsi helper untuk notifikasi (opsional)
+function showNotification(message, type = 'info') {
+// Implementasi sederhana dengan alert
+// Anda bisa ganti dengan toast notification yang lebih bagus
+const icon = type === 'info' ? 'ℹ️' : '✅'; alert(`${icon} ${message}`); }
+// CSS Animation untuk pulse effect (tambahkan ke CSS)
+/* @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); box-shadow: 0 0 20px rgba(102, 126, 234, 0.3); } } */
     </script>
 </body>
 </html>
