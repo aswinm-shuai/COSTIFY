@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * * {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -67,7 +67,6 @@
             margin-bottom: 20px;
         }
 
-        /* New Featured Features Section */
         .featured-section {
             background: #f8f9fa;
             padding: 80px 0;
@@ -124,7 +123,6 @@
             line-height: 1.6;
         }
 
-        /* Footer Styles */
         .landing-footer {
             background: #1a1a2e;
             color: #e0e0e0;
@@ -178,7 +176,6 @@
             50% { transform: scale(1.1); }
         }
 
-        /* Dark Mode Toggle */
         .dark-mode-toggle {
             position: fixed;
             top: 20px;
@@ -202,7 +199,6 @@
             transform: scale(1.1);
         }
 
-        /* Dark Mode Styles */
         body.dark-mode {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         }
@@ -339,6 +335,75 @@
             margin-bottom: 30px;
             font-weight: 700;
         }
+
+        /* Styling untuk satuan tambahan */
+        .satuan-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .satuan-item input {
+            flex: 1;
+        }
+
+        .satuan-item .btn-sm {
+            padding: 5px 10px;
+        }
+
+        #satuanTambahanContainer {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Autocomplete styling */
+        .autocomplete-container {
+            position: relative;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+        .autocomplete-active {
+            background-color: #667eea !important;
+            color: #ffffff;
+        }
+
+        .badge-info {
+            background-color: #17a2b8;
+            color: white;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-left: 5px;
+        }
         
         @media (max-width: 768px) {
             .hero-section h1 {
@@ -373,7 +438,6 @@
 </head>
 <body>
 
-    <!-- Dark Mode Toggle -->
     <div class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
         <i class="fas fa-moon" id="darkModeIcon"></i>
     </div>
@@ -421,7 +485,6 @@
             </div>
         </section>
 
-        <!-- New Featured Features Section -->
         <section class="featured-section">
             <div class="container">
                 <h2>Fitur Unggulan Costify</h2>
@@ -488,7 +551,6 @@
             </div>
         </section>
 
-        <!-- Footer -->
         <footer class="landing-footer">
             <div class="container">
                 <div class="footer-content">
@@ -508,7 +570,6 @@
         </footer>
     </div>
 
-    <!-- Login Page -->
     <div id="loginPage" class="login-container">
         <div class="auth-card">
             <h2 class="text-center"><i class="fas fa-sign-in-alt me-2"></i>Login</h2>
@@ -532,7 +593,6 @@
         </div>
     </div>
 
-    <!-- Register Page -->
     <div id="registerPage" class="login-container">
         <div class="auth-card">
             <h2 class="text-center"><i class="fas fa-user-plus me-2"></i>Daftar Akun</h2>
@@ -557,7 +617,6 @@
         </div>
     </div>
 
-    <!-- Main App -->
     <div id="appContainer" class="app-container">
         <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container">
@@ -595,7 +654,6 @@
 
         <div class="main-content">
             <div class="container">
-                <!-- Dashboard -->
                 <div id="dashboardSection">
                     <div class="card mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
                         <div class="card-body text-white text-center py-4">
@@ -670,37 +728,49 @@
                     </div>
                 </div>
 
-                <!-- Master Barang Section -->
                 <div id="masterBarangSection" style="display:none;">
                     <h2 class="mb-4">Master Barang</h2>
                     
                     <div class="card">
-                        <div class="card-header">Tambah Barang Baru</div>
+                        <div class="card-header">
+                            <span id="masterBarangFormTitle">Tambah Barang Baru</span>
+                        </div>
                         <div class="card-body">
                             <form id="masterBarangForm">
+                                <input type="hidden" id="editBarangId">
                                 <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Kode Barang</label>
-                                        <input type="text" class="form-control" id="kodeBarang" required placeholder="Contoh: BRG001">
-                                    </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Nama Barang</label>
                                         <input type="text" class="form-control" id="namaBarang" required placeholder="Contoh: Tepung Terigu">
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Satuan Dasar</label>
-                                        <select class="form-select" id="satuanDasar" required>
-                                            <option value="">Pilih Satuan</option>
-                                            <option value="kg">Kilogram (kg)</option>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Satuan Standar (Terkecil)</label>
+                                        <select class="form-select" id="satuanStandar" required onchange="updateSatuanStandarInfo()">
+                                            <option value="">Pilih Satuan Standar</option>
                                             <option value="gram">Gram (g)</option>
-                                            <option value="liter">Liter (l)</option>
                                             <option value="ml">Mililiter (ml)</option>
                                             <option value="pcs">Pieces (pcs)</option>
                                         </select>
+                                        <small class="text-muted">Satuan terkecil yang menjadi dasar perhitungan HPP</small>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-plus me-2"></i>Tambah Barang
+
+                                <div class="mb-3">
+                                    <label class="form-label">Satuan Tambahan (Opsional)</label>
+                                    <button type="button" class="btn btn-sm btn-outline-primary ms-2" onclick="tambahSatuanBaru()">
+                                        <i class="fas fa-plus"></i> Tambah Satuan
+                                    </button>
+                                    <div id="satuanStandarInfoBox" class="alert alert-info mt-2" style="display:none;">
+                                        <small><i class="fas fa-info-circle"></i> <strong>Konversi satuan:</strong> <span id="satuanStandarInfoText"></span></small>
+                                    </div>
+                                    <div id="satuanTambahanContainer" class="mt-2"></div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" id="masterBarangSubmitBtn">
+                                    <i class="fas fa-plus me-2"></i><span id="masterBarangBtnText">Tambah Barang</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="cancelEditMasterBarang()" id="masterBarangCancelBtn" style="display:none;">
+                                    <i class="fas fa-times me-2"></i>Batal
                                 </button>
                             </form>
                         </div>
@@ -715,7 +785,8 @@
                                         <tr>
                                             <th>Kode Barang</th>
                                             <th>Nama Barang</th>
-                                            <th>Satuan Dasar</th>
+                                            <th>Satuan Standar</th>
+                                            <th>Satuan Lain</th>
                                             <th>Harga Terakhir</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -727,7 +798,6 @@
                     </div>
                 </div>
 
-                <!-- Pengadaan Section -->
                 <div id="pengadaanSection" style="display:none;">
                     <h2 class="mb-4">Transaksi Pengadaan</h2>
                     
@@ -736,38 +806,50 @@
                             <span id="pengadaanFormTitle">Tambah Transaksi Pengadaan</span>
                         </div>
                         <div class="card-body">
+                            <div class="alert alert-info mb-3">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Catatan:</strong> Harga akan otomatis dikonversi ke satuan standar untuk perhitungan HPP.
+                            </div>
                             <form id="pengadaanForm">
                                 <input type="hidden" id="pengadaanEditId">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">Tanggal</label>
-                                        <input type="date" class="form-control" id="tanggalPengadaan" required readonly>
+                                        <input type="date" class="form-control" id="tanggalPengadaan" required>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-3 mb-3 autocomplete-container">
                                         <label class="form-label">Nama Barang</label>
-                                        <select class="form-select" id="barangPengadaan" required onchange="updateSatuanPengadaan()">
-                                            <option value="">Pilih Barang</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="barangPengadaanSearch" placeholder="Ketik untuk mencari..." autocomplete="off" oninput="searchBarangPengadaan(this.value)">
+                                        <input type="hidden" id="barangPengadaanValue">
+                                        <div id="barangPengadaanList" class="autocomplete-items"></div>
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Jumlah</label>
-                                        <input type="number" class="form-control" id="jumlahPengadaan" required min="0" step="0.01" oninput="hitungSubtotal()">
+                                        <input type="number" class="form-control" id="jumlahPengadaan" required min="0" step="0.001" oninput="hitungPengadaanInfo()">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Satuan</label>
-                                        <input type="text" class="form-control" id="satuanPengadaan" readonly>
+                                        <select class="form-select" id="satuanPengadaan" required onchange="hitungPengadaanInfo()">
+                                            <option value="">Pilih Satuan</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Harga/Satuan</label>
-                                        <input type="number" class="form-control" id="hargaPengadaan" required min="0" step="0.01" oninput="hitungSubtotal()">
+                                        <label class="form-label">Harga Total</label>
+                                        <input type="number" class="form-control" id="hargaTotalPengadaan" required min="0" step="0.01" oninput="hitungPengadaanInfo()">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 mb-3">
-                                        <label class="form-label">Subtotal</label>
-                                        <input type="text" class="form-control" id="subtotalPengadaan" readonly>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="alert alert-success" id="pengadaanInfoBox" style="display:none;">
+                                            <small>
+                                                <i class="fas fa-calculator me-2"></i>
+                                                <span id="pengadaanInfoText"></span>
+                                            </small>
+                                        </div>
                                     </div>
-                                    <div class="col-md-9 mb-3 d-flex align-items-end">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3 d-flex align-items-end">
                                         <button type="submit" class="btn btn-primary me-2">
                                             <i class="fas fa-save me-2"></i><span id="pengadaanSubmitBtn">Simpan</span>
                                         </button>
@@ -791,8 +873,8 @@
                                             <th>Kode Barang</th>
                                             <th>Nama Barang</th>
                                             <th>Jumlah</th>
-                                            <th>Harga/Satuan</th>
-                                            <th>Subtotal</th>
+                                            <th>Harga Total</th>
+                                            <th>Harga/Satuan Standar</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -803,7 +885,6 @@
                     </div>
                 </div>
 
-                <!-- Products Section -->
                 <div id="productsSection" style="display:none;">
                     <h2 class="mb-4">Kelola Produk</h2>
                     
@@ -847,53 +928,48 @@
                     </div>
                 </div>
 
-                <!-- Calculate HPP Section -->
                 <div id="calculateSection" style="display:none;">
                     <button class="btn btn-secondary mb-3" onclick="showProducts()">
                         <i class="fas fa-arrow-left me-2"></i>Kembali
                     </button>
                     <h2 class="mb-4">Hitung HPP: <span id="calcProductName"></span></h2>
 
-                    <!-- Bahan Baku -->
                     <div class="card">
                         <div class="card-header">1. Biaya Bahan Baku</div>
                         <div class="card-body">
                             <div class="alert alert-info mb-3">
                                 <strong><i class="fas fa-info-circle me-2"></i>Informasi:</strong> 
-                                Pilih bahan dari Master Barang. Harga akan otomatis terisi dari transaksi Pengadaan terakhir.
+                                Pilih bahan dari Master Barang. Harga akan otomatis terisi dari transaksi Pengadaan terakhir dalam satuan standar.
                             </div>
 
                             <form id="materialForm">
                                 <div class="row">
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-4 mb-3 autocomplete-container">
                                         <label class="form-label">Nama Bahan</label>
-                                        <select class="form-select" id="materialName" required onchange="loadHargaTerakhir()">
-                                            <option value="">Pilih Bahan</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="materialNameSearch" placeholder="Ketik untuk mencari..." autocomplete="off" oninput="searchMaterial(this.value)">
+                                        <input type="hidden" id="materialNameValue">
+                                        <div id="materialNameList" class="autocomplete-items"></div>
                                     </div>
                                     
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Jumlah Pakai</label>
-                                        <input type="number" class="form-control" id="materialQty" required min="0" step="0.001">
+                                        <input type="number" class="form-control" id="materialQty" required min="0" step="0.001" oninput="updateMaterialInfo()">
                                     </div>
 
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Satuan</label>
-                                        <select class="form-select" id="usageUnit" required>
-                                            <option value="kg">Kilogram (kg)</option>
-                                            <option value="gram">Gram (g)</option>
-                                            <option value="liter">Liter (l)</option>
-                                            <option value="ml">Mililiter (ml)</option>
-                                            <option value="pcs">Pieces (pcs)</option>
+                                        <select class="form-select" id="usageUnit" required onchange="updateMaterialInfo()">
+                                            <option value="">Pilih Satuan</option>
                                         </select>
                                     </div>
 
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Harga/Satuan</label>
+                                        <label class="form-label">Harga/Standar</label>
                                         <input type="text" class="form-control" id="displayHarga" readonly placeholder="Otomatis">
+                                        <small class="text-muted" id="hargaSatuan"></small>
                                     </div>
                                     <input type="hidden" id="actualHarga">
-                                    <input type="hidden" id="satuanHarga">
+                                    <input type="hidden" id="satuanStandarBahan">
 
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">&nbsp;</label>
@@ -902,13 +978,19 @@
                                         </button>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-success" id="materialCostInfo" style="display:none;">
+                                            <small id="materialCostInfoText"></small>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
 
                             <div id="materialTableContainer"></div>
                         </div>
                     </div>
 
-                    <!-- Tenaga Kerja -->
                     <div class="card mt-4">
                         <div class="card-header">2. Biaya Tenaga Kerja</div>
                         <div class="card-body">
@@ -971,7 +1053,6 @@
                         </div>
                     </div>
 
-                    <!-- Overhead -->
                     <div class="card mt-4">
                         <div class="card-header">3. Biaya Overhead</div>
                         <div class="card-body">
@@ -1036,7 +1117,6 @@
                         </div>
                     </div>
 
-                    <!-- Hasil HPP -->
                     <div class="card mt-4">
                         <div class="card-header">Hasil Perhitungan HPP</div>
                         <div class="card-body">
@@ -1078,7 +1158,6 @@
                     </div>
                 </div>
 
-                <!-- History Section -->
                 <div id="historySection" style="display:none;">
                     <h2 class="mb-4">Riwayat Perhitungan</h2>
                     <div class="card">
@@ -1110,10 +1189,12 @@
     <script>
         let currentUser = null;
         let currentProductId = null;
-        let currentCalculationId = null; // Untuk edit HPP
+        let currentCalculationId = null;
         let materials = [];
         let labors = [];
         let overheads = [];
+        let tempSatuanTambahan = [];
+        let currentEditBarangId = null;
 
         window.onload = function() {
             checkAutoLogin();
@@ -1170,47 +1251,58 @@
             }
         }
 
-        // ========== FUNGSI KONVERSI SATUAN ==========
+        // ========== KONVERSI SATUAN FUNCTIONS ==========
         
-        function calculateMaterialCost(priceUnit, price, usageUnit, usageQty) {
-            let hargaSetara = price;
-            let jumlahSetara = usageQty;
-            
-            if (priceUnit === 'kg' && usageUnit === 'gram') {
-                hargaSetara = price / 1000;
-                jumlahSetara = usageQty;
-            }
-            else if (priceUnit === 'liter' && usageUnit === 'ml') {
-                hargaSetara = price / 1000;
-                jumlahSetara = usageQty;
-            }
-            else if (priceUnit === 'gram' && usageUnit === 'kg') {
-                hargaSetara = price;
-                jumlahSetara = usageQty * 1000;
-            }
-            else if (priceUnit === 'ml' && usageUnit === 'liter') {
-                hargaSetara = price;
-                jumlahSetara = usageQty * 1000;
-            }
-            else if (priceUnit === usageUnit) {
-                hargaSetara = price;
-                jumlahSetara = usageQty;
-            }
-            else if (priceUnit === 'pcs' && usageUnit === 'pcs') {
-                hargaSetara = price;
-                jumlahSetara = usageQty;
+        function konversiKeStandar(jumlah, satuanInput, satuanStandar, idBarang) {
+            if (satuanInput === satuanStandar) {
+                return jumlah;
             }
             
-            const totalBiaya = hargaSetara * jumlahSetara;
+            const satuanLain = getSatuanByBarangId(idBarang);
+            const satuan = satuanLain.find(s => s.nama === satuanInput);
             
-            return {
-                total: totalBiaya,
-                finalPrice: hargaSetara,
-                finalQty: jumlahSetara
-            };
+            if (satuan) {
+                return jumlah * satuan.konversi;
+            }
+            
+            return jumlah;
         }
 
-        // ========== AUTH FUNCTIONS ==========
+        function konversiDariStandar(jumlahStandar, satuanTarget, satuanStandar, idBarang) {
+            if (satuanTarget === satuanStandar) {
+                return jumlahStandar;
+            }
+            
+            const satuanLain = getSatuanByBarangId(idBarang);
+            const satuan = satuanLain.find(s => s.nama === satuanTarget);
+            
+            if (satuan && satuan.konversi > 0) {
+                return jumlahStandar / satuan.konversi;
+            }
+            
+            return jumlahStandar;
+        }
+
+        // ========== GENERATE KODE BARANG ==========
+        
+        function generateKodeBarang() {
+            const barang = getMasterBarang();
+            const maxNum = barang.reduce((max, b) => {
+                const match = b.kode.match(/BRG(\d+)/);
+                if (match) {
+                    const num = parseInt(match[1]);
+                    return num > max ? num : max;
+                }
+                return max;
+            }, 0);
+            
+            const newNum = maxNum + 1;
+            return 'BRG' + String(newNum).padStart(4, '0');
+        }
+
+        function calculateMaterialCost(hargaPerStandar, jumlahStandar) {
+            return hargaPerStandar * jumlahStandar;
+        }
 
         document.getElementById('registerForm').onsubmit = function(e) {
             e.preventDefault();
@@ -1273,8 +1365,6 @@
             }
         }
 
-        // ========== NAVIGATION FUNCTIONS ==========
-
         function showDashboard() {
             document.getElementById('dashboardSection').style.display = 'block';
             document.getElementById('masterBarangSection').style.display = 'none';
@@ -1323,7 +1413,6 @@
             document.getElementById('calculateSection').style.display = 'none';
             document.getElementById('historySection').style.display = 'none';
             loadPengadaan();
-            loadBarangDropdown();
             setTanggalHariIni();
         }
 
@@ -1354,37 +1443,195 @@
             return all.filter(b => b.userId === currentUser.id);
         }
 
+        function getSatuanTambahan() {
+            return JSON.parse(localStorage.getItem('costify_satuan_tambahan') || '[]');
+        }
+
+        function getSatuanByKode(kodeBarang) {
+            const allSatuan = getSatuanTambahan();
+            return allSatuan.filter(s => s.kodeBarang === kodeBarang && s.userId === currentUser.id);
+        }
+
+        function getSatuanByBarangId(idBarang) {
+            const allSatuan = getSatuanTambahan();
+            return allSatuan.filter(s => s.idBarang === idBarang && s.userId === currentUser.id);
+        }
+
+        function updateSatuanStandarInfo() {
+            const satuanStandar = document.getElementById('satuanStandar').value;
+            const infoBox = document.getElementById('satuanStandarInfoBox');
+            const infoText = document.getElementById('satuanStandarInfoText');
+            
+            if (satuanStandar) {
+                infoBox.style.display = 'block';
+                
+                let contohSatuan = '';
+                if (satuanStandar === 'gram') {
+                    contohSatuan = 'Contoh: kilogram = 1000 gram';
+                } else if (satuanStandar === 'ml') {
+                    contohSatuan = 'Contoh: liter = 1000 ml';
+                } else if (satuanStandar === 'pcs') {
+                    contohSatuan = 'Contoh: lusin = 12 pcs';
+                }
+                
+                infoText.textContent = `Satuan standar adalah ${satuanStandar}. ${contohSatuan}`;
+            } else {
+                infoBox.style.display = 'none';
+            }
+        }
+
+        function tambahSatuanBaru() {
+            const satuanStandar = document.getElementById('satuanStandar').value;
+            
+            if (!satuanStandar) {
+                alert('Pilih satuan standar terlebih dahulu!');
+                return;
+            }
+            
+            const container = document.getElementById('satuanTambahanContainer');
+            const id = Date.now();
+            
+            const div = document.createElement('div');
+            div.className = 'satuan-item';
+            div.id = 'satuan-' + id;
+            div.innerHTML = `
+                <input type="text" class="form-control" placeholder="Nama Satuan (contoh: kilogram)" data-id="${id}" data-field="nama">
+                <input type="number" class="form-control" placeholder="Nilai Konversi (contoh: 1000)" min="0" step="0.001" data-id="${id}" data-field="konversi">
+                <span class="text-muted">× ${satuanStandar}</span>
+                <button type="button" class="btn btn-sm btn-danger" onclick="hapusSatuanBaru(${id})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            
+            container.appendChild(div);
+            
+            tempSatuanTambahan.push({ id: id, nama: '', konversi: 0 });
+        }
+
+        function hapusSatuanBaru(id) {
+            const elem = document.getElementById('satuan-' + id);
+            if (elem) elem.remove();
+            
+            tempSatuanTambahan = tempSatuanTambahan.filter(s => s.id !== id);
+        }
+
+        document.getElementById('satuanTambahanContainer').addEventListener('input', function(e) {
+            if (e.target.dataset.id && e.target.dataset.field) {
+                const id = parseInt(e.target.dataset.id);
+                const field = e.target.dataset.field;
+                const value = e.target.value;
+                
+                const satuan = tempSatuanTambahan.find(s => s.id === id);
+                if (satuan) {
+                    if (field === 'nama') {
+                        satuan.nama = value;
+                    } else if (field === 'konversi') {
+                        satuan.konversi = parseFloat(value) || 0;
+                    }
+                }
+            }
+        });
+
         document.getElementById('masterBarangForm').onsubmit = function(e) {
             e.preventDefault();
             
-            const kode = document.getElementById('kodeBarang').value;
             const nama = document.getElementById('namaBarang').value;
-            const satuan = document.getElementById('satuanDasar').value;
+            const satuan = document.getElementById('satuanStandar').value;
+            const editId = document.getElementById('editBarangId').value;
 
-            // Cek duplikasi kode
-            const existing = getMasterBarang();
-            if (existing.find(b => b.kode === kode)) {
-                alert('Kode barang sudah digunakan!');
-                return;
+            if (editId) {
+                // Mode Edit
+                let all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
+                const idx = all.findIndex(b => b.id === parseInt(editId));
+                
+                if (idx !== -1) {
+                    all[idx].nama = nama;
+                    all[idx].satuan = satuan;
+                    all[idx].updatedAt = new Date().toISOString();
+                    
+                    localStorage.setItem('costify_master_barang', JSON.stringify(all));
+                    
+                    // Update satuan tambahan
+                    let allSatuan = getSatuanTambahan();
+                    // Hapus satuan lama
+                    allSatuan = allSatuan.filter(s => s.idBarang !== parseInt(editId));
+                    
+                    // Tambah satuan baru
+                    if (tempSatuanTambahan.length > 0) {
+                        tempSatuanTambahan.forEach(s => {
+                            if (s.nama && s.konversi > 0) {
+                                allSatuan.push({
+                                    id: Date.now() + Math.random(),
+                                    userId: currentUser.id,
+                                    idBarang: parseInt(editId),
+                                    kodeBarang: all[idx].kode,
+                                    nama: s.nama,
+                                    konversi: s.konversi
+                                });
+                            }
+                        });
+                    }
+                    
+                    localStorage.setItem('costify_satuan_tambahan', JSON.stringify(allSatuan));
+                    alert('Master Barang berhasil diubah!');
+                }
+            } else {
+                // Mode Tambah Baru
+                const kode = generateKodeBarang();
+                const existing = getMasterBarang();
+                
+                if (existing.find(b => b.nama.toLowerCase() === nama.toLowerCase())) {
+                    alert('Nama barang sudah digunakan!');
+                    return;
+                }
+
+                const barang = {
+                    id: Date.now(),
+                    userId: currentUser.id,
+                    kode: kode,
+                    nama: nama,
+                    satuan: satuan,
+                    createdAt: new Date().toISOString()
+                };
+
+                let all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
+                all.push(barang);
+                localStorage.setItem('costify_master_barang', JSON.stringify(all));
+                
+                // Simpan satuan tambahan
+                if (tempSatuanTambahan.length > 0) {
+                    let allSatuan = getSatuanTambahan();
+                    tempSatuanTambahan.forEach(s => {
+                        if (s.nama && s.konversi > 0) {
+                            allSatuan.push({
+                                id: Date.now() + Math.random(),
+                                userId: currentUser.id,
+                                idBarang: barang.id,
+                                kodeBarang: kode,
+                                nama: s.nama,
+                                konversi: s.konversi
+                            });
+                        }
+                    });
+                    localStorage.setItem('costify_satuan_tambahan', JSON.stringify(allSatuan));
+                }
+                
+                alert('Master Barang berhasil ditambahkan!');
             }
-
-            const barang = {
-                id: Date.now(),
-                userId: currentUser.id,
-                kode: kode,
-                nama: nama,
-                satuan: satuan,
-                createdAt: new Date().toISOString()
-            };
-
-            let all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
-            all.push(barang);
-            localStorage.setItem('costify_master_barang', JSON.stringify(all));
             
             this.reset();
+            document.getElementById('editBarangId').value = '';
+            document.getElementById('satuanTambahanContainer').innerHTML = '';
+            document.getElementById('satuanStandarInfoBox').style.display = 'none';
+            tempSatuanTambahan = [];
+            currentEditBarangId = null;
+            
+            document.getElementById('masterBarangFormTitle').textContent = 'Tambah Barang Baru';
+            document.getElementById('masterBarangBtnText').textContent = 'Tambah Barang';
+            document.getElementById('masterBarangCancelBtn').style.display = 'none';
+            
             loadMasterBarang();
             updateDashboard();
-            alert('Master Barang berhasil ditambahkan!');
         };
 
         function loadMasterBarang() {
@@ -1393,23 +1640,33 @@
             tbody.innerHTML = '';
 
             if (barang.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="text-center">Belum ada master barang</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center">Belum ada master barang</td></tr>';
                 return;
             }
 
             barang.forEach(b => {
-                // Cari harga terakhir dari pengadaan
-                const hargaTerakhir = getHargaTerakhir(b.kode);
-                const hargaDisplay = hargaTerakhir ? formatRupiah(hargaTerakhir.harga) + '/' + hargaTerakhir.satuan : '-';
+                const hargaTerakhir = getHargaTerakhirByBarangId(b.id);
+                const hargaDisplay = hargaTerakhir ? 
+                    formatRupiah(hargaTerakhir.harga_per_standar) + '/' + b.satuan : '-';
+                
+                const satuanLain = getSatuanByBarangId(b.id);
+                let satuanLainText = '-';
+                if (satuanLain.length > 0) {
+                    satuanLainText = satuanLain.map(s => `${s.nama} (${s.konversi}×)`).join(', ');
+                }
                 
                 tbody.innerHTML += `
                     <tr>
                         <td>${b.kode}</td>
                         <td>${b.nama}</td>
-                        <td>${b.satuan}</td>
+                        <td><span class="badge bg-primary">${b.satuan}</span></td>
+                        <td><small>${satuanLainText}</small></td>
                         <td>${hargaDisplay}</td>
                         <td>
-                            <button class="btn btn-sm btn-danger" onclick="deleteMasterBarang('${b.kode}')">
+                            <button class="btn btn-sm btn-warning" onclick="editMasterBarang(${b.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteMasterBarang(${b.id})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>
@@ -1418,11 +1675,76 @@
             });
         }
 
-        function deleteMasterBarang(kode) {
+        function editMasterBarang(idBarang) {
+            const all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
+            const barang = all.find(b => b.id === idBarang);
+            
+            if (!barang) return;
+            
+            currentEditBarangId = idBarang;
+            
+            document.getElementById('editBarangId').value = idBarang;
+            document.getElementById('namaBarang').value = barang.nama;
+            document.getElementById('satuanStandar').value = barang.satuan;
+            
+            updateSatuanStandarInfo();
+            
+            // Load satuan tambahan
+            const satuanLain = getSatuanByBarangId(idBarang);
+            tempSatuanTambahan = [];
+            document.getElementById('satuanTambahanContainer').innerHTML = '';
+            
+            satuanLain.forEach(s => {
+                const id = Date.now() + Math.random();
+                const container = document.getElementById('satuanTambahanContainer');
+                
+                const div = document.createElement('div');
+                div.className = 'satuan-item';
+                div.id = 'satuan-' + id;
+                div.innerHTML = `
+                    <input type="text" class="form-control" placeholder="Nama Satuan" data-id="${id}" data-field="nama" value="${s.nama}">
+                    <input type="number" class="form-control" placeholder="Nilai Konversi" min="0" step="0.001" data-id="${id}" data-field="konversi" value="${s.konversi}">
+                    <span class="text-muted">× ${barang.satuan}</span>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="hapusSatuanBaru(${id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                
+                container.appendChild(div);
+                tempSatuanTambahan.push({ id: id, nama: s.nama, konversi: s.konversi });
+            });
+            
+            document.getElementById('masterBarangFormTitle').textContent = 'Ubah Master Barang';
+            document.getElementById('masterBarangBtnText').textContent = 'Update';
+            document.getElementById('masterBarangCancelBtn').style.display = 'inline-block';
+            
+            document.getElementById('masterBarangForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function cancelEditMasterBarang() {
+            document.getElementById('masterBarangForm').reset();
+            document.getElementById('editBarangId').value = '';
+            document.getElementById('satuanTambahanContainer').innerHTML = '';
+            document.getElementById('satuanStandarInfoBox').style.display = 'none';
+            tempSatuanTambahan = [];
+            currentEditBarangId = null;
+            
+            document.getElementById('masterBarangFormTitle').textContent = 'Tambah Barang Baru';
+            document.getElementById('masterBarangBtnText').textContent = 'Tambah Barang';
+            document.getElementById('masterBarangCancelBtn').style.display = 'none';
+        }
+
+        function deleteMasterBarang(idBarang) {
             if (confirm('Yakin ingin menghapus barang ini?')) {
                 let all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
-                all = all.filter(b => !(b.kode === kode && b.userId === currentUser.id));
+                all = all.filter(b => b.id !== idBarang);
                 localStorage.setItem('costify_master_barang', JSON.stringify(all));
+                
+                // Hapus satuan tambahan
+                let allSatuan = getSatuanTambahan();
+                allSatuan = allSatuan.filter(s => s.idBarang !== idBarang);
+                localStorage.setItem('costify_satuan_tambahan', JSON.stringify(allSatuan));
+                
                 loadMasterBarang();
                 updateDashboard();
             }
@@ -1440,28 +1762,90 @@
             document.getElementById('tanggalPengadaan').value = today;
         }
 
-        function loadBarangDropdown() {
-            const barang = getMasterBarang();
-            const select = document.getElementById('barangPengadaan');
-            select.innerHTML = '<option value="">Pilih Barang</option>';
+        function searchBarangPengadaan(query) {
+            const listContainer = document.getElementById('barangPengadaanList');
             
-            barang.forEach(b => {
-                select.innerHTML += `<option value="${b.kode}" data-satuan="${b.satuan}">${b.kode} - ${b.nama}</option>`;
+            if (!query) {
+                listContainer.innerHTML = '';
+                return;
+            }
+            
+            const barang = getMasterBarang();
+            const filtered = barang.filter(b => 
+                b.nama.toLowerCase().includes(query.toLowerCase()) || 
+                b.kode.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            listContainer.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                const div = document.createElement('div');
+                div.style.padding = '10px';
+                div.style.color = '#999';
+                div.textContent = 'Barang tidak ditemukan. Tambahkan di Master Barang terlebih dahulu.';
+                listContainer.appendChild(div);
+                return;
+            }
+            
+            filtered.forEach(b => {
+                const div = document.createElement('div');
+                div.textContent = `${b.kode} - ${b.nama}`;
+                div.onclick = function() {
+                    selectBarangPengadaan(b.id, b.kode, b.nama, b.satuan);
+                };
+                listContainer.appendChild(div);
             });
         }
 
-        function updateSatuanPengadaan() {
-            const select = document.getElementById('barangPengadaan');
-            const selectedOption = select.options[select.selectedIndex];
-            const satuan = selectedOption.getAttribute('data-satuan');
-            document.getElementById('satuanPengadaan').value = satuan || '';
+        function selectBarangPengadaan(idBarang, kode, nama, satuanStandar) {
+            document.getElementById('barangPengadaanSearch').value = `${kode} - ${nama}`;
+            document.getElementById('barangPengadaanValue').value = idBarang;
+            document.getElementById('barangPengadaanList').innerHTML = '';
+            
+            // Populate satuan dropdown
+            const satuanSelect = document.getElementById('satuanPengadaan');
+            satuanSelect.innerHTML = `<option value="${satuanStandar}" data-konversi="1">${satuanStandar} (standar)</option>`;
+            
+            const satuanLain = getSatuanByBarangId(idBarang);
+            satuanLain.forEach(s => {
+                satuanSelect.innerHTML += `<option value="${s.nama}" data-konversi="${s.konversi}">${s.nama}</option>`;
+            });
         }
 
-        function hitungSubtotal() {
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.autocomplete-container')) {
+                document.querySelectorAll('.autocomplete-items').forEach(el => el.innerHTML = '');
+            }
+        });
+
+        function hitungPengadaanInfo() {
+            const idBarang = document.getElementById('barangPengadaanValue').value;
             const jumlah = parseFloat(document.getElementById('jumlahPengadaan').value) || 0;
-            const harga = parseFloat(document.getElementById('hargaPengadaan').value) || 0;
-            const subtotal = jumlah * harga;
-            document.getElementById('subtotalPengadaan').value = formatRupiah(subtotal);
+            const satuanInput = document.getElementById('satuanPengadaan').value;
+            const hargaTotal = parseFloat(document.getElementById('hargaTotalPengadaan').value) || 0;
+            
+            const infoBox = document.getElementById('pengadaanInfoBox');
+            const infoText = document.getElementById('pengadaanInfoText');
+            
+            if (!idBarang || !jumlah || !satuanInput || !hargaTotal) {
+                infoBox.style.display = 'none';
+                return;
+            }
+            
+            const all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
+            const barang = all.find(b => b.id === parseInt(idBarang));
+            
+            if (!barang) return;
+            
+            const jumlahStandar = konversiKeStandar(jumlah, satuanInput, barang.satuan, parseInt(idBarang));
+            const hargaPerStandar = hargaTotal / jumlahStandar;
+            
+            infoText.innerHTML = `
+                <strong>Konversi:</strong> ${jumlah} ${satuanInput} = ${jumlahStandar.toFixed(3)} ${barang.satuan}<br>
+                <strong>Harga per ${barang.satuan}:</strong> ${formatRupiah(hargaPerStandar)}
+            `;
+            
+            infoBox.style.display = 'block';
         }
 
         document.getElementById('pengadaanForm').onsubmit = function(e) {
@@ -1469,53 +1853,66 @@
             
             const editId = document.getElementById('pengadaanEditId').value;
             const tanggal = document.getElementById('tanggalPengadaan').value;
-            const kodeBarang = document.getElementById('barangPengadaan').value;
+            const idBarang = parseInt(document.getElementById('barangPengadaanValue').value);
             const jumlah = parseFloat(document.getElementById('jumlahPengadaan').value);
-            const satuan = document.getElementById('satuanPengadaan').value;
-            const harga = parseFloat(document.getElementById('hargaPengadaan').value);
-            const subtotal = jumlah * harga;
+            const satuanInput = document.getElementById('satuanPengadaan').value;
+            const hargaTotal = parseFloat(document.getElementById('hargaTotalPengadaan').value);
 
-            if (!kodeBarang) {
+            if (!idBarang) {
                 alert('Pilih barang terlebih dahulu!');
                 return;
             }
 
-            const barang = getMasterBarang().find(b => b.kode === kodeBarang);
+            const all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
+            const barang = all.find(b => b.id === idBarang);
+            
+            if (!barang) {
+                alert('Barang tidak ditemukan!');
+                return;
+            }
 
-            let all = JSON.parse(localStorage.getItem('costify_pengadaan') || '[]');
+            const jumlahStandar = konversiKeStandar(jumlah, satuanInput, barang.satuan, idBarang);
+            const hargaPerStandar = hargaTotal / jumlahStandar;
+
+            let allPengadaan = JSON.parse(localStorage.getItem('costify_pengadaan') || '[]');
 
             if (editId) {
-                // Update mode
-                const idx = all.findIndex(p => p.id === parseInt(editId));
+                const idx = allPengadaan.findIndex(p => p.id === parseInt(editId));
                 if (idx !== -1) {
-                    all[idx].tanggal = tanggal;
-                    all[idx].kodeBarang = kodeBarang;
-                    all[idx].namaBarang = barang.nama;
-                    all[idx].jumlah = jumlah;
-                    all[idx].satuan = satuan;
-                    all[idx].harga = harga;
-                    all[idx].subtotal = subtotal;
+                    allPengadaan[idx].tanggal = tanggal;
+                    allPengadaan[idx].idBarang = idBarang;
+                    allPengadaan[idx].kodeBarang = barang.kode;
+                    allPengadaan[idx].namaBarang = barang.nama;
+                    allPengadaan[idx].jumlah_input = jumlah;
+                    allPengadaan[idx].satuan_input = satuanInput;
+                    allPengadaan[idx].jumlah_standar = jumlahStandar;
+                    allPengadaan[idx].satuan_standar = barang.satuan;
+                    allPengadaan[idx].harga_total = hargaTotal;
+                    allPengadaan[idx].harga_per_standar = hargaPerStandar;
+                    allPengadaan[idx].updatedAt = new Date().toISOString();
                 }
                 alert('Transaksi pengadaan berhasil diubah!');
             } else {
-                // Add mode
                 const pengadaan = {
                     id: Date.now(),
                     userId: currentUser.id,
                     tanggal: tanggal,
-                    kodeBarang: kodeBarang,
+                    idBarang: idBarang,
+                    kodeBarang: barang.kode,
                     namaBarang: barang.nama,
-                    jumlah: jumlah,
-                    satuan: satuan,
-                    harga: harga,
-                    subtotal: subtotal,
+                    jumlah_input: jumlah,
+                    satuan_input: satuanInput,
+                    jumlah_standar: jumlahStandar,
+                    satuan_standar: barang.satuan,
+                    harga_total: hargaTotal,
+                    harga_per_standar: hargaPerStandar,
                     createdAt: new Date().toISOString()
                 };
-                all.push(pengadaan);
+                allPengadaan.push(pengadaan);
                 alert('Transaksi pengadaan berhasil ditambahkan!');
             }
 
-            localStorage.setItem('costify_pengadaan', JSON.stringify(all));
+            localStorage.setItem('costify_pengadaan', JSON.stringify(allPengadaan));
             
             resetPengadaanForm();
             loadPengadaan();
@@ -1525,6 +1922,10 @@
         function resetPengadaanForm() {
             document.getElementById('pengadaanForm').reset();
             document.getElementById('pengadaanEditId').value = '';
+            document.getElementById('barangPengadaanSearch').value = '';
+            document.getElementById('barangPengadaanValue').value = '';
+            document.getElementById('satuanPengadaan').innerHTML = '<option value="">Pilih Satuan</option>';
+            document.getElementById('pengadaanInfoBox').style.display = 'none';
             document.getElementById('pengadaanFormTitle').textContent = 'Tambah Transaksi Pengadaan';
             document.getElementById('pengadaanSubmitBtn').textContent = 'Simpan';
             document.getElementById('pengadaanCancelBtn').style.display = 'none';
@@ -1548,9 +1949,9 @@
                         <td>${tgl}</td>
                         <td>${p.kodeBarang}</td>
                         <td>${p.namaBarang}</td>
-                        <td>${p.jumlah} ${p.satuan}</td>
-                        <td>${formatRupiah(p.harga)}/${p.satuan}</td>
-                        <td>${formatRupiah(p.subtotal)}</td>
+                        <td>${p.jumlah_input} ${p.satuan_input} <span class="badge badge-info">${p.jumlah_standar.toFixed(3)} ${p.satuan_standar}</span></td>
+                        <td>${formatRupiah(p.harga_total)}</td>
+                        <td>${formatRupiah(p.harga_per_standar)}/${p.satuan_standar}</td>
                         <td>
                             <button class="btn btn-sm btn-warning" onclick="editPengadaan(${p.id})">
                                 <i class="fas fa-edit"></i>
@@ -1567,34 +1968,39 @@
             
             if (!pengadaan) return;
 
+            const allBarang = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
+            const barang = allBarang.find(b => b.id === pengadaan.idBarang);
+            if (!barang) return;
+
             document.getElementById('pengadaanEditId').value = pengadaan.id;
             document.getElementById('tanggalPengadaan').value = pengadaan.tanggal;
-            document.getElementById('barangPengadaan').value = pengadaan.kodeBarang;
-            updateSatuanPengadaan();
-            document.getElementById('jumlahPengadaan').value = pengadaan.jumlah;
-            document.getElementById('hargaPengadaan').value = pengadaan.harga;
-            hitungSubtotal();
+            
+            selectBarangPengadaan(pengadaan.idBarang, pengadaan.kodeBarang, pengadaan.namaBarang, barang.satuan);
+            
+            document.getElementById('jumlahPengadaan').value = pengadaan.jumlah_input;
+            document.getElementById('satuanPengadaan').value = pengadaan.satuan_input;
+            document.getElementById('hargaTotalPengadaan').value = pengadaan.harga_total;
+            hitungPengadaanInfo();
 
             document.getElementById('pengadaanFormTitle').textContent = 'Ubah Transaksi Pengadaan';
             document.getElementById('pengadaanSubmitBtn').textContent = 'Update';
             document.getElementById('pengadaanCancelBtn').style.display = 'inline-block';
 
-            // Scroll to form
             document.getElementById('pengadaanForm').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function getHargaTerakhir(kodeBarang) {
+        function getHargaTerakhirByBarangId(idBarang) {
             const pengadaan = getPengadaan();
-            const filtered = pengadaan.filter(p => p.kodeBarang === kodeBarang);
+            const filtered = pengadaan.filter(p => p.idBarang === idBarang);
             
             if (filtered.length === 0) return null;
             
-            // Urutkan berdasarkan tanggal terbaru
             filtered.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
             
             return {
-                harga: filtered[0].harga,
-                satuan: filtered[0].satuan
+                harga_per_standar: filtered[0].harga_per_standar,
+                satuan_standar: filtered[0].satuan_standar,
+                tanggal: filtered[0].tanggal
             };
         }
 
@@ -1616,639 +2022,697 @@
                 name: name,
                 quantity: quantity,
                 createdAt: new Date().toISOString()
-            };
+                };
+        let products = JSON.parse(localStorage.getItem('costify_products') || '[]');
+        products.push(product);
+        localStorage.setItem('costify_products', JSON.stringify(products));
+        
+        this.reset();
+        loadProducts();
+        updateDashboard();
+        alert('Produk berhasil ditambahkan!');
+    };
 
+    function loadProducts() {
+        const products = getProducts();
+        const tbody = document.getElementById('productList');
+        tbody.innerHTML = '';
+
+        if (products.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="3" class="text-center">Belum ada produk</td></tr>';
+            return;
+        }
+
+        products.forEach(p => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${p.name}</td>
+                    <td>${p.quantity} unit</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="calculateHPP(${p.id})">
+                            <i class="fas fa-calculator"></i> Hitung HPP
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteProduct(${p.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function deleteProduct(id) {
+        if (confirm('Yakin ingin menghapus produk ini?')) {
             let products = JSON.parse(localStorage.getItem('costify_products') || '[]');
-            products.push(product);
+            products = products.filter(p => p.id !== id);
             localStorage.setItem('costify_products', JSON.stringify(products));
-            
-            this.reset();
             loadProducts();
             updateDashboard();
-            alert('Produk berhasil ditambahkan!');
-        };
-
-        function loadProducts() {
-            const products = getProducts();
-            const tbody = document.getElementById('productList');
-            tbody.innerHTML = '';
-
-            if (products.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" class="text-center">Belum ada produk</td></tr>';
-                return;
-            }
-
-            products.forEach(p => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${p.name}</td>
-                        <td>${p.quantity} unit</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary" onclick="calculateHPP(${p.id})">
-                                <i class="fas fa-calculator"></i> Hitung HPP
-                            </button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteProduct(${p.id})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
         }
+    }
 
-        function deleteProduct(id) {
-            if (confirm('Yakin ingin menghapus produk ini?')) {
-                let products = JSON.parse(localStorage.getItem('costify_products') || '[]');
-                products = products.filter(p => p.id !== id);
-                localStorage.setItem('costify_products', JSON.stringify(products));
-                loadProducts();
-                updateDashboard();
-            }
+    // ========== HPP CALCULATION FUNCTIONS ==========
+
+    function calculateHPP(productId, calculationId = null) {
+        const masterBarang = getMasterBarang();
+        
+        if (masterBarang.length === 0) {
+            alert('Silakan tambahkan Master Barang terlebih dahulu sebelum menghitung HPP.');
+            showMasterBarang();
+            return;
         }
-
-        // ========== HPP CALCULATION FUNCTIONS ==========
-
-        function calculateHPP(productId, calculationId = null) {
-            currentProductId = productId;
-            currentCalculationId = calculationId;
-            
-            const products = JSON.parse(localStorage.getItem('costify_products') || '[]');
-            const product = products.find(p => p.id === productId);
-            
-            document.getElementById('calcProductName').textContent = product.name;
-            document.getElementById('dashboardSection').style.display = 'none';
-            document.getElementById('masterBarangSection').style.display = 'none';
-            document.getElementById('pengadaanSection').style.display = 'none';
-            document.getElementById('productsSection').style.display = 'none';
-            document.getElementById('calculateSection').style.display = 'block';
-            document.getElementById('historySection').style.display = 'none';
-            
-            // Load dropdown material dari Master Barang
-            loadMaterialDropdown();
-            
-            // Jika edit mode, load data dari calculation
-            if (calculationId) {
-                loadCalculationData(calculationId);
-            } else {
-                // Mode baru
-                materials = [];
-                labors = [];
-                overheads = [];
-                loadMaterials();
-                loadLabors();
-                loadOverheads();
-                updateTotals();
-            }
-        }
-
-        function loadMaterialDropdown() {
-            const barang = getMasterBarang();
-            const select = document.getElementById('materialName');
-            select.innerHTML = '<option value="">Pilih Bahan</option>';
-            
-            barang.forEach(b => {
-                select.innerHTML += `<option value="${b.kode}" data-satuan="${b.satuan}">${b.nama}</option>`;
-            });
-        }
-
-        function loadHargaTerakhir() {
-            const select = document.getElementById('materialName');
-            const kodeBarang = select.value;
-            
-            if (!kodeBarang) {
-                document.getElementById('displayHarga').value = '';
-                document.getElementById('actualHarga').value = '';
-                document.getElementById('satuanHarga').value = '';
-                return;
-            }
-
-            const selectedOption = select.options[select.selectedIndex];
-            const satuanDasar = selectedOption.getAttribute('data-satuan');
-
-            const hargaTerakhir = getHargaTerakhir(kodeBarang);
-            
-            if (hargaTerakhir) {
-                document.getElementById('displayHarga').value = formatRupiah(hargaTerakhir.harga) + '/' + hargaTerakhir.satuan;
-                document.getElementById('actualHarga').value = hargaTerakhir.harga;
-                document.getElementById('satuanHarga').value = hargaTerakhir.satuan;
-                
-                // Set satuan pemakaian default
-                document.getElementById('usageUnit').value = satuanDasar;
-            } else {
-                document.getElementById('displayHarga').value = 'Belum ada pengadaan';
-                document.getElementById('actualHarga').value = '';
-                document.getElementById('satuanHarga').value = '';
-            }
-        }
-
-        document.getElementById('materialForm').onsubmit = function(e) {
-            e.preventDefault();
-            
-            const kodeBarang = document.getElementById('materialName').value;
-            const namaBarang = document.getElementById('materialName').options[document.getElementById('materialName').selectedIndex].text;
-            const usageQty = parseFloat(document.getElementById('materialQty').value);
-            const usageUnit = document.getElementById('usageUnit').value;
-            const harga = parseFloat(document.getElementById('actualHarga').value);
-            const satuanHarga = document.getElementById('satuanHarga').value;
-            
-            if (!kodeBarang) {
-                alert('Pilih bahan terlebih dahulu!');
-                return;
-            }
-
-            if (!harga) {
-                alert('Belum ada data harga pengadaan untuk barang ini!');
-                return;
-            }
-            
-            const result = calculateMaterialCost(satuanHarga, harga, usageUnit, usageQty);
-            
-            const material = {
-                id: Date.now(),
-                kodeBarang: kodeBarang,
-                name: namaBarang,
-                priceUnit: satuanHarga,
-                price: harga,
-                usageUnit: usageUnit,
-                quantity: usageQty,
-                total: result.total,
-                calculation: result
-            };
-            
-            materials.push(material);
-            this.reset();
-            loadMaterialDropdown();
+        
+        currentProductId = productId;
+        currentCalculationId = calculationId;
+        
+        const products = JSON.parse(localStorage.getItem('costify_products') || '[]');
+        const product = products.find(p => p.id === productId);
+        
+        document.getElementById('calcProductName').textContent = product.name;
+        document.getElementById('dashboardSection').style.display = 'none';
+        document.getElementById('masterBarangSection').style.display = 'none';
+        document.getElementById('pengadaanSection').style.display = 'none';
+        document.getElementById('productsSection').style.display = 'none';
+        document.getElementById('calculateSection').style.display = 'block';
+        document.getElementById('historySection').style.display = 'none';
+        
+        if (calculationId) {
+            loadCalculationData(calculationId);
+        } else {
+            materials = [];
+            labors = [];
+            overheads = [];
             loadMaterials();
-            updateTotals();
-        };
-
-        function loadMaterials() {
-            const container = document.getElementById('materialTableContainer');
-            
-            if (materials.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center text-muted py-4">
-                        <i class="fas fa-inbox fa-3x mb-3"></i>
-                        <p>Belum ada bahan baku yang ditambahkan.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            let tableHTML = `<table class="table">
-                <thead>
-                    <tr>
-                        <th>Nama Bahan</th>
-                        <th>Harga</th>
-                        <th>Pemakaian</th>
-                        <th>Total</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>`;
-            
-            materials.forEach((m, idx) => {
-                let priceInfo = `${formatRupiah(m.price)} / ${m.priceUnit}`;
-                
-                tableHTML += `
-                    <tr>
-                        <td>${m.name}</td>
-                        <td>${priceInfo}</td>
-                        <td>
-                            <input type="number" class="form-control form-control-sm d-inline-block" style="width:80px;" 
-                                value="${m.quantity}" step="0.001" min="0"
-                                onchange="updateMaterialQty(${idx}, this.value)"> ${m.usageUnit}
-                        </td>
-                        <td>${formatRupiah(m.total)}</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger" onclick="deleteMaterial(${idx})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-            
-            tableHTML += `</tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="3">Total Biaya Bahan Baku</th>
-                        <th id="totalMaterial">Rp 0</th>
-                        <th></th>
-                    </tr>
-                </tfoot>
-            </table>`;
-            
-            container.innerHTML = tableHTML;
-        }
-
-        function updateMaterialQty(idx, newQty) {
-            const qty = parseFloat(newQty);
-            if (qty < 0 || isNaN(qty)) {
-                alert('Jumlah tidak valid!');
-                loadMaterials();
-                return;
-            }
-            
-            const m = materials[idx];
-            const result = calculateMaterialCost(m.priceUnit, m.price, m.usageUnit, qty);
-            
-            materials[idx].quantity = qty;
-            materials[idx].total = result.total;
-            materials[idx].calculation = result;
-            
-            loadMaterials();
-            updateTotals();
-        }
-
-        function deleteMaterial(idx) {
-            materials.splice(idx, 1);
-            loadMaterials();
-            updateTotals();
-        }
-
-        document.getElementById('laborForm').onsubmit = function(e) {
-            e.preventDefault();
-            const labor = {
-                id: Date.now(),
-                type: document.getElementById('laborType').value,
-                costType: document.getElementById('laborCostType').value,
-                cost: parseFloat(document.getElementById('laborCost').value),
-                time: parseFloat(document.getElementById('laborTime').value),
-                timeUnit: document.getElementById('laborTimeUnit').value
-            };
-            
-            let multiplier = labor.time;
-            if (labor.timeUnit === 'menit') {
-                multiplier = labor.time / 60;
-            }
-            
-            labor.total = labor.cost * multiplier;
-            
-            labors.push(labor);
-            this.reset();
             loadLabors();
-            updateTotals();
-        };
-
-        function loadLabors() {
-            const tbody = document.getElementById('laborList');
-            tbody.innerHTML = '';
-            
-            if (labors.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Belum ada tenaga kerja</td></tr>';
-                return;
-            }
-            
-            labors.forEach((l, idx) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${l.type}</td>
-                        <td>${l.costType === 'per_jam' ? 'Per Jam' : 'Per Unit'}</td>
-                        <td>${formatRupiah(l.cost)}</td>
-                        <td>${l.time} ${l.timeUnit}</td>
-                        <td>${formatRupiah(l.total)}</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger" onclick="deleteLabor(${idx})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        function deleteLabor(idx) {
-            labors.splice(idx, 1);
-            loadLabors();
-            updateTotals();
-        }
-
-        function toggleOverheadInput() {
-            const method = document.getElementById('overheadMethod').value;
-            const label = document.getElementById('overheadValueLabel');
-            const baseDiv = document.getElementById('overheadBaseDiv');
-            
-            if (method === 'persentase') {
-                label.textContent = 'Persentase (%)';
-                baseDiv.style.display = 'block';
-            } else {
-                label.textContent = 'Nominal (Rp)';
-                baseDiv.style.display = 'none';
-            }
-        }
-
-        document.getElementById('overheadForm').onsubmit = function(e) {
-            e.preventDefault();
-            const overhead = {
-                id: Date.now(),
-                type: document.getElementById('overheadType').value,
-                method: document.getElementById('overheadMethod').value,
-                value: parseFloat(document.getElementById('overheadValue').value),
-                base: document.getElementById('overheadBase').value
-            };
-            
-            overheads.push(overhead);
-            this.reset();
-            toggleOverheadInput();
-            loadOverheads();
-            updateTotals();
-        };
-
-        function loadOverheads() {
-            const tbody = document.getElementById('overheadList');
-            tbody.innerHTML = '';
-            
-            if (overheads.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Belum ada overhead</td></tr>';
-                return;
-            }
-            
-            overheads.forEach((o, idx) => {
-                const total = calculateOverheadTotal(o);
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${o.type}</td>
-                        <td>${o.method === 'manual' ? 'Manual' : 'Persentase'}</td>
-                        <td>${o.method === 'manual' ? formatRupiah(o.value) : o.value + '%'}</td>
-                        <td>${formatRupiah(total)}</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger" onclick="deleteOverhead(${idx})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        function deleteOverhead(idx) {
-            overheads.splice(idx, 1);
             loadOverheads();
             updateTotals();
         }
+    }
 
-        function calculateOverheadTotal(overhead) {
-            if (overhead.method === 'manual') {
-                return overhead.value;
-            } else {
-                const totalMaterial = materials.reduce((sum, m) => sum + m.total, 0);
-                const totalLabor = labors.reduce((sum, l) => sum + l.total, 0);
-                const base = overhead.base === 'material' ? totalMaterial : (totalMaterial + totalLabor);
-                return (overhead.value / 100) * base;
-            }
+    function searchMaterial(query) {
+        const listContainer = document.getElementById('materialNameList');
+        
+        if (!query) {
+            listContainer.innerHTML = '';
+            return;
+        }
+        
+        const barang = getMasterBarang();
+        const filtered = barang.filter(b => 
+            b.nama.toLowerCase().includes(query.toLowerCase()) || 
+            b.kode.toLowerCase().includes(query.toLowerCase())
+        );
+        
+        listContainer.innerHTML = '';
+        
+        if (filtered.length === 0) {
+            const div = document.createElement('div');
+            div.style.padding = '10px';
+            div.style.color = '#999';
+            div.textContent = 'Barang tidak ditemukan. Tambahkan di Master Barang terlebih dahulu.';
+            listContainer.appendChild(div);
+            return;
+        }
+        
+        filtered.forEach(b => {
+            const div = document.createElement('div');
+            div.textContent = `${b.kode} - ${b.nama}`;
+            div.onclick = function() {
+                selectMaterial(b.id, b.kode, b.nama, b.satuan);
+            };
+            listContainer.appendChild(div);
+        });
+    }
+
+    function selectMaterial(idBarang, kode, nama, satuanStandar) {
+        document.getElementById('materialNameSearch').value = `${kode} - ${nama}`;
+        document.getElementById('materialNameValue').value = idBarang;
+        document.getElementById('materialNameList').innerHTML = '';
+        
+        // Populate satuan usage
+        const usageSelect = document.getElementById('usageUnit');
+        usageSelect.innerHTML = `<option value="${satuanStandar}" data-konversi="1">${satuanStandar} (standar)</option>`;
+        
+        const satuanLain = getSatuanByBarangId(idBarang);
+        satuanLain.forEach(s => {
+            usageSelect.innerHTML += `<option value="${s.nama}" data-konversi="${s.konversi}">${s.nama}</option>`;
+        });
+        
+        loadHargaTerakhirMaterial(idBarang, satuanStandar);
+    }
+
+    function loadHargaTerakhirMaterial(idBarang, satuanStandar) {
+        const hargaTerakhir = getHargaTerakhirByBarangId(idBarang);
+        
+        if (hargaTerakhir) {
+            document.getElementById('displayHarga').value = formatRupiah(hargaTerakhir.harga_per_standar);
+            document.getElementById('hargaSatuan').textContent = 'per ' + satuanStandar;
+            document.getElementById('actualHarga').value = hargaTerakhir.harga_per_standar;
+            document.getElementById('satuanStandarBahan').value = satuanStandar;
+        } else {
+            document.getElementById('displayHarga').value = 'Belum ada pengadaan';
+            document.getElementById('hargaSatuan').textContent = '';
+            document.getElementById('actualHarga').value = '';
+            document.getElementById('satuanStandarBahan').value = '';
+        }
+        
+        updateMaterialInfo();
+    }
+
+    function updateMaterialInfo() {
+        const idBarang = document.getElementById('materialNameValue').value;
+        const jumlah = parseFloat(document.getElementById('materialQty').value) || 0;
+        const satuanInput = document.getElementById('usageUnit').value;
+        const hargaPerStandar = parseFloat(document.getElementById('actualHarga').value) || 0;
+        const satuanStandar = document.getElementById('satuanStandarBahan').value;
+        
+        const infoBox = document.getElementById('materialCostInfo');
+        const infoText = document.getElementById('materialCostInfoText');
+        
+        if (!idBarang || !jumlah || !satuanInput || !hargaPerStandar) {
+            infoBox.style.display = 'none';
+            return;
+        }
+        
+        const jumlahStandar = konversiKeStandar(jumlah, satuanInput, satuanStandar, parseInt(idBarang));
+        const totalBiaya = calculateMaterialCost(hargaPerStandar, jumlahStandar);
+        
+        infoText.innerHTML = `
+            <i class="fas fa-calculator me-2"></i>
+            <strong>Perhitungan:</strong> ${jumlah} ${satuanInput} = ${jumlahStandar.toFixed(3)} ${satuanStandar} × ${formatRupiah(hargaPerStandar)} = <strong>${formatRupiah(totalBiaya)}</strong>
+        `;
+        
+        infoBox.style.display = 'block';
+    }
+
+    document.getElementById('materialForm').onsubmit = function(e) {
+        e.preventDefault();
+        
+        const idBarang = parseInt(document.getElementById('materialNameValue').value);
+        const namaBarang = document.getElementById('materialNameSearch').value;
+        const usageQty = parseFloat(document.getElementById('materialQty').value);
+        const usageUnit = document.getElementById('usageUnit').value;
+        const hargaPerStandar = parseFloat(document.getElementById('actualHarga').value);
+        const satuanStandar = document.getElementById('satuanStandarBahan').value;
+        
+        if (!idBarang) {
+            alert('Pilih bahan terlebih dahulu!');
+            return;
         }
 
-        function updateTotals() {
+        if (!hargaPerStandar) {
+            alert('Belum ada data harga pengadaan untuk barang ini!');
+            return;
+        }
+        
+        const jumlahStandar = konversiKeStandar(usageQty, usageUnit, satuanStandar, idBarang);
+        const totalBiaya = calculateMaterialCost(hargaPerStandar, jumlahStandar);
+        
+        const material = {
+            id: Date.now(),
+            idBarang: idBarang,
+            name: namaBarang,
+            usageUnit: usageUnit,
+            quantity: usageQty,
+            quantityStandar: jumlahStandar,
+            satuanStandar: satuanStandar,
+            hargaPerStandar: hargaPerStandar,
+            total: totalBiaya
+        };
+        
+        materials.push(material);
+        this.reset();
+        document.getElementById('materialNameSearch').value = '';
+        document.getElementById('materialNameValue').value = '';
+        document.getElementById('usageUnit').innerHTML = '<option value="">Pilih Satuan</option>';
+        document.getElementById('displayHarga').value = '';
+        document.getElementById('hargaSatuan').textContent = '';
+        document.getElementById('materialCostInfo').style.display = 'none';
+        loadMaterials();
+        updateTotals();
+    };
+
+    function loadMaterials() {
+        const container = document.getElementById('materialTableContainer');
+        
+        if (materials.length === 0) {
+            container.innerHTML = `
+                <div class="text-center text-muted py-4">
+                    <i class="fas fa-inbox fa-3x mb-3"></i>
+                    <p>Belum ada bahan baku yang ditambahkan.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        let tableHTML = `<table class="table">
+            <thead>
+                <tr>
+                    <th>Nama Bahan</th>
+                    <th>Harga/Standar</th>
+                    <th>Pemakaian</th>
+                    <th>Total</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>`;
+        
+        materials.forEach((m, idx) => {
+            tableHTML += `
+                <tr>
+                    <td>${m.name}</td>
+                    <td>${formatRupiah(m.hargaPerStandar)} / ${m.satuanStandar}</td>
+                    <td>
+                        <input type="number" class="form-control form-control-sm d-inline-block" style="width:80px;" 
+                            value="${m.quantity}" step="0.001" min="0"
+                            onchange="updateMaterialQty(${idx}, this.value)"> ${m.usageUnit}
+                        <br><small class="text-muted">${m.quantityStandar.toFixed(3)} ${m.satuanStandar}</small>
+                    </td>
+                    <td>${formatRupiah(m.total)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="deleteMaterial(${idx})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+        
+        tableHTML += `</tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3">Total Biaya Bahan Baku</th>
+                    <th id="totalMaterial">Rp 0</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>`;
+        
+        container.innerHTML = tableHTML;
+    }
+
+    function updateMaterialQty(idx, newQty) {
+        const qty = parseFloat(newQty);
+        if (qty < 0 || isNaN(qty)) {
+            alert('Jumlah tidak valid!');
+            loadMaterials();
+            return;
+        }
+        
+        const m = materials[idx];
+        const jumlahStandar = konversiKeStandar(qty, m.usageUnit, m.satuanStandar, m.idBarang);
+        const totalBiaya = calculateMaterialCost(m.hargaPerStandar, jumlahStandar);
+        
+        materials[idx].quantity = qty;
+        materials[idx].quantityStandar = jumlahStandar;
+        materials[idx].total = totalBiaya;
+        
+        loadMaterials();
+        updateTotals();
+    }
+
+    function deleteMaterial(idx) {
+        materials.splice(idx, 1);
+        loadMaterials();
+        updateTotals();
+    }
+
+    document.getElementById('laborForm').onsubmit = function(e) {
+        e.preventDefault();
+        const labor = {
+            id: Date.now(),
+            type: document.getElementById('laborType').value,
+            costType: document.getElementById('laborCostType').value,
+            cost: parseFloat(document.getElementById('laborCost').value),
+            time: parseFloat(document.getElementById('laborTime').value),
+            timeUnit: document.getElementById('laborTimeUnit').value
+        };
+        
+        let multiplier = labor.time;
+        if (labor.timeUnit === 'menit') {
+            multiplier = labor.time / 60;
+        }
+        
+        labor.total = labor.cost * multiplier;
+        
+        labors.push(labor);
+        this.reset();
+        loadLabors();
+        updateTotals();
+    };
+
+    function loadLabors() {
+        const tbody = document.getElementById('laborList');
+        tbody.innerHTML = '';
+        
+        if (labors.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Belum ada tenaga kerja</td></tr>';
+            return;
+        }
+        
+        labors.forEach((l, idx) => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${l.type}</td>
+                    <td>${l.costType === 'per_jam' ? 'Per Jam' : 'Per Unit'}</td>
+                    <td>${formatRupiah(l.cost)}</td>
+                    <td>${l.time} ${l.timeUnit}</td>
+                    <td>${formatRupiah(l.total)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="deleteLabor(${idx})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function deleteLabor(idx) {
+        labors.splice(idx, 1);
+        loadLabors();
+        updateTotals();
+    }
+
+    function toggleOverheadInput() {
+        const method = document.getElementById('overheadMethod').value;
+        const label = document.getElementById('overheadValueLabel');
+        const baseDiv = document.getElementById('overheadBaseDiv');
+        
+        if (method === 'persentase') {
+            label.textContent = 'Persentase (%)';
+            baseDiv.style.display = 'block';
+        } else {
+            label.textContent = 'Nominal (Rp)';
+            baseDiv.style.display = 'none';
+        }
+    }
+
+    document.getElementById('overheadForm').onsubmit = function(e) {
+        e.preventDefault();
+        const overhead = {
+            id: Date.now(),
+            type: document.getElementById('overheadType').value,
+            method: document.getElementById('overheadMethod').value,
+            value: parseFloat(document.getElementById('overheadValue').value),
+            base: document.getElementById('overheadBase').value
+        };
+        
+        overheads.push(overhead);
+        this.reset();
+        toggleOverheadInput();
+        loadOverheads();
+        updateTotals();
+    };
+
+    function loadOverheads() {
+        const tbody = document.getElementById('overheadList');
+        tbody.innerHTML = '';
+        
+        if (overheads.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Belum ada overhead</td></tr>';
+            return;
+        }
+        
+        overheads.forEach((o, idx) => {
+            const total = calculateOverheadTotal(o);
+            tbody.innerHTML += `
+                <tr>
+                    <td>${o.type}</td>
+                    <td>${o.method === 'manual' ? 'Manual' : 'Persentase'}</td>
+                    <td>${o.method === 'manual' ? formatRupiah(o.value) : o.value + '%'}</td>
+                    <td>${formatRupiah(total)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="deleteOverhead(${idx})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function deleteOverhead(idx) {
+        overheads.splice(idx, 1);
+        loadOverheads();
+        updateTotals();
+    }
+
+    function calculateOverheadTotal(overhead) {
+        if (overhead.method === 'manual') {
+            return overhead.value;
+        } else {
             const totalMaterial = materials.reduce((sum, m) => sum + m.total, 0);
             const totalLabor = labors.reduce((sum, l) => sum + l.total, 0);
-            const totalOverhead = overheads.reduce((sum, o) => sum + calculateOverheadTotal(o), 0);
-            
-            const materialEl = document.getElementById('totalMaterial');
-            if (materialEl) materialEl.textContent = formatRupiah(totalMaterial);
-            
-            document.getElementById('totalLabor').textContent = formatRupiah(totalLabor);
-            document.getElementById('totalOverhead').textContent = formatRupiah(totalOverhead);
-            
-            const totalHPP = totalMaterial + totalLabor + totalOverhead;
-            document.getElementById('totalHPP').textContent = formatRupiah(totalHPP);
-            
-            const products = JSON.parse(localStorage.getItem('costify_products') || '[]');
-            const product = products.find(p => p.id === currentProductId);
-            const hppPerUnit = totalHPP / product.quantity;
-            document.getElementById('hppPerUnit').textContent = formatRupiah(hppPerUnit);
-            
-            calculateSellingPrice();
+            const base = overhead.base === 'material' ? totalMaterial : (totalMaterial + totalLabor);
+            return (overhead.value / 100) * base;
+        }
+    }
+
+    function updateTotals() {
+        const totalMaterial = materials.reduce((sum, m) => sum + m.total, 0);
+        const totalLabor = labors.reduce((sum, l) => sum + l.total, 0);
+        const totalOverhead = overheads.reduce((sum, o) => sum + calculateOverheadTotal(o), 0);
+        
+        const materialEl = document.getElementById('totalMaterial');
+        if (materialEl) materialEl.textContent = formatRupiah(totalMaterial);
+        
+        document.getElementById('totalLabor').textContent = formatRupiah(totalLabor);
+        document.getElementById('totalOverhead').textContent = formatRupiah(totalOverhead);
+        
+        const totalHPP = totalMaterial + totalLabor + totalOverhead;
+        document.getElementById('totalHPP').textContent = formatRupiah(totalHPP);
+        
+        const products = JSON.parse(localStorage.getItem('costify_products') || '[]');
+        const product = products.find(p => p.id === currentProductId);
+        const hppPerUnit = totalHPP / product.quantity;
+        document.getElementById('hppPerUnit').textContent = formatRupiah(hppPerUnit);
+        
+        calculateSellingPrice();
+    }
+
+    function calculateSellingPrice() {
+        const hppText = document.getElementById('hppPerUnit').textContent;
+        const hpp = parseRupiah(hppText);
+        const margin = parseFloat(document.getElementById('profitMargin').value || 0);
+        
+        const sellingPrice = hpp + (hpp * margin / 100);
+        const profit = sellingPrice - hpp;
+        
+        document.getElementById('sellingPrice').value = formatRupiah(sellingPrice);
+        document.getElementById('profitPerUnit').value = formatRupiah(profit);
+    }
+
+    function saveCalculation() {
+        if (materials.length === 0) {
+            alert('Tambahkan minimal 1 bahan baku!');
+            return;
         }
 
-        function calculateSellingPrice() {
-            const hppText = document.getElementById('hppPerUnit').textContent;
-            const hpp = parseRupiah(hppText);
-            const margin = parseFloat(document.getElementById('profitMargin').value || 0);
-            
-            const sellingPrice = hpp + (hpp * margin / 100);
-            const profit = sellingPrice - hpp;
-            
-            document.getElementById('sellingPrice').value = formatRupiah(sellingPrice);
-            document.getElementById('profitPerUnit').value = formatRupiah(profit);
-        }
-
-        function saveCalculation() {
-            if (materials.length === 0) {
-                alert('Tambahkan minimal 1 bahan baku!');
-                return;
+        const products = JSON.parse(localStorage.getItem('costify_products') || '[]');
+        const product = products.find(p => p.id === currentProductId);
+        
+        const totalMaterial = materials.reduce((sum, m) => sum + m.total, 0);
+        const totalLabor = labors.reduce((sum, l) => sum + l.total, 0);
+        const totalOverhead = overheads.reduce((sum, o) => sum + calculateOverheadTotal(o), 0);
+        const totalHPP = totalMaterial + totalLabor + totalOverhead;
+        const hppPerUnit = totalHPP / product.quantity;
+        
+        let history = JSON.parse(localStorage.getItem('costify_history') || '[]');
+        
+        if (currentCalculationId) {
+            const idx = history.findIndex(h => h.id === currentCalculationId);
+            if (idx !== -1) {
+                history[idx].materials = materials;
+                history[idx].labors = labors;
+                history[idx].overheads = overheads;
+                history[idx].totalMaterial = totalMaterial;
+                history[idx].totalLabor = totalLabor;
+                history[idx].totalOverhead = totalOverhead;
+                history[idx].totalHPP = totalHPP;
+                history[idx].hppPerUnit = hppPerUnit;
+                history[idx].profitMargin = parseFloat(document.getElementById('profitMargin').value);
+                history[idx].sellingPrice = parseRupiah(document.getElementById('sellingPrice').value);
+                history[idx].updatedAt = new Date().toISOString();
             }
+            alert('Perhitungan berhasil diperbarui!');
+        } else {
+            const calculation = {
+                id: Date.now(),
+                userId: currentUser.id,
+                productId: product.id,
+                productName: product.name,
+                quantity: product.quantity,
+                materials: materials,
+                labors: labors,
+                overheads: overheads,
+                totalMaterial: totalMaterial,
+                totalLabor: totalLabor,
+                totalOverhead: totalOverhead,
+                totalHPP: totalHPP,
+                hppPerUnit: hppPerUnit,
+                profitMargin: parseFloat(document.getElementById('profitMargin').value),
+                sellingPrice: parseRupiah(document.getElementById('sellingPrice').value),
+                date: new Date().toISOString()
+            };
+            history.push(calculation);
+            alert('Perhitungan berhasil disimpan!');
+        }
+        
+        localStorage.setItem('costify_history', JSON.stringify(history));
+        
+        currentCalculationId = null;
+        showProducts();
+        updateDashboard();
+    }
 
-            const products = JSON.parse(localStorage.getItem('costify_products') || '[]');
-            const product = products.find(p => p.id === currentProductId);
-            
-            const totalMaterial = materials.reduce((sum, m) => sum + m.total, 0);
-            const totalLabor = labors.reduce((sum, l) => sum + l.total, 0);
-            const totalOverhead = overheads.reduce((sum, o) => sum + calculateOverheadTotal(o), 0);
-            const totalHPP = totalMaterial + totalLabor + totalOverhead;
-            const hppPerUnit = totalHPP / product.quantity;
-            
-            let history = JSON.parse(localStorage.getItem('costify_history') || '[]');
-            
-            if (currentCalculationId) {
-                // Update existing calculation
-                const idx = history.findIndex(h => h.id === currentCalculationId);
-                if (idx !== -1) {
-                    history[idx].materials = materials;
-                    history[idx].labors = labors;
-                    history[idx].overheads = overheads;
-                    history[idx].totalMaterial = totalMaterial;
-                    history[idx].totalLabor = totalLabor;
-                    history[idx].totalOverhead = totalOverhead;
-                    history[idx].totalHPP = totalHPP;
-                    history[idx].hppPerUnit = hppPerUnit;
-                    history[idx].profitMargin = parseFloat(document.getElementById('profitMargin').value);
-                    history[idx].sellingPrice = parseRupiah(document.getElementById('sellingPrice').value);
-                    history[idx].updatedAt = new Date().toISOString();
-                }
-                alert('Perhitungan berhasil diperbarui!');
-            } else {
-                // Create new calculation
-                const calculation = {
-                    id: Date.now(),
-                    userId: currentUser.id,
-                    productId: product.id,
-                    productName: product.name,
-                    quantity: product.quantity,
-                    materials: materials,
-                    labors: labors,
-                    overheads: overheads,
-                    totalMaterial: totalMaterial,
-                    totalLabor: totalLabor,
-                    totalOverhead: totalOverhead,
-                    totalHPP: totalHPP,
-                    hppPerUnit: hppPerUnit,
-                    profitMargin: parseFloat(document.getElementById('profitMargin').value),
-                    sellingPrice: parseRupiah(document.getElementById('sellingPrice').value),
-                    date: new Date().toISOString()
-                };
-                history.push(calculation);
-                alert('Perhitungan berhasil disimpan!');
-            }
-            
-            localStorage.setItem('costify_history', JSON.stringify(history));
-            
-            currentCalculationId = null;
-            showProducts();
-            updateDashboard();
+    function loadCalculationData(calculationId) {
+        const history = JSON.parse(localStorage.getItem('costify_history') || '[]');
+        const calc = history.find(h => h.id === calculationId);
+        
+        if (!calc) return;
+        
+        materials = calc.materials || [];
+        labors = calc.labors || [];
+        overheads = calc.overheads || [];
+        
+        document.getElementById('profitMargin').value = calc.profitMargin || 30;
+        
+        loadMaterials();
+        loadLabors();
+        loadOverheads();
+        updateTotals();
+    }
+
+    // ========== HISTORY FUNCTIONS ==========
+
+    function getHistory() {
+        const all = JSON.parse(localStorage.getItem('costify_history') || '[]');
+        return all.filter(h => h.userId === currentUser.id);
+    }
+
+    function loadHistory() {
+        const history = getHistory();
+        const tbody = document.getElementById('historyList');
+        tbody.innerHTML = '';
+
+        if (history.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center">Belum ada riwayat perhitungan</td></tr>';
+            return;
         }
 
-        function loadCalculationData(calculationId) {
-            const history = JSON.parse(localStorage.getItem('costify_history') || '[]');
-            const calc = history.find(h => h.id === calculationId);
-            
-            if (!calc) return;
-            
-            materials = calc.materials || [];
-            labors = calc.labors || [];
-            overheads = calc.overheads || [];
-            
-            document.getElementById('profitMargin').value = calc.profitMargin || 30;
-            
-            loadMaterials();
-            loadLabors();
-            loadOverheads();
-            updateTotals();
-        }
+        history.reverse().forEach(h => {
+            const date = new Date(h.date).toLocaleDateString('id-ID');
+            tbody.innerHTML += `
+                <tr>
+                    <td>${date}</td>
+                    <td>${h.productName}</td>
+                    <td>${h.quantity} unit</td>
+                    <td>${formatRupiah(h.totalHPP)}</td>
+                    <td>${formatRupiah(h.hppPerUnit)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning" onclick="editHPP(${h.id}, ${h.productId})" title="Edit HPP">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-info" onclick="viewDetail(${h.id})" title="Lihat Detail">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-success" onclick="exportToExcel(${h.id})" title="Export Excel">
+                            <i class="fas fa-file-excel"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
 
-        // ========== HISTORY FUNCTIONS ==========
+    function editHPP(calculationId, productId) {
+        calculateHPP(productId, calculationId);
+    }
 
-        function getHistory() {
-            const all = JSON.parse(localStorage.getItem('costify_history') || '[]');
-            return all.filter(h => h.userId === currentUser.id);
-        }
+    function viewDetail(id) {
+        const history = JSON.parse(localStorage.getItem('costify_history') || '[]');
+        const calc = history.find(h => h.id === id);
+        
+        let detail = `=== DETAIL PERHITUNGAN HPP ===\n`;
+        detail += `Produk: ${calc.productName}\n`;
+        detail += `Jumlah Produksi: ${calc.quantity} unit\n`;
+        detail += `Tanggal: ${new Date(calc.date).toLocaleString('id-ID')}\n\n`;
 
-        function loadHistory() {
-            const history = getHistory();
-            const tbody = document.getElementById('historyList');
-            tbody.innerHTML = '';
+        detail += `BAHAN BAKU:\n`;
+        calc.materials.forEach(m => {
+            detail += `- ${m.name}: ${m.quantity} ${m.usageUnit} (${m.quantityStandar.toFixed(3)} ${m.satuanStandar}) × ${formatRupiah(m.hargaPerStandar)}/${m.satuanStandar} = ${formatRupiah(m.total)}\n`;
+        });
+        detail += `Total Bahan Baku: ${formatRupiah(calc.totalMaterial)}\n\n`;
 
-            if (history.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="text-center">Belum ada riwayat perhitungan</td></tr>';
-                return;
-            }
+        detail += `TENAGA KERJA:\n`;
+        calc.labors.forEach(l => {
+            detail += `- ${l.type}: ${formatRupiah(l.total)}\n`;
+        });
+        detail += `Total Tenaga Kerja: ${formatRupiah(calc.totalLabor)}\n\n`;
 
-            history.reverse().forEach(h => {
-                const date = new Date(h.date).toLocaleDateString('id-ID');
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${date}</td>
-                        <td>${h.productName}</td>
-                        <td>${h.quantity} unit</td>
-                        <td>${formatRupiah(h.totalHPP)}</td>
-                        <td>${formatRupiah(h.hppPerUnit)}</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning" onclick="editHPP(${h.id}, ${h.productId})" title="Edit HPP">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-sm btn-info" onclick="viewDetail(${h.id})" title="Lihat Detail">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="btn btn-sm btn-success" onclick="exportToExcel(${h.id})" title="Export Excel">
-                                <i class="fas fa-file-excel"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
+        detail += `OVERHEAD:\n`;
+        calc.overheads.forEach(o => {
+            const total = o.method === 'manual' ? formatRupiah(o.value) : (o.value + '% dari ' + (o.base === 'material' ? 'Bahan' : 'Produksi'));
+            detail += `- ${o.type}: ${total}\n`;
+        });
+        detail += `Total Overhead: ${formatRupiah(calc.totalOverhead)}\n\n`;
 
-        function editHPP(calculationId, productId) {
-            calculateHPP(productId, calculationId);
-        }
+        detail += `=== RINGKASAN ===\n`;
+        detail += `Total HPP: ${formatRupiah(calc.totalHPP)}\n`;
+        detail += `HPP per Unit: ${formatRupiah(calc.hppPerUnit)}\n`;
+        detail += `Margin: ${calc.profitMargin}%\n`;
+        detail += `Harga Jual: ${formatRupiah(calc.sellingPrice)}\n`;
 
-        function viewDetail(id) {
-            const history = JSON.parse(localStorage.getItem('costify_history') || '[]');
-            const calc = history.find(h => h.id === id);
-            
-            let detail = `=== DETAIL PERHITUNGAN HPP ===\n`;
-            detail += `Produk: ${calc.productName}\n`;
-            detail += `Jumlah Produksi: ${calc.quantity} unit\n`;
-            detail += `Tanggal: ${new Date(calc.date).toLocaleString('id-ID')}\n\n`;
+        alert(detail);
+    }
 
-            detail += `BAHAN BAKU:\n`;
-            calc.materials.forEach(m => {
-                let priceInfo = `${formatRupiah(m.price)} / ${m.priceUnit}`;
-                detail += `- ${m.name}: ${m.quantity} ${m.usageUnit} × ${priceInfo} = ${formatRupiah(m.total)}\n`;
-            });
-            detail += `Total Bahan Baku: ${formatRupiah(calc.totalMaterial)}\n\n`;
+    function exportToExcel(id) {
+        const history = JSON.parse(localStorage.getItem('costify_history') || '[]');
+        const calc = history.find(h => h.id === id);
+        
+        const workbook = XLSX.utils.book_new();
+        
+        const materials = calc.materials.map(m => ({
+            'Nama Bahan': m.name,
+            'Jumlah Pakai': m.quantity,
+            'Satuan': m.usageUnit,
+            'Jumlah Standar': m.quantityStandar.toFixed(3),
+            'Satuan Standar': m.satuanStandar,
+            'Harga/Standar': formatRupiah(m.hargaPerStandar),
+            'Total': formatRupiah(m.total)
+        }));
+        const ws1 = XLSX.utils.json_to_sheet(materials);
+        XLSX.utils.book_append_sheet(workbook, ws1, 'Bahan Baku');
+        
+        const summary = [
+            ['Produk', calc.productName],
+            ['Jumlah Produksi', calc.quantity + ' unit'],
+            ['Tanggal', new Date(calc.date).toLocaleString('id-ID')],
+            [],
+            ['Total Bahan Baku', formatRupiah(calc.totalMaterial)],
+            ['Total Tenaga Kerja', formatRupiah(calc.totalLabor)],
+            ['Total Overhead', formatRupiah(calc.totalOverhead)],
+            [],
+            ['TOTAL HPP', formatRupiah(calc.totalHPP)],
+            ['HPP per Unit', formatRupiah(calc.hppPerUnit)],
+            ['Margin Keuntungan', calc.profitMargin + '%'],
+            ['Harga Jual', formatRupiah(calc.sellingPrice)]
+        ];
+        const ws2 = XLSX.utils.aoa_to_sheet(summary);
+        XLSX.utils.book_append_sheet(workbook, ws2, 'Ringkasan');
+        
+        XLSX.writeFile(workbook, `HPP_${calc.productName}_${new Date().getTime()}.xlsx`);
+    }
 
-            detail += `TENAGA KERJA:\n`;
-            calc.labors.forEach(l => {
-                detail += `- ${l.type}: ${formatRupiah(l.total)}\n`;
-            });
-            detail += `Total Tenaga Kerja: ${formatRupiah(calc.totalLabor)}\n\n`;
+    function formatRupiah(number) {
+        return 'Rp ' + Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
 
-            detail += `OVERHEAD:\n`;
-            calc.overheads.forEach(o => {
-                const total = o.method === 'manual' ? formatRupiah(o.value) : (o.value + '% dari ' + (o.base === 'material' ? 'Bahan' : 'Produksi'));
-                detail += `- ${o.type}: ${total}\n`;
-            });
-            detail += `Total Overhead: ${formatRupiah(calc.totalOverhead)}\n\n`;
-
-            detail += `=== RINGKASAN ===\n`;
-            detail += `Total HPP: ${formatRupiah(calc.totalHPP)}\n`;
-            detail += `HPP per Unit: ${formatRupiah(calc.hppPerUnit)}\n`;
-            detail += `Margin: ${calc.profitMargin}%\n`;
-            detail += `Harga Jual: ${formatRupiah(calc.sellingPrice)}\n`;
-
-            alert(detail);
-        }
-
-        function exportToExcel(id) {
-            const history = JSON.parse(localStorage.getItem('costify_history') || '[]');
-            const calc = history.find(h => h.id === id);
-            
-            const workbook = XLSX.utils.book_new();
-            
-            // Sheet 1: Bahan Baku
-            const materials = calc.materials.map(m => ({
-                'Kode Barang': m.kodeBarang || '-',
-                'Nama Bahan': m.name,
-                'Harga': formatRupiah(m.price),
-                'Satuan Harga': m.priceUnit,
-                'Jumlah Pakai': m.quantity,
-                'Satuan Pakai': m.usageUnit,
-                'Total': formatRupiah(m.total)
-            }));
-            const ws1 = XLSX.utils.json_to_sheet(materials);
-            XLSX.utils.book_append_sheet(workbook, ws1, 'Bahan Baku');
-            
-            // Sheet 2: Summary
-            const summary = [
-                ['Produk', calc.productName],
-                ['Jumlah Produksi', calc.quantity + ' unit'],
-                ['Tanggal', new Date(calc.date).toLocaleString('id-ID')],
-                [],
-                ['Total Bahan Baku', formatRupiah(calc.totalMaterial)],
-                ['Total Tenaga Kerja', formatRupiah(calc.totalLabor)],
-                ['Total Overhead', formatRupiah(calc.totalOverhead)],
-                [],
-                ['TOTAL HPP', formatRupiah(calc.totalHPP)],
-                ['HPP per Unit', formatRupiah(calc.hppPerUnit)],
-                ['Margin Keuntungan', calc.profitMargin + '%'],
-                ['Harga Jual', formatRupiah(calc.sellingPrice)]
-            ];
-            const ws2 = XLSX.utils.aoa_to_sheet(summary);
-            XLSX.utils.book_append_sheet(workbook, ws2, 'Ringkasan');
-            
-            XLSX.writeFile(workbook, `HPP_${calc.productName}_${new Date().getTime()}.xlsx`);
-        }
-
-        // ========== HELPER FUNCTIONS ==========
-
-        function formatRupiah(number) {
-            return 'Rp ' + Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-        }
-
-        function parseRupiah(rupiah) {
-            return parseInt(rupiah.replace(/[^0-9]/g, '')) || 0;
-        }
-    </script>
+    function parseRupiah(rupiah) {
+        return parseInt(rupiah.replace(/[^0-9]/g, '')) || 0;
+    }
+</script>
 </body>
 </html>
+```
