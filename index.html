@@ -404,6 +404,92 @@
             border-radius: 10px;
             margin-left: 5px;
         }
+
+        /* NEW: Styling untuk transaksi card */
+        .transaction-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .transaction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .transaction-id {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .transaction-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .transaction-table {
+            margin-bottom: 10px;
+        }
+
+        .transaction-table table {
+            margin: 0;
+        }
+
+        .transaction-subtotal {
+            text-align: right;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .transaction-actions {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .budgeting-box {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .budgeting-box h4 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .budgeting-box .amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        /* Styling untuk temp items table */
+        .temp-items-table {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .temp-items-table table {
+            margin-bottom: 10px;
+        }
+
+        .btn-save-transaction {
+            margin-top: 10px;
+        }
         
         @media (max-width: 768px) {
             .hero-section h1 {
@@ -432,6 +518,11 @@
             .dark-mode-toggle {
                 width: 45px;
                 height: 45px;
+            }
+
+            .transaction-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -801,6 +892,30 @@
                 <div id="pengadaanSection" style="display:none;">
                     <h2 class="mb-4">Transaksi Pengadaan</h2>
                     
+                    <!-- NEW: Budgeting Box -->
+                    <div class="budgeting-box">
+                        <h4><i class="fas fa-wallet me-2"></i>Total Pengeluaran Bulan Ini</h4>
+                        <div class="amount" id="monthlyBudget">Rp 0</div>
+                        <small id="budgetMonth"></small>
+                    </div>
+
+                    <!-- NEW: Filter Tanggal -->
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row align-items-end">
+                                <div class="col-md-3">
+                                    <label class="form-label"><i class="fas fa-filter me-2"></i>Filter Tanggal</label>
+                                    <input type="date" class="form-control" id="filterTanggalPengadaan" onchange="filterPengadaanByDate()">
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-secondary" onclick="resetFilterPengadaan()">
+                                        <i class="fas fa-redo me-2"></i>Reset Filter
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="card">
                         <div class="card-header">
                             <span id="pengadaanFormTitle">Tambah Transaksi Pengadaan</span>
@@ -808,18 +923,17 @@
                         <div class="card-body">
                             <div class="alert alert-info mb-3">
                                 <i class="fas fa-info-circle me-2"></i>
-                                <strong>Catatan:</strong> Harga akan otomatis dikonversi ke satuan standar untuk perhitungan HPP.
+                                <strong>Catatan:</strong> Harga akan otomatis dikonversi ke satuan standar untuk perhitungan HPP. Tambahkan beberapa barang, lalu klik "Simpan Transaksi" untuk menyimpan dalam satu kelompok transaksi.
                             </div>
                             <form id="pengadaanForm">
-                                <input type="hidden" id="pengadaanEditId">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <label class="form-label">Tanggal</label>
+                                        <label class="form-label">Tanggal Transaksi</label>
                                         <input type="date" class="form-control" id="tanggalPengadaan" required>
                                     </div>
                                     <div class="col-md-3 mb-3 autocomplete-container">
-                                        <label class="form-label">Nama Barang</label>
-                                        <input type="text" class="form-control" id="barangPengadaanSearch" placeholder="Ketik untuk mencari..." autocomplete="off" oninput="searchBarangPengadaan(this.value)">
+                                        <label class="form-label">Nama Barang <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="barangPengadaanSearch" placeholder="Ketik untuk mencari..." autocomplete="off" oninput="searchBarangPengadaan(this.value)" required>
                                         <input type="hidden" id="barangPengadaanValue">
                                         <div id="barangPengadaanList" class="autocomplete-items"></div>
                                     </div>
@@ -851,36 +965,51 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3 d-flex align-items-end">
                                         <button type="submit" class="btn btn-primary me-2">
-                                            <i class="fas fa-save me-2"></i><span id="pengadaanSubmitBtn">Simpan</span>
-                                        </button>
-                                        <button type="button" class="btn btn-secondary" onclick="resetPengadaanForm()" style="display:none;" id="pengadaanCancelBtn">
-                                            <i class="fas fa-times me-2"></i>Batal
+                                            <i class="fas fa-plus me-2"></i>Tambah ke Transaksi
                                         </button>
                                     </div>
                                 </div>
                             </form>
+
+                            <!-- NEW: Temporary Items Table -->
+                            <div id="tempItemsContainer" class="temp-items-table" style="display:none;">
+                                <h5><i class="fas fa-list me-2"></i>Barang dalam Transaksi Ini</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Barang</th>
+                                                <th>Jumlah</th>
+                                                <th>Satuan</th>
+                                                <th>Harga/Satuan Standar</th>
+                                                <th>Subtotal</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tempItemsList"></tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="4" class="text-end">Subtotal Transaksi:</th>
+                                                <th id="tempTransactionSubtotal">Rp 0</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <button class="btn btn-success btn-save-transaction" onclick="saveTransaction()">
+                                    <i class="fas fa-save me-2"></i>Simpan Transaksi
+                                </button>
+                                <button class="btn btn-secondary btn-save-transaction" onclick="cancelTransaction()">
+                                    <i class="fas fa-times me-2"></i>Batal
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <div class="card mt-4">
                         <div class="card-header">Riwayat Transaksi Pengadaan</div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Tanggal</th>
-                                            <th>Kode Barang</th>
-                                            <th>Nama Barang</th>
-                                            <th>Jumlah</th>
-                                            <th>Harga Total</th>
-                                            <th>Harga/Satuan Standar</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="pengadaanList"></tbody>
-                                </table>
-                            </div>
+                            <div id="pengadaanTransactionsList"></div>
                         </div>
                     </div>
                 </div>
@@ -939,14 +1068,14 @@
                         <div class="card-body">
                             <div class="alert alert-info mb-3">
                                 <strong><i class="fas fa-info-circle me-2"></i>Informasi:</strong> 
-                                Pilih bahan dari Master Barang. Harga akan otomatis terisi dari transaksi Pengadaan terakhir dalam satuan standar.
+                                Pilih bahan dari Master Barang. Harga bahan otomatis diambil dari data pengadaan terakhir.
                             </div>
 
                             <form id="materialForm">
                                 <div class="row">
                                     <div class="col-md-4 mb-3 autocomplete-container">
-                                        <label class="form-label">Nama Bahan</label>
-                                        <input type="text" class="form-control" id="materialNameSearch" placeholder="Ketik untuk mencari..." autocomplete="off" oninput="searchMaterial(this.value)">
+                                        <label class="form-label">Nama Bahan <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="materialNameSearch" placeholder="Ketik untuk mencari..." autocomplete="off" oninput="searchMaterial(this.value)" required>
                                         <input type="hidden" id="materialNameValue">
                                         <div id="materialNameList" class="autocomplete-items"></div>
                                     </div>
@@ -1195,6 +1324,11 @@
         let overheads = [];
         let tempSatuanTambahan = [];
         let currentEditBarangId = null;
+        
+        // NEW: Variables for grouping transactions
+        let tempTransactionItems = [];
+        let currentTransactionDate = null;
+        let currentEditTransactionId = null; // FITUR BARU: untuk edit transaksi
 
         window.onload = function() {
             checkAutoLogin();
@@ -1377,12 +1511,12 @@
 
         function updateDashboard() {
             const masterBarang = getMasterBarang();
-            const pengadaan = getPengadaan();
+            const transactions = getPengadaanTransactions();
             const products = getProducts();
             const history = getHistory();
             
             document.getElementById('totalMasterBarang').textContent = masterBarang.length;
-            document.getElementById('totalPengadaan').textContent = pengadaan.length;
+            document.getElementById('totalPengadaan').textContent = transactions.length;
             document.getElementById('totalProducts').textContent = products.length;
             document.getElementById('totalCalculations').textContent = history.length;
             
@@ -1414,6 +1548,7 @@
             document.getElementById('historySection').style.display = 'none';
             loadPengadaan();
             setTanggalHariIni();
+            updateMonthlyBudget();
         }
 
         function showProducts() {
@@ -1750,11 +1885,11 @@
             }
         }
 
-        // ========== PENGADAAN FUNCTIONS ==========
+        // ========== PENGADAAN TRANSACTIONS FUNCTIONS ==========
 
-        function getPengadaan() {
-            const all = JSON.parse(localStorage.getItem('costify_pengadaan') || '[]');
-            return all.filter(p => p.userId === currentUser.id);
+        function getPengadaanTransactions() {
+            const all = JSON.parse(localStorage.getItem('costify_pengadaan_transactions') || '[]');
+            return all.filter(t => t.userId === currentUser.id);
         }
 
         function setTanggalHariIni() {
@@ -1848,10 +1983,10 @@
             infoBox.style.display = 'block';
         }
 
+        // Modified pengadaan form submission
         document.getElementById('pengadaanForm').onsubmit = function(e) {
             e.preventDefault();
             
-            const editId = document.getElementById('pengadaanEditId').value;
             const tanggal = document.getElementById('tanggalPengadaan').value;
             const idBarang = parseInt(document.getElementById('barangPengadaanValue').value);
             const jumlah = parseFloat(document.getElementById('jumlahPengadaan').value);
@@ -1873,156 +2008,407 @@
 
             const jumlahStandar = konversiKeStandar(jumlah, satuanInput, barang.satuan, idBarang);
             const hargaPerStandar = hargaTotal / jumlahStandar;
+            const subtotal = hargaTotal;
 
-            let allPengadaan = JSON.parse(localStorage.getItem('costify_pengadaan') || '[]');
+            // Add to temp items
+            const tempItem = {
+                id: Date.now(),
+                idBarang: idBarang,
+                kodeBarang: barang.kode,
+                namaBarang: barang.nama,
+                jumlah_input: jumlah,
+                satuan_input: satuanInput,
+                jumlah_standar: jumlahStandar,
+                satuan_standar: barang.satuan,
+                harga_total: hargaTotal,
+                harga_per_standar: hargaPerStandar,
+                subtotal: subtotal
+            };
 
-            if (editId) {
-                const idx = allPengadaan.findIndex(p => p.id === parseInt(editId));
-                if (idx !== -1) {
-                    allPengadaan[idx].tanggal = tanggal;
-                    allPengadaan[idx].idBarang = idBarang;
-                    allPengadaan[idx].kodeBarang = barang.kode;
-                    allPengadaan[idx].namaBarang = barang.nama;
-                    allPengadaan[idx].jumlah_input = jumlah;
-                    allPengadaan[idx].satuan_input = satuanInput;
-                    allPengadaan[idx].jumlah_standar = jumlahStandar;
-                    allPengadaan[idx].satuan_standar = barang.satuan;
-                    allPengadaan[idx].harga_total = hargaTotal;
-                    allPengadaan[idx].harga_per_standar = hargaPerStandar;
-                    allPengadaan[idx].updatedAt = new Date().toISOString();
-                }
-                alert('Transaksi pengadaan berhasil diubah!');
-            } else {
-                const pengadaan = {
-                    id: Date.now(),
-                    userId: currentUser.id,
-                    tanggal: tanggal,
-                    idBarang: idBarang,
-                    kodeBarang: barang.kode,
-                    namaBarang: barang.nama,
-                    jumlah_input: jumlah,
-                    satuan_input: satuanInput,
-                    jumlah_standar: jumlahStandar,
-                    satuan_standar: barang.satuan,
-                    harga_total: hargaTotal,
-                    harga_per_standar: hargaPerStandar,
-                    createdAt: new Date().toISOString()
-                };
-                allPengadaan.push(pengadaan);
-                alert('Transaksi pengadaan berhasil ditambahkan!');
-            }
+            tempTransactionItems.push(tempItem);
+            currentTransactionDate = tanggal;
 
-            localStorage.setItem('costify_pengadaan', JSON.stringify(allPengadaan));
-            
-            resetPengadaanForm();
-            loadPengadaan();
-            updateDashboard();
-        };
-
-        function resetPengadaanForm() {
-            document.getElementById('pengadaanForm').reset();
-            document.getElementById('pengadaanEditId').value = '';
+            // Clear form
             document.getElementById('barangPengadaanSearch').value = '';
             document.getElementById('barangPengadaanValue').value = '';
+            document.getElementById('jumlahPengadaan').value = '';
             document.getElementById('satuanPengadaan').innerHTML = '<option value="">Pilih Satuan</option>';
+            document.getElementById('hargaTotalPengadaan').value = '';
             document.getElementById('pengadaanInfoBox').style.display = 'none';
-            document.getElementById('pengadaanFormTitle').textContent = 'Tambah Transaksi Pengadaan';
-            document.getElementById('pengadaanSubmitBtn').textContent = 'Simpan';
-            document.getElementById('pengadaanCancelBtn').style.display = 'none';
-            setTanggalHariIni();
-        }
 
-        function loadPengadaan() {
-            const pengadaan = getPengadaan();
-            const tbody = document.getElementById('pengadaanList');
-            tbody.innerHTML = '';
+            loadTempItems();
+        };
 
-            if (pengadaan.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="text-center">Belum ada transaksi pengadaan</td></tr>';
+        function loadTempItems() {
+            const container = document.getElementById('tempItemsContainer');
+            const tbody = document.getElementById('tempItemsList');
+            
+            if (tempTransactionItems.length === 0) {
+                container.style.display = 'none';
                 return;
             }
 
-            pengadaan.reverse().forEach(p => {
-                const tgl = new Date(p.tanggal).toLocaleDateString('id-ID');
+            container.style.display = 'block';
+            tbody.innerHTML = '';
+
+            let totalSubtotal = 0;
+
+            tempTransactionItems.forEach((item, idx) => {
+                totalSubtotal += item.subtotal;
                 tbody.innerHTML += `
                     <tr>
-                        <td>${tgl}</td>
-                        <td>${p.kodeBarang}</td>
-                        <td>${p.namaBarang}</td>
-                        <td>${p.jumlah_input} ${p.satuan_input} <span class="badge badge-info">${p.jumlah_standar.toFixed(3)} ${p.satuan_standar}</span></td>
-                        <td>${formatRupiah(p.harga_total)}</td>
-                        <td>${formatRupiah(p.harga_per_standar)}/${p.satuan_standar}</td>
+                        <td>${item.namaBarang}</td>
+                        <td>${item.jumlah_input}</td>
+                        <td>${item.satuan_input}</td>
+                        <td>${formatRupiah(item.harga_per_standar)}/${item.satuan_standar}</td>
+                        <td>${formatRupiah(item.subtotal)}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning" onclick="editPengadaan(${p.id})">
-                                <i class="fas fa-edit"></i>
+                            <button class="btn btn-sm btn-danger" onclick="removeTempItem(${idx})">
+                                <i class="fas fa-trash"></i>
                             </button>
                         </td>
                     </tr>
                 `;
             });
+
+            document.getElementById('tempTransactionSubtotal').textContent = formatRupiah(totalSubtotal);
         }
 
-        function editPengadaan(id) {
-            const all = JSON.parse(localStorage.getItem('costify_pengadaan') || '[]');
-            const pengadaan = all.find(p => p.id === id);
-            
-            if (!pengadaan) return;
-
-            const allBarang = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
-            const barang = allBarang.find(b => b.id === pengadaan.idBarang);
-            if (!barang) return;
-
-            document.getElementById('pengadaanEditId').value = pengadaan.id;
-            document.getElementById('tanggalPengadaan').value = pengadaan.tanggal;
-            
-            selectBarangPengadaan(pengadaan.idBarang, pengadaan.kodeBarang, pengadaan.namaBarang, barang.satuan);
-            
-            document.getElementById('jumlahPengadaan').value = pengadaan.jumlah_input;
-            document.getElementById('satuanPengadaan').value = pengadaan.satuan_input;
-            document.getElementById('hargaTotalPengadaan').value = pengadaan.harga_total;
-            hitungPengadaanInfo();
-
-            document.getElementById('pengadaanFormTitle').textContent = 'Ubah Transaksi Pengadaan';
-            document.getElementById('pengadaanSubmitBtn').textContent = 'Update';
-            document.getElementById('pengadaanCancelBtn').style.display = 'inline-block';
-
-            document.getElementById('pengadaanForm').scrollIntoView({ behavior: 'smooth' });
+        function removeTempItem(idx) {
+            tempTransactionItems.splice(idx, 1);
+            loadTempItems();
         }
-
-        function getHargaTerakhirByBarangId(idBarang) {
-            const pengadaan = getPengadaan();
-            const filtered = pengadaan.filter(p => p.idBarang === idBarang);
+        function saveTransaction() {
+if (tempTransactionItems.length === 0) {
+alert('Belum ada barang yang ditambahkan!');
+return;
+}
+        // FITUR BARU: Cek mode Edit atau Tambah
+        if (currentEditTransactionId) {
+            // Mode Edit: Update transaksi yang sudah ada
+            let allTransactions = JSON.parse(localStorage.getItem('costify_pengadaan_transactions') || '[]');
+            const idx = allTransactions.findIndex(t => t.id === currentEditTransactionId);
             
-            if (filtered.length === 0) return null;
+            if (idx !== -1) {
+                allTransactions[idx].tanggal = currentTransactionDate;
+                allTransactions[idx].items = tempTransactionItems;
+                allTransactions[idx].subtotal = tempTransactionItems.reduce((sum, item) => sum + item.subtotal, 0);
+                allTransactions[idx].updatedAt = new Date().toISOString();
+                
+                localStorage.setItem('costify_pengadaan_transactions', JSON.stringify(allTransactions));
+                alert('Transaksi berhasil diperbarui!');
+            }
             
-            filtered.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
-            
-            return {
-                harga_per_standar: filtered[0].harga_per_standar,
-                satuan_standar: filtered[0].satuan_standar,
-                tanggal: filtered[0].tanggal
-            };
-        }
-
-        // ========== PRODUCTS FUNCTIONS ==========
-
-        function getProducts() {
-            const all = JSON.parse(localStorage.getItem('costify_products') || '[]');
-            return all.filter(p => p.userId === currentUser.id);
-        }
-
-        document.getElementById('productForm').onsubmit = function(e) {
-            e.preventDefault();
-            const name = document.getElementById('productName').value;
-            const quantity = parseInt(document.getElementById('productQuantity').value);
-
-            const product = {
+            currentEditTransactionId = null;
+        } else {
+            // Mode Tambah: Buat transaksi baru
+            const transaction = {
                 id: Date.now(),
                 userId: currentUser.id,
-                name: name,
-                quantity: quantity,
+                tanggal: currentTransactionDate,
+                items: tempTransactionItems,
+                subtotal: tempTransactionItems.reduce((sum, item) => sum + item.subtotal, 0),
                 createdAt: new Date().toISOString()
-                };
+            };
+
+            let allTransactions = JSON.parse(localStorage.getItem('costify_pengadaan_transactions') || '[]');
+            allTransactions.push(transaction);
+            localStorage.setItem('costify_pengadaan_transactions', JSON.stringify(allTransactions));
+            
+            alert('Transaksi berhasil disimpan!');
+        }
+        
+        // Reset
+        tempTransactionItems = [];
+        currentTransactionDate = null;
+        loadTempItems();
+        loadPengadaan();
+        updateMonthlyBudget();
+        updateDashboard();
+        
+        // Reset form title
+        document.getElementById('pengadaanFormTitle').textContent = 'Tambah Transaksi Pengadaan';
+    }
+
+    function cancelTransaction() {
+        if (confirm('Batalkan transaksi ini?')) {
+            tempTransactionItems = [];
+            currentTransactionDate = null;
+            currentEditTransactionId = null;
+            loadTempItems();
+            
+            // Reset form title
+            document.getElementById('pengadaanFormTitle').textContent = 'Tambah Transaksi Pengadaan';
+        }
+    }
+
+    // FITUR BARU: Edit Transaksi Pengadaan
+    function editTransaction(transactionId) {
+        const transactions = getPengadaanTransactions();
+        const trans = transactions.find(t => t.id === transactionId);
+        
+        if (!trans) return;
+        
+        // Set mode edit
+        currentEditTransactionId = transactionId;
+        currentTransactionDate = trans.tanggal;
+        
+        // Load items ke temp
+        tempTransactionItems = JSON.parse(JSON.stringify(trans.items)); // Deep copy
+        
+        // Update form tanggal
+        document.getElementById('tanggalPengadaan').value = trans.tanggal;
+        
+        // Update form title
+        document.getElementById('pengadaanFormTitle').textContent = 'Edit Transaksi Pengadaan';
+        
+        // Tampilkan temp items
+        loadTempItems();
+        
+        // Scroll ke form
+        document.getElementById('pengadaanSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // FITUR BARU: Hapus Transaksi Pengadaan
+    function deleteTransaction(transactionId) {
+        if (confirm('Yakin ingin menghapus transaksi ini? Data tidak dapat dikembalikan.')) {
+            let allTransactions = JSON.parse(localStorage.getItem('costify_pengadaan_transactions') || '[]');
+            allTransactions = allTransactions.filter(t => t.id !== transactionId);
+            localStorage.setItem('costify_pengadaan_transactions', JSON.stringify(allTransactions));
+            
+            alert('Transaksi berhasil dihapus!');
+            loadPengadaan();
+            updateMonthlyBudget();
+            updateDashboard();
+        }
+    }
+
+    function loadPengadaan() {
+        const transactions = getPengadaanTransactions();
+        const container = document.getElementById('pengadaanTransactionsList');
+        
+        if (transactions.length === 0) {
+            container.innerHTML = '<p class="text-center text-muted">Belum ada transaksi pengadaan</p>';
+            return;
+        }
+
+        let html = '';
+        transactions.reverse().forEach(trans => {
+            const tgl = new Date(trans.tanggal).toLocaleDateString('id-ID');
+            
+            html += `
+                <div class="transaction-card">
+                    <div class="transaction-header">
+                        <div>
+                            <span class="transaction-id">ID: ${trans.id}</span>
+                        </div>
+                        <div>
+                            <span class="transaction-date"><i class="fas fa-calendar me-2"></i>${tgl}</span>
+                        </div>
+                    </div>
+                    <div class="transaction-table">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nama Barang</th>
+                                    <th>Jumlah</th>
+                                    <th>Satuan</th>
+                                    <th>Harga/Satuan Standar</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+            
+            trans.items.forEach(item => {
+                html += `
+                    <tr>
+                        <td>${item.namaBarang}</td>
+                        <td>${item.jumlah_input}</td>
+                        <td>${item.satuan_input} <span class="badge badge-info">${item.jumlah_standar.toFixed(3)} ${item.satuan_standar}</span></td>
+                        <td>${formatRupiah(item.harga_per_standar)}/${item.satuan_standar}</td>
+                        <td>${formatRupiah(item.subtotal)}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="transaction-subtotal">
+                        Subtotal Transaksi: ${formatRupiah(trans.subtotal)}
+                    </div>
+                    <div class="transaction-actions">
+                        <button class="btn btn-sm btn-warning" onclick="editTransaction(${trans.id})">
+                            <i class="fas fa-edit me-1"></i>Edit
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteTransaction(${trans.id})">
+                            <i class="fas fa-trash me-1"></i>Hapus
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    // Filter by date
+    function filterPengadaanByDate() {
+        const filterDate = document.getElementById('filterTanggalPengadaan').value;
+        
+        if (!filterDate) {
+            loadPengadaan();
+            return;
+        }
+
+        const transactions = getPengadaanTransactions();
+        const filtered = transactions.filter(t => t.tanggal === filterDate);
+        
+        const container = document.getElementById('pengadaanTransactionsList');
+        
+        if (filtered.length === 0) {
+            container.innerHTML = '<p class="text-center text-muted">Tidak ada transaksi pada tanggal tersebut</p>';
+            return;
+        }
+
+        let html = '';
+        filtered.reverse().forEach(trans => {
+            const tgl = new Date(trans.tanggal).toLocaleDateString('id-ID');
+            
+            html += `
+                <div class="transaction-card">
+                    <div class="transaction-header">
+                        <div>
+                            <span class="transaction-id">ID: ${trans.id}</span>
+                        </div>
+                        <div>
+                            <span class="transaction-date"><i class="fas fa-calendar me-2"></i>${tgl}</span>
+                        </div>
+                    </div>
+                    <div class="transaction-table">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nama Barang</th>
+                                    <th>Jumlah</th>
+                                    <th>Satuan</th>
+                                    <th>Harga/Satuan Standar</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+            
+            trans.items.forEach(item => {
+                html += `
+                    <tr>
+                        <td>${item.namaBarang}</td>
+                        <td>${item.jumlah_input}</td>
+                        <td>${item.satuan_input} <span class="badge badge-info">${item.jumlah_standar.toFixed(3)} ${item.satuan_standar}</span></td>
+                        <td>${formatRupiah(item.harga_per_standar)}/${item.satuan_standar}</td>
+                        <td>${formatRupiah(item.subtotal)}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="transaction-subtotal">
+                        Subtotal Transaksi: ${formatRupiah(trans.subtotal)}
+                    </div>
+                    <div class="transaction-actions">
+                        <button class="btn btn-sm btn-warning" onclick="editTransaction(${trans.id})">
+                            <i class="fas fa-edit me-1"></i>Edit
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteTransaction(${trans.id})">
+                            <i class="fas fa-trash me-1"></i>Hapus
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    function resetFilterPengadaan() {
+        document.getElementById('filterTanggalPengadaan').value = '';
+        loadPengadaan();
+    }
+
+    // Monthly budget calculation
+    function updateMonthlyBudget() {
+        const transactions = getPengadaanTransactions();
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+
+        const monthlyTransactions = transactions.filter(t => {
+            const transDate = new Date(t.tanggal);
+            return transDate.getMonth() === currentMonth && transDate.getFullYear() === currentYear;
+        });
+
+        const total = monthlyTransactions.reduce((sum, t) => sum + t.subtotal, 0);
+
+        document.getElementById('monthlyBudget').textContent = formatRupiah(total);
+        
+        const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+                           'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        document.getElementById('budgetMonth').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+    }
+
+    // Get latest price from transactions
+    function getHargaTerakhirByBarangId(idBarang) {
+        const transactions = getPengadaanTransactions();
+        
+        let latestItem = null;
+        let latestDate = null;
+
+        transactions.forEach(trans => {
+            trans.items.forEach(item => {
+                if (item.idBarang === idBarang) {
+                    const transDate = new Date(trans.tanggal);
+                    if (!latestDate || transDate > latestDate) {
+                        latestDate = transDate;
+                        latestItem = item;
+                    }
+                }
+            });
+        });
+
+        if (!latestItem) return null;
+
+        return {
+            harga_per_standar: latestItem.harga_per_standar,
+            satuan_standar: latestItem.satuan_standar,
+            tanggal: latestDate.toISOString()
+        };
+    }
+
+    // ========== PRODUCTS FUNCTIONS ==========
+
+    function getProducts() {
+        const all = JSON.parse(localStorage.getItem('costify_products') || '[]');
+        return all.filter(p => p.userId === currentUser.id);
+    }
+
+    document.getElementById('productForm').onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('productName').value;
+        const quantity = parseInt(document.getElementById('productQuantity').value);
+
+        const product = {
+            id: Date.now(),
+            userId: currentUser.id,
+            name: name,
+            quantity: quantity,
+            createdAt: new Date().toISOString()
+        };
+        
         let products = JSON.parse(localStorage.getItem('costify_products') || '[]');
         products.push(product);
         localStorage.setItem('costify_products', JSON.stringify(products));
@@ -2221,7 +2607,7 @@
         }
 
         if (!hargaPerStandar) {
-            alert('Belum ada data harga pengadaan untuk barang ini!');
+            alert('Belum ada data harga pengadaan untuk barang ini! Silakan input pengadaan terlebih dahulu.');
             return;
         }
         
