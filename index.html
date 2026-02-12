@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Costify - Hitung HPP Produk Jadi Lebih Mudah</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,118 +15,174 @@
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
             min-height: 100vh;
+            color: #1a202c;
         }
         
+        /* ========== LANDING PAGE ========== */
         .landing-page {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
         
         .hero-section {
-            padding: 100px 0 60px;
+            padding: 120px 0 80px;
             color: white;
             text-align: center;
         }
         
         .hero-section h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            line-height: 1.2;
         }
         
         .hero-section p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-section .btn {
+            padding: 14px 36px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .hero-section .btn-light {
+            background: white;
+            color: #667eea;
+            border: none;
+        }
+
+        .hero-section .btn-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .hero-section .btn-outline-light:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
         }
         
         .feature-section {
-            background: white;
-            padding: 80px 0;
+            background: #ffffff;
+            padding: 100px 0;
+        }
+
+        .feature-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #1a202c;
         }
         
         .feature-card {
             text-align: center;
-            padding: 30px;
-            border-radius: 10px;
-            transition: transform 0.3s;
+            padding: 40px 24px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            height: 100%;
         }
         
         .feature-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+            background: white;
         }
         
         .feature-icon {
             font-size: 3rem;
             color: #667eea;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h4 {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a202c;
+        }
+
+        .feature-card p {
+            color: #4a5568;
+            line-height: 1.6;
+            margin: 0;
         }
 
         .featured-section {
             background: #f8f9fa;
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .featured-section h2 {
             text-align: center;
-            margin-bottom: 50px;
-            color: #333;
+            margin-bottom: 60px;
+            color: #1a202c;
             font-weight: 700;
+            font-size: 2.5rem;
         }
 
         .featured-item {
             display: flex;
-            align-items: center;
-            margin-bottom: 40px;
-            padding: 25px;
+            align-items: flex-start;
+            margin-bottom: 32px;
+            padding: 32px;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: all 0.3s;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
         }
 
         .featured-item:hover {
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
-            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.12);
+            transform: translateY(-4px);
         }
 
         .featured-icon-box {
-            min-width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
+            min-width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 25px;
+            margin-right: 24px;
         }
 
         .featured-icon-box i {
-            font-size: 2rem;
+            font-size: 1.75rem;
             color: white;
         }
 
         .featured-content h4 {
-            color: #333;
+            color: #1a202c;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-size: 1.125rem;
         }
 
         .featured-content p {
-            color: #666;
+            color: #4a5568;
             margin: 0;
             line-height: 1.6;
         }
 
         .landing-footer {
-            background: #1a1a2e;
-            color: #e0e0e0;
-            padding: 40px 0 20px;
+            background: #1a202c;
+            color: #cbd5e0;
+            padding: 60px 0 24px;
             margin-top: auto;
         }
 
@@ -138,36 +194,36 @@
 
         .footer-description {
             font-size: 0.95rem;
-            color: #b0b0b0;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            color: #a0aec0;
+            margin-bottom: 32px;
+            line-height: 1.7;
         }
 
         .footer-links {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .footer-links a {
             color: #667eea;
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 16px;
             font-size: 0.9rem;
             transition: color 0.3s;
         }
 
         .footer-links a:hover {
-            color: #764ba2;
+            color: #667eea;
         }
 
         .footer-copyright {
-            font-size: 0.85rem;
-            color: #888;
-            padding-top: 20px;
-            border-top: 1px solid #2a2a3e;
+            font-size: 0.875rem;
+            color: #718096;
+            padding-top: 24px;
+            border-top: 1px solid #2d3748;
         }
 
         .footer-copyright .heart {
-            color: #e74c3c;
+            color: #e53e3e;
             animation: heartbeat 1.5s infinite;
         }
 
@@ -178,82 +234,156 @@
 
         .dark-mode-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            top: 24px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
             z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .dark-mode-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.05);
         }
 
+        /* Dark Mode */
         body.dark-mode {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: #0f172a;
         }
 
         body.dark-mode .landing-page {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         }
 
         body.dark-mode .feature-section {
-            background: #0f3460;
+            background: #1e293b;
         }
 
         body.dark-mode .feature-card {
-            background: #1a1a2e;
-            color: #e0e0e0;
+            background: #334155;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .feature-card:hover {
+            background: #475569;
         }
 
         body.dark-mode .feature-card h4 {
-            color: #667eea;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .feature-card p {
+            color: #cbd5e0;
         }
 
         body.dark-mode .featured-section {
-            background: #16213e;
+            background: #0f172a;
         }
 
-        body.dark-mode .featured-section h2 {
-            color: #e0e0e0;
+        body.dark-mode .featured-section h2,
+        body.dark-mode .feature-section h2 {
+            color: #f1f5f9;
         }
 
         body.dark-mode .featured-item {
-            background: #1a1a2e;
+            background: #1e293b;
         }
 
         body.dark-mode .featured-content h4 {
-            color: #e0e0e0;
+            color: #f1f5f9;
         }
 
         body.dark-mode .featured-content p {
-            color: #b0b0b0;
+            color: #cbd5e0;
         }
 
         body.dark-mode .landing-footer {
-            background: #0f0f1e;
+            background: #020617;
         }
         
+        /* ========== LOGIN/REGISTER ========== */
+        .login-container {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: 16px;
+            padding: 48px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .auth-card h2 {
+            color: #1a202c;
+            margin-bottom: 32px;
+            font-weight: 700;
+            font-size: 1.75rem;
+        }
+
+        .auth-card .form-label {
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+
+        .auth-card .form-control {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .auth-card .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .auth-card .btn-primary {
+            padding: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        .auth-card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-card a:hover {
+            color: #667eea;
+        }
+
+        /* ========== APP CONTAINER ========== */
         .app-container {
             display: none;
-            background: #f8f9fa;
+            background: #f5f7fa;
             min-height: 100vh;
         }
         
         .navbar-custom {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 15px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 16px 0;
+            border-bottom: 1px solid #e2e8f0;
         }
         
         .navbar-brand {
@@ -261,98 +391,277 @@
             color: #667eea !important;
             font-size: 1.5rem;
         }
-        
-        .main-content {
-            padding: 30px 0;
+
+        .navbar-custom .nav-link {
+            color: #4a5568;
+            font-weight: 500;
+            padding: 8px 16px;
+            margin: 0 4px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #667eea;
+            background: #f7fafc;
+        }
+
+        .navbar-custom .nav-link.active {
+            color: #667eea;
+            background: #edf2f7;
         }
         
+        .main-content {
+            padding: 40px 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-header h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin: 0;
+        }
+
+        .page-header p {
+            color: #718096;
+            margin: 8px 0 0 0;
+        }
+        
+        /* Cards */
         .card {
             border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            margin-bottom: 24px;
+            background: white;
         }
         
         .card-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 15px 15px 0 0 !important;
-            padding: 20px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            border-radius: 12px 12px 0 0 !important;
+            padding: 20px 24px;
             font-weight: 600;
+            color: #1a202c;
+            font-size: 1.125rem;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        /* Forms */
+        .form-label {
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+        }
+
+        .form-control, .form-select {
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-size: 0.9375rem;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
         
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 25px;
-            padding: 10px 30px;
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
             font-weight: 500;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            border: none;
         }
         
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            background: #5568d3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
-        
-        .table {
-            margin-top: 20px;
+
+        .btn-secondary {
+            background: #718096;
+            border: none;
         }
-        
-        .result-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        .btn-secondary:hover {
+            background: #4a5568;
+        }
+
+        .btn-success {
+            background: #48bb78;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background: #38a169;
+        }
+
+        .btn-warning {
+            background: #ed8936;
+            border: none;
             color: white;
-            padding: 30px;
-            border-radius: 15px;
+        }
+
+        .btn-warning:hover {
+            background: #dd6b20;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #f56565;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+
+        .btn-info {
+            background: #4299e1;
+            border: none;
+        }
+
+        .btn-info:hover {
+            background: #3182ce;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.875rem;
+        }
+
+        .btn-lg {
+            padding: 14px 28px;
+            font-size: 1rem;
+        }
+        
+        /* Tables */
+        .table {
+            margin-top: 0;
+        }
+
+        .table thead th {
+            background: #f7fafc;
+            border-bottom: 2px solid #e2e8f0;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 14px 16px;
+        }
+
+        .table tbody td {
+            padding: 14px 16px;
+            vertical-align: middle;
+            color: #2d3748;
+            font-size: 0.9375rem;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f7fafc;
+        }
+
+        .table tfoot th {
+            background: #f7fafc;
+            font-weight: 600;
+            padding: 14px 16px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        /* Result Box */
+        .result-box {
+            background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
+            color: white;
+            padding: 32px;
+            border-radius: 12px;
             text-align: center;
         }
         
+        .result-box h5 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
         .result-value {
             font-size: 2rem;
             font-weight: 700;
-            margin-top: 10px;
-        }
-        
-        .login-container {
-            display: none;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .auth-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 450px;
-            width: 100%;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        
-        .auth-card h2 {
-            color: #667eea;
-            margin-bottom: 30px;
-            font-weight: 700;
+            margin-top: 8px;
         }
 
-        /* Styling untuk satuan tambahan */
+        /* Stats Cards */
+        .stats-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .stats-card h5 {
+            color: #718096;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .stats-card h2 {
+            color: #1a202c;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .stats-card i {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        /* Satuan Item */
         .satuan-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            padding: 10px;
-            background: #f8f9fa;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: #f7fafc;
             border-radius: 8px;
+            border: 1px solid #e2e8f0;
         }
 
         .satuan-item input {
             flex: 1;
-        }
-
-        .satuan-item .btn-sm {
-            padding: 5px 10px;
         }
 
         #satuanTambahanContainer {
@@ -360,35 +669,36 @@
             overflow-y: auto;
         }
 
-        /* Autocomplete styling */
+        /* Autocomplete */
         .autocomplete-container {
             position: relative;
         }
 
         .autocomplete-items {
             position: absolute;
-            border: 1px solid #d4d4d4;
-            border-bottom: none;
+            border: 1px solid #e2e8f0;
             border-top: none;
             z-index: 99;
             top: 100%;
             left: 0;
             right: 0;
-            max-height: 200px;
+            max-height: 240px;
             overflow-y: auto;
             background-color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 0 0 8px 8px;
         }
 
         .autocomplete-items div {
-            padding: 10px;
+            padding: 12px 16px;
             cursor: pointer;
             background-color: #fff;
-            border-bottom: 1px solid #d4d4d4;
+            border-bottom: 1px solid #f7fafc;
+            font-size: 0.9375rem;
         }
 
         .autocomplete-items div:hover {
-            background-color: #e9e9e9;
+            background-color: #f7fafc;
         }
 
         .autocomplete-active {
@@ -396,104 +706,216 @@
             color: #ffffff;
         }
 
-        .badge-info {
-            background-color: #17a2b8;
-            color: white;
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            border-radius: 10px;
-            margin-left: 5px;
+        /* Badge */
+        .badge {
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8125rem;
         }
 
-        /* NEW: Styling untuk transaksi card */
+        .badge-info {
+            background-color: #4299e1;
+            color: white;
+        }
+
+        .badge.bg-primary {
+            background-color: #667eea !important;
+        }
+
+        /* Transaction Card */
         .transaction-card {
             background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
             border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .transaction-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
         }
 
         .transaction-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .transaction-id {
             font-weight: 600;
             color: #667eea;
+            font-size: 0.9375rem;
         }
 
         .transaction-date {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .transaction-table {
-            margin-bottom: 10px;
-        }
-
-        .transaction-table table {
-            margin: 0;
+            color: #718096;
+            font-size: 0.875rem;
         }
 
         .transaction-subtotal {
             text-align: right;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
+            padding: 16px;
+            background: #f7fafc;
+            border-radius: 8px;
             font-weight: 600;
-            color: #667eea;
+            color: #1a202c;
+            margin-top: 16px;
         }
 
         .transaction-actions {
             text-align: right;
-            margin-top: 10px;
+            margin-top: 16px;
         }
 
+        /* Budgeting Box */
         .budgeting-box {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            padding: 32px;
+            border-radius: 12px;
+            margin-bottom: 24px;
             text-align: center;
         }
 
         .budgeting-box h4 {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
+            margin-bottom: 16px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
         }
 
         .budgeting-box .amount {
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             font-weight: 700;
         }
 
-        /* Styling untuk temp items table */
+        .budgeting-box small {
+            opacity: 0.85;
+            font-size: 0.875rem;
+        }
+
+        /* Temp Items Table */
         .temp-items-table {
-            background: #f8f9fa;
-            padding: 15px;
+            background: #f7fafc;
+            padding: 20px;
             border-radius: 8px;
-            margin-top: 15px;
+            margin-top: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .temp-items-table h5 {
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 16px;
         }
 
         .temp-items-table table {
-            margin-bottom: 10px;
+            margin-bottom: 16px;
         }
 
         .btn-save-transaction {
-            margin-top: 10px;
+            margin-top: 12px;
+            margin-right: 8px;
+        }
+
+        /* Alert */
+        .alert {
+            border-radius: 8px;
+            border: none;
+            padding: 14px 18px;
+        }
+
+        .alert-info {
+            background: #e6f2ff;
+            color: #2c5282;
+        }
+
+        .alert-success {
+            background: #e6ffed;
+            color: #22543d;
+        }
+
+        /* Welcome Card */
+        .welcome-card {
+            background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
+            border: none;
+            border-radius: 12px;
+            margin-bottom: 32px;
+        }
+
+        .welcome-card .card-body {
+            padding: 48px 32px;
+            text-align: center;
+            color: white;
+        }
+
+        .welcome-card h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .welcome-card p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        /* Info Card */
+        .info-card {
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card .card-body {
+            padding: 24px;
+        }
+
+        .info-card h5 {
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 16px;
+        }
+
+        .info-card ol {
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+
+        .info-card ol li {
+            margin-bottom: 10px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Empty State */
+        #emptyState {
+            border: 2px dashed #e2e8f0;
+        }
+
+        #emptyState .card-body {
+            padding: 64px 32px;
+        }
+
+        #emptyState i {
+            color: #cbd5e0;
+        }
+
+        #emptyState h5,
+        #emptyState p {
+            color: #a0aec0;
         }
         
         @media (max-width: 768px) {
             .hero-section h1 {
-                font-size: 2rem;
+                font-size: 2.25rem;
             }
             
             .hero-section p {
@@ -507,23 +929,58 @@
 
             .featured-icon-box {
                 margin-right: 0;
-                margin-bottom: 20px;
+                margin-bottom: 16px;
             }
 
             .footer-links a {
                 display: block;
-                margin: 10px 0;
+                margin: 12px 0;
             }
 
             .dark-mode-toggle {
-                width: 45px;
-                height: 45px;
+                width: 44px;
+                height: 44px;
             }
 
             .transaction-header {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 8px;
             }
+
+            .auth-card {
+                padding: 32px 24px;
+            }
+
+            .main-content {
+                padding: 24px 0;
+            }
+
+            .page-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .stats-card {
+                margin-bottom: 16px;
+            }
+        }
+
+        /* Material Table Container */
+        #materialTableContainer {
+            margin-top: 20px;
+        }
+
+        #materialTableContainer .text-center {
+            padding: 48px 24px;
+        }
+
+        #materialTableContainer i.fa-inbox {
+            color: #cbd5e0;
+        }
+
+        #materialTableContainer p {
+            color: #a0aec0;
+            margin: 0;
         }
     </style>
 </head>
@@ -533,6 +990,7 @@
         <i class="fas fa-moon" id="darkModeIcon"></i>
     </div>
 
+    <!-- LANDING PAGE -->
     <div id="landingPage" class="landing-page">
         <section class="hero-section">
             <div class="container">
@@ -549,7 +1007,7 @@
 
         <section class="feature-section">
             <div class="container">
-                <h2 class="text-center mb-5">Mengapa Memilih Costify?</h2>
+                <h2>Mengapa Memilih Costify?</h2>
                 <div class="row">
                     <div class="col-md-4 mb-4">
                         <div class="feature-card">
@@ -585,18 +1043,18 @@
                         <i class="fas fa-exchange-alt"></i>
                     </div>
                     <div class="featured-content">
-                        <h4>Konversi Satuan Otomatis</h4>
-                        <p>Sistem pintar yang otomatis mengkonversi berbagai satuan (kg, gram, liter, ml, pcs) sehingga Anda tidak perlu repot menghitung manual. Input harga dalam satuan apa saja, sistem akan menyesuaikan dengan pemakaian.</p>
+                        <h4>Konversi Satuan & Harga Otomatis</h4>
+                        <p>Sistem otomatis mengonversi satuan dan menghitung harga per satuan standar berdasarkan harga pembelian terakhir pada transaksi pengadaan.</p>
                     </div>
                 </div>
 
                 <div class="featured-item">
                     <div class="featured-icon-box">
                         <i class="fas fa-boxes"></i>
-                    </div>
+                    </div>  
                     <div class="featured-content">
-                        <h4>Support Harga Kemasan</h4>
-                        <p>Mendukung perhitungan bahan baku yang dibeli per kemasan. Misalnya: tepung 1 kg isi 7.5 kg, sistem akan otomatis menghitung harga per satuan yang sebenarnya.</p>
+                        <h4>Pengadaan Bahan</h4>
+                        <p>Mencatat pembelian bahan baku dan menghitung harga satuan otomatis dari kemasan berdasarkan harga beli terakhir.</p>
                     </div>
                 </div>
 
@@ -650,7 +1108,7 @@
                     </div>
                     <div class="footer-links">
                         <a href="#" onclick="alert('Privacy Policy - Coming Soon')">Privacy Policy</a>
-                        <span style="color: #555;">|</span>
+                        <span style="color: #4a5568;">|</span>
                         <a href="#" onclick="alert('Terms of Service - Coming Soon')">Terms of Service</a>
                     </div>
                     <div class="footer-copyright">
@@ -661,6 +1119,7 @@
         </footer>
     </div>
 
+    <!-- LOGIN PAGE -->
     <div id="loginPage" class="login-container">
         <div class="auth-card">
             <h2 class="text-center"><i class="fas fa-sign-in-alt me-2"></i>Login</h2>
@@ -684,6 +1143,7 @@
         </div>
     </div>
 
+    <!-- REGISTER PAGE -->
     <div id="registerPage" class="login-container">
         <div class="auth-card">
             <h2 class="text-center"><i class="fas fa-user-plus me-2"></i>Daftar Akun</h2>
@@ -708,6 +1168,7 @@
         </div>
     </div>
 
+    <!-- APP CONTAINER -->
     <div id="appContainer" class="app-container">
         <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container">
@@ -718,25 +1179,25 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="showDashboard()">Dashboard</a>
+                            <a class="nav-link" href="#" onclick="showDashboard()"><i class="fas fa-home me-1"></i> Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="showMasterBarang()">Master Barang</a>
+                            <a class="nav-link" href="#" onclick="showMasterBarang()"><i class="fas fa-cubes me-1"></i> Master Barang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="showPengadaan()">Pengadaan</a>
+                            <a class="nav-link" href="#" onclick="showPengadaan()"><i class="fas fa-shopping-cart me-1"></i> Pengadaan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="showProducts()">Produk</a>
+                            <a class="nav-link" href="#" onclick="showProducts()"><i class="fas fa-box me-1"></i> Produk</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="showHistory()">Riwayat</a>
+                            <a class="nav-link" href="#" onclick="showHistory()"><i class="fas fa-history me-1"></i> Riwayat</a>
                         </li>
                         <li class="nav-item">
                             <span class="nav-link" id="userNameNav"></span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            <a class="nav-link" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-1"></i> Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -745,82 +1206,82 @@
 
         <div class="main-content">
             <div class="container">
+                <!-- DASHBOARD SECTION -->
                 <div id="dashboardSection">
-                    <div class="card mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
-                        <div class="card-body text-white text-center py-4">
-                            <h2 class="mb-3">👋 Selamat Datang di Costify</h2>
-                            <p class="mb-0" style="font-size: 1.1rem;">Aplikasi sederhana untuk membantu menghitung Harga Pokok Produksi (HPP) secara lebih rapi dan terstruktur dengan konversi satuan yang akurat.</p>
+                    <div class="card welcome-card">
+                        <div class="card-body">
+                            <h2>👋 Selamat Datang di Costify</h2>
+                            <p>Aplikasi sederhana untuk membantu menghitung Harga Pokok Produksi (HPP) secara lebih rapi dan terstruktur dengan konversi satuan yang akurat.</p>
                         </div>
                     </div>
 
-                    <div class="card mb-4" style="border-left: 4px solid #667eea;">
+                    <div class="card info-card mb-4">
                         <div class="card-body">
-                            <h5 class="mb-3"><i class="fas fa-lightbulb text-warning me-2"></i>Cara menggunakan Costify:</h5>
-                            <ol class="mb-0">
-                                <li class="mb-2">Tambahin dulu Master Barang ya best.</li>
-                                <li class="mb-2">Setiap beli bahan, jangan lupa catat di Pengadaan biar ke-track ya.</li>
-                                <li class="mb-2">Masukin produk yang mau kamu hitung HPP-nya di menu Produk.</li>
-                                <li class="mb-2">Tinggal klik tombol “Hitung HPP”.</li>
-                                <li class="mb-2">Pilih bahan dari Master Barang, harganya auto ngikut dari pengadaan terakhir</li>
+                            <h5><i class="fas fa-lightbulb text-warning me-2"></i>Cara menggunakan Costify:</h5>
+                            <ol>
+                                <li>Tambahin dulu Master Barang ya best.</li>
+                                <li>Setiap beli bahan, jangan lupa catat di Pengadaan biar ke-track ya.</li>
+                                <li>Masukin produk yang mau kamu hitung HPP-nya di menu Produk.</li>
+                                <li>Tinggal klik tombol "Hitung HPP".</li>
+                                <li>Pilih bahan dari Master Barang, harganya auto ngikut dari pengadaan terakhir</li>
                                 <li>Taraaa~ langsung keluar estimasi HPP produk kamu</li>
                             </ol>
                         </div>
                     </div>
 
-                    <h3 class="mb-3">📊 Statistik</h3>
+                    <div class="page-header">
+                        <h2><i class="fas fa-chart-bar me-2"></i>Statistik</h2>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-3 mb-4">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-cubes fa-3x text-info mb-3"></i>
-                                    <h5>Master Barang</h5>
-                                    <h2 id="totalMasterBarang">0</h2>
-                                </div>
+                            <div class="stats-card text-center">
+                                <i class="fas fa-cubes" style="color: #4299e1;"></i>
+                                <h5>Master Barang</h5>
+                                <h2 id="totalMasterBarang">0</h2>
                             </div>
                         </div>
                         <div class="col-md-3 mb-4">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-shopping-cart fa-3x text-warning mb-3"></i>
-                                    <h5>Transaksi Pengadaan</h5>
-                                    <h2 id="totalPengadaan">0</h2>
-                                </div>
+                            <div class="stats-card text-center">
+                                <i class="fas fa-shopping-cart" style="color: #ed8936;"></i>
+                                <h5>Transaksi Pengadaan</h5>
+                                <h2 id="totalPengadaan">0</h2>
                             </div>
                         </div>
                         <div class="col-md-3 mb-4">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-box fa-3x text-primary mb-3"></i>
-                                    <h5>Total Produk</h5>
-                                    <h2 id="totalProducts">0</h2>
-                                </div>
+                            <div class="stats-card text-center">
+                                <i class="fas fa-box" style="color: #667eea;"></i>
+                                <h5>Total Produk</h5>
+                                <h2 id="totalProducts">0</h2>
                             </div>
                         </div>
                         <div class="col-md-3 mb-4">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-history fa-3x text-success mb-3"></i>
-                                    <h5>Total Perhitungan</h5>
-                                    <h2 id="totalCalculations">0</h2>
-                                </div>
+                            <div class="stats-card text-center">
+                                <i class="fas fa-history" style="color: #48bb78;"></i>
+                                <h5>Total Perhitungan</h5>
+                                <h2 id="totalCalculations">0</h2>
                             </div>
                         </div>
                     </div>
 
                     <div id="emptyState" class="card text-center" style="display:none;">
-                        <div class="card-body py-5">
-                            <i class="fas fa-chart-pie fa-4x text-muted mb-3"></i>
-                            <h5 class="text-muted">Belum ada perhitungan HPP</h5>
-                            <p class="text-muted">Mulai dengan menambahkan Master Barang, catat Pengadaan, lalu hitung HPP produk Anda.</p>
-                            <button class="btn btn-primary mt-2" onclick="showMasterBarang()">
+                        <div class="card-body">
+                            <i class="fas fa-chart-pie fa-4x mb-3"></i>
+                            <h5>Belum ada perhitungan HPP</h5>
+                            <p>Mulai dengan menambahkan Master Barang, catat Pengadaan, lalu hitung HPP produk Anda.</p>
+                            <button class="btn btn-primary mt-3" onclick="showMasterBarang()">
                                 <i class="fas fa-plus me-2"></i>Tambah Master Barang
                             </button>
                         </div>
                     </div>
                 </div>
 
+                <!-- MASTER BARANG SECTION -->
                 <div id="masterBarangSection" style="display:none;">
-                    <h2 class="mb-4">Master Barang</h2>
+                    <div class="page-header">
+                        <h2><i class="fas fa-cubes me-2"></i>Master Barang</h2>
+                        <p>Kelola data barang dan satuan untuk perhitungan HPP</p>
+                    </div>
                     
                     <div class="card">
                         <div class="card-header">
@@ -848,11 +1309,11 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Satuan Tambahan (Opsional)</label>
-                                    <button type="button" class="btn btn-sm btn-outline-primary ms-2" onclick="tambahSatuanBaru()">
-                                        <i class="fas fa-plus"></i> Tambah Satuan
+                                    <button type="button" class="btn btn-sm btn-primary ms-2" onclick="tambahSatuanBaru()">
+                                        <i class="fas fa-plus me-1"></i> Tambah Satuan
                                     </button>
                                     <div id="satuanStandarInfoBox" class="alert alert-info mt-2" style="display:none;">
-                                        <small><i class="fas fa-info-circle"></i> <strong>Konversi satuan:</strong> <span id="satuanStandarInfoText"></span></small>
+                                        <small><i class="fas fa-info-circle me-1"></i> <strong>Konversi satuan:</strong> <span id="satuanStandarInfoText"></span></small>
                                     </div>
                                     <div id="satuanTambahanContainer" class="mt-2"></div>
                                 </div>
@@ -879,7 +1340,7 @@
                                             <th>Satuan Standar</th>
                                             <th>Satuan Lain</th>
                                             <th>Harga Terakhir</th>
-                                            <th>Aksi</th>
+                                            <th style="width: 140px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="masterBarangList"></tbody>
@@ -889,17 +1350,19 @@
                     </div>
                 </div>
 
+                <!-- PENGADAAN SECTION -->
                 <div id="pengadaanSection" style="display:none;">
-                    <h2 class="mb-4">Transaksi Pengadaan</h2>
+                    <div class="page-header">
+                        <h2><i class="fas fa-shopping-cart me-2"></i>Transaksi Pengadaan</h2>
+                        <p>Catat pembelian bahan baku untuk tracking harga</p>
+                    </div>
                     
-                    <!-- NEW: Budgeting Box -->
                     <div class="budgeting-box">
                         <h4><i class="fas fa-wallet me-2"></i>Total Pengeluaran Bulan Ini</h4>
                         <div class="amount" id="monthlyBudget">Rp 0</div>
                         <small id="budgetMonth"></small>
                     </div>
 
-                    <!-- NEW: Filter Tanggal -->
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="row align-items-end">
@@ -963,15 +1426,14 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12 mb-3 d-flex align-items-end">
-                                        <button type="submit" class="btn btn-primary me-2">
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-primary">
                                             <i class="fas fa-plus me-2"></i>Tambah ke Transaksi
                                         </button>
                                     </div>
                                 </div>
                             </form>
 
-                            <!-- NEW: Temporary Items Table -->
                             <div id="tempItemsContainer" class="temp-items-table" style="display:none;">
                                 <h5><i class="fas fa-list me-2"></i>Barang dalam Transaksi Ini</h5>
                                 <div class="table-responsive">
@@ -982,15 +1444,15 @@
                                                 <th>Jumlah</th>
                                                 <th>Satuan</th>
                                                 <th>Harga/Satuan Standar</th>
-                                                <th>Subtotal</th>
-                                                <th>Aksi</th>
+                                                <th style="text-align: right;">Subtotal</th>
+                                                <th style="width: 80px;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tempItemsList"></tbody>
                                         <tfoot>
                                             <tr>
                                                 <th colspan="4" class="text-end">Subtotal Transaksi:</th>
-                                                <th id="tempTransactionSubtotal">Rp 0</th>
+                                                <th style="text-align: right;" id="tempTransactionSubtotal">Rp 0</th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>
@@ -1014,8 +1476,12 @@
                     </div>
                 </div>
 
+                <!-- PRODUCTS SECTION -->
                 <div id="productsSection" style="display:none;">
-                    <h2 class="mb-4">Kelola Produk</h2>
+                    <div class="page-header">
+                        <h2><i class="fas fa-box me-2"></i>Kelola Produk</h2>
+                        <p>Tambahkan produk yang akan dihitung HPP-nya</p>
+                    </div>
                     
                     <div class="card">
                         <div class="card-header">Tambah Produk Baru</div>
@@ -1024,11 +1490,11 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Nama Produk</label>
-                                        <input type="text" class="form-control" id="productName" required>
+                                        <input type="text" class="form-control" id="productName" required placeholder="Contoh: Kue Brownies">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Jumlah Produksi (per batch)</label>
-                                        <input type="number" class="form-control" id="productQuantity" required min="1">
+                                        <input type="number" class="form-control" id="productQuantity" required min="1" placeholder="Contoh: 10">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">
@@ -1047,7 +1513,7 @@
                                         <tr>
                                             <th>Nama Produk</th>
                                             <th>Jumlah Produksi</th>
-                                            <th>Aksi</th>
+                                            <th style="width: 200px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="productList"></tbody>
@@ -1057,18 +1523,23 @@
                     </div>
                 </div>
 
+                <!-- CALCULATE SECTION -->
                 <div id="calculateSection" style="display:none;">
-                    <button class="btn btn-secondary mb-3" onclick="showProducts()">
+                    <button class="btn btn-secondary mb-4" onclick="showProducts()">
                         <i class="fas fa-arrow-left me-2"></i>Kembali
                     </button>
-                    <h2 class="mb-4">Hitung HPP: <span id="calcProductName"></span></h2>
+                    
+                    <div class="page-header">
+                        <h2><i class="fas fa-calculator me-2"></i>Hitung HPP: <span id="calcProductName"></span></h2>
+                        <p>Input biaya produksi untuk mendapatkan HPP akurat</p>
+                    </div>
 
                     <div class="card">
                         <div class="card-header">1. Biaya Bahan Baku</div>
                         <div class="card-body">
                             <div class="alert alert-info mb-3">
-                                <strong><i class="fas fa-info-circle me-2"></i>Informasi:</strong> 
-                                Pilih bahan dari Master Barang. Harga bahan otomatis diambil dari data pengadaan terakhir.
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Informasi:</strong> Pilih bahan dari Master Barang. Harga bahan otomatis diambil dari data pengadaan terakhir.
                             </div>
 
                             <form id="materialForm">
@@ -1103,7 +1574,7 @@
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">&nbsp;</label>
                                         <button type="submit" class="btn btn-primary w-100">
-                                            <i class="fas fa-plus"></i> Tambah
+                                            <i class="fas fa-plus me-1"></i> Tambah
                                         </button>
                                     </div>
                                 </div>
@@ -1127,7 +1598,7 @@
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">Jenis Tenaga Kerja</label>
-                                        <input type="text" class="form-control" id="laborType" required>
+                                        <input type="text" class="form-control" id="laborType" required placeholder="Contoh: Operator Produksi">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Jenis Biaya</label>
@@ -1138,11 +1609,11 @@
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Biaya (Rp)</label>
-                                        <input type="number" class="form-control" id="laborCost" required min="0">
+                                        <input type="number" class="form-control" id="laborCost" required min="0" placeholder="0">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Waktu/Jumlah</label>
-                                        <input type="number" class="form-control" id="laborTime" required min="0" step="0.01">
+                                        <input type="number" class="form-control" id="laborTime" required min="0" step="0.01" placeholder="0">
                                     </div>
                                     <div class="col-md-1 mb-3">
                                         <label class="form-label">Satuan</label>
@@ -1153,7 +1624,7 @@
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">&nbsp;</label>
-                                        <button type="submit" class="btn btn-primary w-100">Tambah</button>
+                                        <button type="submit" class="btn btn-primary w-100"><i class="fas fa-plus me-1"></i> Tambah</button>
                                     </div>
                                 </div>
                             </form>
@@ -1165,15 +1636,15 @@
                                             <th>Tipe Biaya</th>
                                             <th>Biaya</th>
                                             <th>Waktu/Jumlah</th>
-                                            <th>Total</th>
-                                            <th>Aksi</th>
+                                            <th style="text-align: right;">Total</th>
+                                            <th style="width: 80px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="laborList"></tbody>
                                     <tfoot>
                                         <tr>
                                             <th colspan="4">Total Biaya Tenaga Kerja</th>
-                                            <th id="totalLabor">Rp 0</th>
+                                            <th style="text-align: right;" id="totalLabor">Rp 0</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>
@@ -1207,7 +1678,7 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label" id="overheadValueLabel">Nominal (Rp)</label>
-                                        <input type="number" class="form-control" id="overheadValue" required min="0" step="0.01">
+                                        <input type="number" class="form-control" id="overheadValue" required min="0" step="0.01" placeholder="0">
                                     </div>
                                     <div class="col-md-2 mb-3" id="overheadBaseDiv" style="display:none;">
                                         <label class="form-label">Basis Persentase</label>
@@ -1218,7 +1689,7 @@
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">&nbsp;</label>
-                                        <button type="submit" class="btn btn-primary w-100">Tambah</button>
+                                        <button type="submit" class="btn btn-primary w-100"><i class="fas fa-plus me-1"></i> Tambah</button>
                                     </div>
                                 </div>
                             </form>
@@ -1229,15 +1700,15 @@
                                             <th>Jenis</th>
                                             <th>Metode</th>
                                             <th>Nilai</th>
-                                            <th>Total</th>
-                                            <th>Aksi</th>
+                                            <th style="text-align: right;">Total</th>
+                                            <th style="width: 80px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="overheadList"></tbody>
                                     <tfoot>
                                         <tr>
                                             <th colspan="3">Total Biaya Overhead</th>
-                                            <th id="totalOverhead">Rp 0</th>
+                                            <th style="text-align: right;" id="totalOverhead">Rp 0</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>
@@ -1264,7 +1735,7 @@
                                 </div>
                             </div>
 
-                            <h5 class="mt-4 mb-3">Estimasi Harga Jual</h5>
+                            <h5 class="mt-4 mb-3"><i class="fas fa-tags me-2"></i>Estimasi Harga Jual</h5>
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Margin Keuntungan (%)</label>
@@ -1287,8 +1758,13 @@
                     </div>
                 </div>
 
+                <!-- HISTORY SECTION -->
                 <div id="historySection" style="display:none;">
-                    <h2 class="mb-4">Riwayat Perhitungan</h2>
+                    <div class="page-header">
+                        <h2><i class="fas fa-history me-2"></i>Riwayat Perhitungan</h2>
+                        <p>Lihat kembali perhitungan HPP yang telah disimpan</p>
+                    </div>
+                    
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -1298,9 +1774,9 @@
                                             <th>Tanggal</th>
                                             <th>Produk</th>
                                             <th>Jumlah Produksi</th>
-                                            <th>Total HPP</th>
-                                            <th>HPP per Unit</th>
-                                            <th>Aksi</th>
+                                            <th style="text-align: right;">Total HPP</th>
+                                            <th style="text-align: right;">HPP per Unit</th>
+                                            <th style="width: 200px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="historyList"></tbody>
@@ -1316,6 +1792,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
+        // SEMUA JAVASCRIPT TETAP SAMA - TIDAK ADA PERUBAHAN LOGIKA
         let currentUser = null;
         let currentProductId = null;
         let currentCalculationId = null;
@@ -1325,10 +1802,9 @@
         let tempSatuanTambahan = [];
         let currentEditBarangId = null;
         
-        // NEW: Variables for grouping transactions
         let tempTransactionItems = [];
         let currentTransactionDate = null;
-        let currentEditTransactionId = null; // FITUR BARU: untuk edit transaksi
+        let currentEditTransactionId = null;
 
         window.onload = function() {
             checkAutoLogin();
@@ -1385,8 +1861,6 @@
             }
         }
 
-        // ========== KONVERSI SATUAN FUNCTIONS ==========
-        
         function konversiKeStandar(jumlah, satuanInput, satuanStandar, idBarang) {
             if (satuanInput === satuanStandar) {
                 return jumlah;
@@ -1417,8 +1891,6 @@
             return jumlahStandar;
         }
 
-        // ========== GENERATE KODE BARANG ==========
-        
         function generateKodeBarang() {
             const barang = getMasterBarang();
             const maxNum = barang.reduce((max, b) => {
@@ -1571,8 +2043,6 @@
             loadHistory();
         }
 
-        // ========== MASTER BARANG FUNCTIONS ==========
-
         function getMasterBarang() {
             const all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
             return all.filter(b => b.userId === currentUser.id);
@@ -1675,7 +2145,6 @@
             const editId = document.getElementById('editBarangId').value;
 
             if (editId) {
-                // Mode Edit
                 let all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
                 const idx = all.findIndex(b => b.id === parseInt(editId));
                 
@@ -1686,12 +2155,9 @@
                     
                     localStorage.setItem('costify_master_barang', JSON.stringify(all));
                     
-                    // Update satuan tambahan
                     let allSatuan = getSatuanTambahan();
-                    // Hapus satuan lama
                     allSatuan = allSatuan.filter(s => s.idBarang !== parseInt(editId));
                     
-                    // Tambah satuan baru
                     if (tempSatuanTambahan.length > 0) {
                         tempSatuanTambahan.forEach(s => {
                             if (s.nama && s.konversi > 0) {
@@ -1711,7 +2177,6 @@
                     alert('Master Barang berhasil diubah!');
                 }
             } else {
-                // Mode Tambah Baru
                 const kode = generateKodeBarang();
                 const existing = getMasterBarang();
                 
@@ -1733,7 +2198,6 @@
                 all.push(barang);
                 localStorage.setItem('costify_master_barang', JSON.stringify(all));
                 
-                // Simpan satuan tambahan
                 if (tempSatuanTambahan.length > 0) {
                     let allSatuan = getSatuanTambahan();
                     tempSatuanTambahan.forEach(s => {
@@ -1781,311 +2245,302 @@
 
             barang.forEach(b => {
                 const hargaTerakhir = getHargaTerakhirByBarangId(b.id);
-                const hargaDisplay = hargaTerakhir ? 
-                    formatRupiah(hargaTerakhir.harga_per_standar) + '/' + b.satuan : '-';
-                
-                const satuanLain = getSatuanByBarangId(b.id);
-                let satuanLainText = '-';
-                if (satuanLain.length > 0) {
-                    satuanLainText = satuanLain.map(s => `${s.nama} (${s.konversi}×)`).join(', ');
-                }
-                
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${b.kode}</td>
-                        <td>${b.nama}</td>
-                        <td><span class="badge bg-primary">${b.satuan}</span></td>
-                        <td><small>${satuanLainText}</small></td>
-                        <td>${hargaDisplay}</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning" onclick="editMasterBarang(${b.id})">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteMasterBarang(${b.id})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        function editMasterBarang(idBarang) {
-            const all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
-            const barang = all.find(b => b.id === idBarang);
-            
-            if (!barang) return;
-            
-            currentEditBarangId = idBarang;
-            
-            document.getElementById('editBarangId').value = idBarang;
-            document.getElementById('namaBarang').value = barang.nama;
-            document.getElementById('satuanStandar').value = barang.satuan;
-            
-            updateSatuanStandarInfo();
-            
-            // Load satuan tambahan
-            const satuanLain = getSatuanByBarangId(idBarang);
-            tempSatuanTambahan = [];
-            document.getElementById('satuanTambahanContainer').innerHTML = '';
-            
-            satuanLain.forEach(s => {
-                const id = Date.now() + Math.random();
-                const container = document.getElementById('satuanTambahanContainer');
-                
-                const div = document.createElement('div');
-                div.className = 'satuan-item';
-                div.id = 'satuan-' + id;
-                div.innerHTML = `
-                    <input type="text" class="form-control" placeholder="Nama Satuan" data-id="${id}" data-field="nama" value="${s.nama}">
-                    <input type="number" class="form-control" placeholder="Nilai Konversi" min="0" step="0.001" data-id="${id}" data-field="konversi" value="${s.konversi}">
-                    <span class="text-muted">× ${barang.satuan}</span>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="hapusSatuanBaru(${id})">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                `;
-                
-                container.appendChild(div);
-                tempSatuanTambahan.push({ id: id, nama: s.nama, konversi: s.konversi });
-            });
-            
-            document.getElementById('masterBarangFormTitle').textContent = 'Ubah Master Barang';
-            document.getElementById('masterBarangBtnText').textContent = 'Update';
-            document.getElementById('masterBarangCancelBtn').style.display = 'inline-block';
-            
-            document.getElementById('masterBarangForm').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function cancelEditMasterBarang() {
-            document.getElementById('masterBarangForm').reset();
-            document.getElementById('editBarangId').value = '';
-            document.getElementById('satuanTambahanContainer').innerHTML = '';
-            document.getElementById('satuanStandarInfoBox').style.display = 'none';
-            tempSatuanTambahan = [];
-            currentEditBarangId = null;
-            
-            document.getElementById('masterBarangFormTitle').textContent = 'Tambah Barang Baru';
-            document.getElementById('masterBarangBtnText').textContent = 'Tambah Barang';
-            document.getElementById('masterBarangCancelBtn').style.display = 'none';
-        }
-
-        function deleteMasterBarang(idBarang) {
-            if (confirm('Yakin ingin menghapus barang ini?')) {
-                let all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
-                all = all.filter(b => b.id !== idBarang);
-                localStorage.setItem('costify_master_barang', JSON.stringify(all));
-                
-                // Hapus satuan tambahan
-                let allSatuan = getSatuanTambahan();
-                allSatuan = allSatuan.filter(s => s.idBarang !== idBarang);
-                localStorage.setItem('costify_satuan_tambahan', JSON.stringify(allSatuan));
-                
-                loadMasterBarang();
-                updateDashboard();
-            }
-        }
-
-        // ========== PENGADAAN TRANSACTIONS FUNCTIONS ==========
-
-        function getPengadaanTransactions() {
-            const all = JSON.parse(localStorage.getItem('costify_pengadaan_transactions') || '[]');
-            return all.filter(t => t.userId === currentUser.id);
-        }
-
-        function setTanggalHariIni() {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('tanggalPengadaan').value = today;
-        }
-
-        function searchBarangPengadaan(query) {
-            const listContainer = document.getElementById('barangPengadaanList');
-            
-            if (!query) {
-                listContainer.innerHTML = '';
-                return;
+                const hargaDisplay = hargaTerakhir ?
+formatRupiah(hargaTerakhir.harga_per_standar) + '/' + b.satuan : '-';
+            const satuanLain = getSatuanByBarangId(b.id);
+            let satuanLainText = '-';
+            if (satuanLain.length > 0) {
+                satuanLainText = satuanLain.map(s => `${s.nama} (${s.konversi}×)`).join(', ');
             }
             
-            const barang = getMasterBarang();
-            const filtered = barang.filter(b => 
-                b.nama.toLowerCase().includes(query.toLowerCase()) || 
-                b.kode.toLowerCase().includes(query.toLowerCase())
-            );
-            
-            listContainer.innerHTML = '';
-            
-            if (filtered.length === 0) {
-                const div = document.createElement('div');
-                div.style.padding = '10px';
-                div.style.color = '#999';
-                div.textContent = 'Barang tidak ditemukan. Tambahkan di Master Barang terlebih dahulu.';
-                listContainer.appendChild(div);
-                return;
-            }
-            
-            filtered.forEach(b => {
-                const div = document.createElement('div');
-                div.textContent = `${b.kode} - ${b.nama}`;
-                div.onclick = function() {
-                    selectBarangPengadaan(b.id, b.kode, b.nama, b.satuan);
-                };
-                listContainer.appendChild(div);
-            });
-        }
-
-        function selectBarangPengadaan(idBarang, kode, nama, satuanStandar) {
-            document.getElementById('barangPengadaanSearch').value = `${kode} - ${nama}`;
-            document.getElementById('barangPengadaanValue').value = idBarang;
-            document.getElementById('barangPengadaanList').innerHTML = '';
-            
-            // Populate satuan dropdown
-            const satuanSelect = document.getElementById('satuanPengadaan');
-            satuanSelect.innerHTML = `<option value="${satuanStandar}" data-konversi="1">${satuanStandar} (standar)</option>`;
-            
-            const satuanLain = getSatuanByBarangId(idBarang);
-            satuanLain.forEach(s => {
-                satuanSelect.innerHTML += `<option value="${s.nama}" data-konversi="${s.konversi}">${s.nama}</option>`;
-            });
-        }
-
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.autocomplete-container')) {
-                document.querySelectorAll('.autocomplete-items').forEach(el => el.innerHTML = '');
-            }
+            tbody.innerHTML += `
+                <tr>
+                    <td>${b.kode}</td>
+                    <td>${b.nama}</td>
+                    <td><span class="badge bg-primary">${b.satuan}</span></td>
+                    <td><small>${satuanLainText}</small></td>
+                    <td>${hargaDisplay}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning" onclick="editMasterBarang(${b.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteMasterBarang(${b.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
         });
+    }
 
-        function hitungPengadaanInfo() {
-            const idBarang = document.getElementById('barangPengadaanValue').value;
-            const jumlah = parseFloat(document.getElementById('jumlahPengadaan').value) || 0;
-            const satuanInput = document.getElementById('satuanPengadaan').value;
-            const hargaTotal = parseFloat(document.getElementById('hargaTotalPengadaan').value) || 0;
+    function editMasterBarang(idBarang) {
+        const all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
+        const barang = all.find(b => b.id === idBarang);
+        
+        if (!barang) return;
+        
+        currentEditBarangId = idBarang;
+        
+        document.getElementById('editBarangId').value = idBarang;
+        document.getElementById('namaBarang').value = barang.nama;
+        document.getElementById('satuanStandar').value = barang.satuan;
+        
+        updateSatuanStandarInfo();
+        
+        const satuanLain = getSatuanByBarangId(idBarang);
+        tempSatuanTambahan = [];
+        document.getElementById('satuanTambahanContainer').innerHTML = '';
+        
+        satuanLain.forEach(s => {
+            const id = Date.now() + Math.random();
+            const container = document.getElementById('satuanTambahanContainer');
             
-            const infoBox = document.getElementById('pengadaanInfoBox');
-            const infoText = document.getElementById('pengadaanInfoText');
-            
-            if (!idBarang || !jumlah || !satuanInput || !hargaTotal) {
-                infoBox.style.display = 'none';
-                return;
-            }
-            
-            const all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
-            const barang = all.find(b => b.id === parseInt(idBarang));
-            
-            if (!barang) return;
-            
-            const jumlahStandar = konversiKeStandar(jumlah, satuanInput, barang.satuan, parseInt(idBarang));
-            const hargaPerStandar = hargaTotal / jumlahStandar;
-            
-            infoText.innerHTML = `
-                <strong>Konversi:</strong> ${jumlah} ${satuanInput} = ${jumlahStandar.toFixed(3)} ${barang.satuan}<br>
-                <strong>Harga per ${barang.satuan}:</strong> ${formatRupiah(hargaPerStandar)}
+            const div = document.createElement('div');
+            div.className = 'satuan-item';
+            div.id = 'satuan-' + id;
+            div.innerHTML = `
+                <input type="text" class="form-control" placeholder="Nama Satuan" data-id="${id}" data-field="nama" value="${s.nama}">
+                <input type="number" class="form-control" placeholder="Nilai Konversi" min="0" step="0.001" data-id="${id}" data-field="konversi" value="${s.konversi}">
+                <span class="text-muted">× ${barang.satuan}</span>
+                <button type="button" class="btn btn-sm btn-danger" onclick="hapusSatuanBaru(${id})">
+                    <i class="fas fa-trash"></i>
+                </button>
             `;
             
-            infoBox.style.display = 'block';
+            container.appendChild(div);
+            tempSatuanTambahan.push({ id: id, nama: s.nama, konversi: s.konversi });
+        });
+        
+        document.getElementById('masterBarangFormTitle').textContent = 'Ubah Master Barang';
+        document.getElementById('masterBarangBtnText').textContent = 'Update';
+        document.getElementById('masterBarangCancelBtn').style.display = 'inline-block';
+        
+        document.getElementById('masterBarangForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function cancelEditMasterBarang() {
+        document.getElementById('masterBarangForm').reset();
+        document.getElementById('editBarangId').value = '';
+        document.getElementById('satuanTambahanContainer').innerHTML = '';
+        document.getElementById('satuanStandarInfoBox').style.display = 'none';
+        tempSatuanTambahan = [];
+        currentEditBarangId = null;
+        
+        document.getElementById('masterBarangFormTitle').textContent = 'Tambah Barang Baru';
+        document.getElementById('masterBarangBtnText').textContent = 'Tambah Barang';
+        document.getElementById('masterBarangCancelBtn').style.display = 'none';
+    }
+
+    function deleteMasterBarang(idBarang) {
+        if (confirm('Yakin ingin menghapus barang ini?')) {
+            let all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
+            all = all.filter(b => b.id !== idBarang);
+            localStorage.setItem('costify_master_barang', JSON.stringify(all));
+            
+            let allSatuan = getSatuanTambahan();
+            allSatuan = allSatuan.filter(s => s.idBarang !== idBarang);
+            localStorage.setItem('costify_satuan_tambahan', JSON.stringify(allSatuan));
+            
+            loadMasterBarang();
+            updateDashboard();
+        }
+    }
+
+    function getPengadaanTransactions() {
+        const all = JSON.parse(localStorage.getItem('costify_pengadaan_transactions') || '[]');
+        return all.filter(t => t.userId === currentUser.id);
+    }
+
+    function setTanggalHariIni() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('tanggalPengadaan').value = today;
+    }
+
+    function searchBarangPengadaan(query) {
+        const listContainer = document.getElementById('barangPengadaanList');
+        
+        if (!query) {
+            listContainer.innerHTML = '';
+            return;
+        }
+        
+        const barang = getMasterBarang();
+        const filtered = barang.filter(b => 
+            b.nama.toLowerCase().includes(query.toLowerCase()) || 
+            b.kode.toLowerCase().includes(query.toLowerCase())
+        );
+        
+        listContainer.innerHTML = '';
+        
+        if (filtered.length === 0) {
+            const div = document.createElement('div');
+            div.style.padding = '10px';
+            div.style.color = '#999';
+            div.textContent = 'Barang tidak ditemukan. Tambahkan di Master Barang terlebih dahulu.';
+            listContainer.appendChild(div);
+            return;
+        }
+        
+        filtered.forEach(b => {
+            const div = document.createElement('div');
+            div.textContent = `${b.kode} - ${b.nama}`;
+            div.onclick = function() {
+                selectBarangPengadaan(b.id, b.kode, b.nama, b.satuan);
+            };
+            listContainer.appendChild(div);
+        });
+    }
+
+    function selectBarangPengadaan(idBarang, kode, nama, satuanStandar) {
+        document.getElementById('barangPengadaanSearch').value = `${kode} - ${nama}`;
+        document.getElementById('barangPengadaanValue').value = idBarang;
+        document.getElementById('barangPengadaanList').innerHTML = '';
+        
+        const satuanSelect = document.getElementById('satuanPengadaan');
+        satuanSelect.innerHTML = `<option value="${satuanStandar}" data-konversi="1">${satuanStandar} (standar)</option>`;
+        
+        const satuanLain = getSatuanByBarangId(idBarang);
+        satuanLain.forEach(s => {
+            satuanSelect.innerHTML += `<option value="${s.nama}" data-konversi="${s.konversi}">${s.nama}</option>`;
+        });
+    }
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.autocomplete-container')) {
+            document.querySelectorAll('.autocomplete-items').forEach(el => el.innerHTML = '');
+        }
+    });
+
+    function hitungPengadaanInfo() {
+        const idBarang = document.getElementById('barangPengadaanValue').value;
+        const jumlah = parseFloat(document.getElementById('jumlahPengadaan').value) || 0;
+        const satuanInput = document.getElementById('satuanPengadaan').value;
+        const hargaTotal = parseFloat(document.getElementById('hargaTotalPengadaan').value) || 0;
+        
+        const infoBox = document.getElementById('pengadaanInfoBox');
+        const infoText = document.getElementById('pengadaanInfoText');
+        
+        if (!idBarang || !jumlah || !satuanInput || !hargaTotal) {
+            infoBox.style.display = 'none';
+            return;
+        }
+        
+        const all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
+        const barang = all.find(b => b.id === parseInt(idBarang));
+        
+        if (!barang) return;
+        
+        const jumlahStandar = konversiKeStandar(jumlah, satuanInput, barang.satuan, parseInt(idBarang));
+        const hargaPerStandar = hargaTotal / jumlahStandar;
+        
+        infoText.innerHTML = `
+            <strong>Konversi:</strong> ${jumlah} ${satuanInput} = ${jumlahStandar.toFixed(3)} ${barang.satuan}<br>
+            <strong>Harga per ${barang.satuan}:</strong> ${formatRupiah(hargaPerStandar)}
+        `;
+        
+        infoBox.style.display = 'block';
+    }
+
+    document.getElementById('pengadaanForm').onsubmit = function(e) {
+        e.preventDefault();
+        
+        const tanggal = document.getElementById('tanggalPengadaan').value;
+        const idBarang = parseInt(document.getElementById('barangPengadaanValue').value);
+        const jumlah = parseFloat(document.getElementById('jumlahPengadaan').value);
+        const satuanInput = document.getElementById('satuanPengadaan').value;
+        const hargaTotal = parseFloat(document.getElementById('hargaTotalPengadaan').value);
+
+        if (!idBarang) {
+            alert('Pilih barang terlebih dahulu!');
+            return;
         }
 
-        // Modified pengadaan form submission
-        document.getElementById('pengadaanForm').onsubmit = function(e) {
-            e.preventDefault();
-            
-            const tanggal = document.getElementById('tanggalPengadaan').value;
-            const idBarang = parseInt(document.getElementById('barangPengadaanValue').value);
-            const jumlah = parseFloat(document.getElementById('jumlahPengadaan').value);
-            const satuanInput = document.getElementById('satuanPengadaan').value;
-            const hargaTotal = parseFloat(document.getElementById('hargaTotalPengadaan').value);
+        const all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
+        const barang = all.find(b => b.id === idBarang);
+        
+        if (!barang) {
+            alert('Barang tidak ditemukan!');
+            return;
+        }
 
-            if (!idBarang) {
-                alert('Pilih barang terlebih dahulu!');
-                return;
-            }
+        const jumlahStandar = konversiKeStandar(jumlah, satuanInput, barang.satuan, idBarang);
+        const hargaPerStandar = hargaTotal / jumlahStandar;
+        const subtotal = hargaTotal;
 
-            const all = JSON.parse(localStorage.getItem('costify_master_barang') || '[]');
-            const barang = all.find(b => b.id === idBarang);
-            
-            if (!barang) {
-                alert('Barang tidak ditemukan!');
-                return;
-            }
-
-            const jumlahStandar = konversiKeStandar(jumlah, satuanInput, barang.satuan, idBarang);
-            const hargaPerStandar = hargaTotal / jumlahStandar;
-            const subtotal = hargaTotal;
-
-            // Add to temp items
-            const tempItem = {
-                id: Date.now(),
-                idBarang: idBarang,
-                kodeBarang: barang.kode,
-                namaBarang: barang.nama,
-                jumlah_input: jumlah,
-                satuan_input: satuanInput,
-                jumlah_standar: jumlahStandar,
-                satuan_standar: barang.satuan,
-                harga_total: hargaTotal,
-                harga_per_standar: hargaPerStandar,
-                subtotal: subtotal
-            };
-
-            tempTransactionItems.push(tempItem);
-            currentTransactionDate = tanggal;
-
-            // Clear form
-            document.getElementById('barangPengadaanSearch').value = '';
-            document.getElementById('barangPengadaanValue').value = '';
-            document.getElementById('jumlahPengadaan').value = '';
-            document.getElementById('satuanPengadaan').innerHTML = '<option value="">Pilih Satuan</option>';
-            document.getElementById('hargaTotalPengadaan').value = '';
-            document.getElementById('pengadaanInfoBox').style.display = 'none';
-
-            loadTempItems();
+        const tempItem = {
+            id: Date.now(),
+            idBarang: idBarang,
+            kodeBarang: barang.kode,
+            namaBarang: barang.nama,
+            jumlah_input: jumlah,
+            satuan_input: satuanInput,
+            jumlah_standar: jumlahStandar,
+            satuan_standar: barang.satuan,
+            harga_total: hargaTotal,
+            harga_per_standar: hargaPerStandar,
+            subtotal: subtotal
         };
 
-        function loadTempItems() {
-            const container = document.getElementById('tempItemsContainer');
-            const tbody = document.getElementById('tempItemsList');
-            
-            if (tempTransactionItems.length === 0) {
-                container.style.display = 'none';
-                return;
-            }
+        tempTransactionItems.push(tempItem);
+        currentTransactionDate = tanggal;
 
-            container.style.display = 'block';
-            tbody.innerHTML = '';
+        document.getElementById('barangPengadaanSearch').value = '';
+        document.getElementById('barangPengadaanValue').value = '';
+        document.getElementById('jumlahPengadaan').value = '';
+        document.getElementById('satuanPengadaan').innerHTML = '<option value="">Pilih Satuan</option>';
+        document.getElementById('hargaTotalPengadaan').value = '';
+        document.getElementById('pengadaanInfoBox').style.display = 'none';
 
-            let totalSubtotal = 0;
+        loadTempItems();
+    };
 
-            tempTransactionItems.forEach((item, idx) => {
-                totalSubtotal += item.subtotal;
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${item.namaBarang}</td>
-                        <td>${item.jumlah_input}</td>
-                        <td>${item.satuan_input}</td>
-                        <td>${formatRupiah(item.harga_per_standar)}/${item.satuan_standar}</td>
-                        <td>${formatRupiah(item.subtotal)}</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger" onclick="removeTempItem(${idx})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            document.getElementById('tempTransactionSubtotal').textContent = formatRupiah(totalSubtotal);
+    function loadTempItems() {
+        const container = document.getElementById('tempItemsContainer');
+        const tbody = document.getElementById('tempItemsList');
+        
+        if (tempTransactionItems.length === 0) {
+            container.style.display = 'none';
+            return;
         }
 
-        function removeTempItem(idx) {
-            tempTransactionItems.splice(idx, 1);
-            loadTempItems();
+        container.style.display = 'block';
+        tbody.innerHTML = '';
+
+        let totalSubtotal = 0;
+
+        tempTransactionItems.forEach((item, idx) => {
+            totalSubtotal += item.subtotal;
+            tbody.innerHTML += `
+                <tr>
+                    <td>${item.namaBarang}</td>
+                    <td>${item.jumlah_input}</td>
+                    <td>${item.satuan_input} <span class="badge badge-info">${item.jumlah_standar.toFixed(3)} ${item.satuan_standar}</span></td>
+                    <td>${formatRupiah(item.harga_per_standar)}/${item.satuan_standar}</td>
+                    <td style="text-align: right;">${formatRupiah(item.subtotal)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="removeTempItem(${idx})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        document.getElementById('tempTransactionSubtotal').textContent = formatRupiah(totalSubtotal);
+    }
+
+    function removeTempItem(idx) {
+        tempTransactionItems.splice(idx, 1);
+        loadTempItems();
+    }
+
+    function saveTransaction() {
+        if (tempTransactionItems.length === 0) {
+            alert('Belum ada barang yang ditambahkan!');
+            return;
         }
-        function saveTransaction() {
-if (tempTransactionItems.length === 0) {
-alert('Belum ada barang yang ditambahkan!');
-return;
-}
-        // FITUR BARU: Cek mode Edit atau Tambah
+
         if (currentEditTransactionId) {
-            // Mode Edit: Update transaksi yang sudah ada
             let allTransactions = JSON.parse(localStorage.getItem('costify_pengadaan_transactions') || '[]');
             const idx = allTransactions.findIndex(t => t.id === currentEditTransactionId);
             
@@ -2101,7 +2556,6 @@ return;
             
             currentEditTransactionId = null;
         } else {
-            // Mode Tambah: Buat transaksi baru
             const transaction = {
                 id: Date.now(),
                 userId: currentUser.id,
@@ -2118,7 +2572,6 @@ return;
             alert('Transaksi berhasil disimpan!');
         }
         
-        // Reset
         tempTransactionItems = [];
         currentTransactionDate = null;
         loadTempItems();
@@ -2126,7 +2579,6 @@ return;
         updateMonthlyBudget();
         updateDashboard();
         
-        // Reset form title
         document.getElementById('pengadaanFormTitle').textContent = 'Tambah Transaksi Pengadaan';
     }
 
@@ -2137,39 +2589,30 @@ return;
             currentEditTransactionId = null;
             loadTempItems();
             
-            // Reset form title
             document.getElementById('pengadaanFormTitle').textContent = 'Tambah Transaksi Pengadaan';
         }
     }
 
-    // FITUR BARU: Edit Transaksi Pengadaan
     function editTransaction(transactionId) {
         const transactions = getPengadaanTransactions();
         const trans = transactions.find(t => t.id === transactionId);
         
         if (!trans) return;
         
-        // Set mode edit
         currentEditTransactionId = transactionId;
         currentTransactionDate = trans.tanggal;
         
-        // Load items ke temp
-        tempTransactionItems = JSON.parse(JSON.stringify(trans.items)); // Deep copy
+        tempTransactionItems = JSON.parse(JSON.stringify(trans.items));
         
-        // Update form tanggal
         document.getElementById('tanggalPengadaan').value = trans.tanggal;
         
-        // Update form title
         document.getElementById('pengadaanFormTitle').textContent = 'Edit Transaksi Pengadaan';
         
-        // Tampilkan temp items
         loadTempItems();
         
-        // Scroll ke form
         document.getElementById('pengadaanSection').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // FITUR BARU: Hapus Transaksi Pengadaan
     function deleteTransaction(transactionId) {
         if (confirm('Yakin ingin menghapus transaksi ini? Data tidak dapat dikembalikan.')) {
             let allTransactions = JSON.parse(localStorage.getItem('costify_pengadaan_transactions') || '[]');
@@ -2214,7 +2657,7 @@ return;
                                     <th>Jumlah</th>
                                     <th>Satuan</th>
                                     <th>Harga/Satuan Standar</th>
-                                    <th>Subtotal</th>
+                                    <th style="text-align: right;">Subtotal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -2227,7 +2670,7 @@ return;
                         <td>${item.jumlah_input}</td>
                         <td>${item.satuan_input} <span class="badge badge-info">${item.jumlah_standar.toFixed(3)} ${item.satuan_standar}</span></td>
                         <td>${formatRupiah(item.harga_per_standar)}/${item.satuan_standar}</td>
-                        <td>${formatRupiah(item.subtotal)}</td>
+                        <td style="text-align: right;">${formatRupiah(item.subtotal)}</td>
                     </tr>
                 `;
             });
@@ -2254,7 +2697,6 @@ return;
         container.innerHTML = html;
     }
 
-    // Filter by date
     function filterPengadaanByDate() {
         const filterDate = document.getElementById('filterTanggalPengadaan').value;
         
@@ -2295,7 +2737,7 @@ return;
                                     <th>Jumlah</th>
                                     <th>Satuan</th>
                                     <th>Harga/Satuan Standar</th>
-                                    <th>Subtotal</th>
+                                    <th style="text-align: right;">Subtotal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -2308,7 +2750,7 @@ return;
                         <td>${item.jumlah_input}</td>
                         <td>${item.satuan_input} <span class="badge badge-info">${item.jumlah_standar.toFixed(3)} ${item.satuan_standar}</span></td>
                         <td>${formatRupiah(item.harga_per_standar)}/${item.satuan_standar}</td>
-                        <td>${formatRupiah(item.subtotal)}</td>
+                        <td style="text-align: right;">${formatRupiah(item.subtotal)}</td>
                     </tr>
                 `;
             });
@@ -2340,7 +2782,6 @@ return;
         loadPengadaan();
     }
 
-    // Monthly budget calculation
     function updateMonthlyBudget() {
         const transactions = getPengadaanTransactions();
         const now = new Date();
@@ -2361,7 +2802,6 @@ return;
         document.getElementById('budgetMonth').textContent = `${monthNames[currentMonth]} ${currentYear}`;
     }
 
-    // Get latest price from transactions
     function getHargaTerakhirByBarangId(idBarang) {
         const transactions = getPengadaanTransactions();
         
@@ -2388,8 +2828,6 @@ return;
             tanggal: latestDate.toISOString()
         };
     }
-
-    // ========== PRODUCTS FUNCTIONS ==========
 
     function getProducts() {
         const all = JSON.parse(localStorage.getItem('costify_products') || '[]');
@@ -2436,7 +2874,7 @@ return;
                     <td>${p.quantity} unit</td>
                     <td>
                         <button class="btn btn-sm btn-primary" onclick="calculateHPP(${p.id})">
-                            <i class="fas fa-calculator"></i> Hitung HPP
+                            <i class="fas fa-calculator me-1"></i> Hitung HPP
                         </button>
                         <button class="btn btn-sm btn-danger" onclick="deleteProduct(${p.id})">
                             <i class="fas fa-trash"></i>
@@ -2456,8 +2894,6 @@ return;
             updateDashboard();
         }
     }
-
-    // ========== HPP CALCULATION FUNCTIONS ==========
 
     function calculateHPP(productId, calculationId = null) {
         const masterBarang = getMasterBarang();
@@ -2535,7 +2971,6 @@ return;
         document.getElementById('materialNameValue').value = idBarang;
         document.getElementById('materialNameList').innerHTML = '';
         
-        // Populate satuan usage
         const usageSelect = document.getElementById('usageUnit');
         usageSelect.innerHTML = `<option value="${satuanStandar}" data-konversi="1">${satuanStandar} (standar)</option>`;
         
@@ -2643,7 +3078,7 @@ return;
         
         if (materials.length === 0) {
             container.innerHTML = `
-                <div class="text-center text-muted py-4">
+                <div class="text-center text-muted py-5">
                     <i class="fas fa-inbox fa-3x mb-3"></i>
                     <p>Belum ada bahan baku yang ditambahkan.</p>
                 </div>
@@ -2657,8 +3092,8 @@ return;
                     <th>Nama Bahan</th>
                     <th>Harga/Standar</th>
                     <th>Pemakaian</th>
-                    <th>Total</th>
-                    <th>Aksi</th>
+                    <th style="text-align: right;">Total</th>
+                    <th style="width: 80px;">Aksi</th>
                 </tr>
             </thead>
             <tbody>`;
@@ -2674,7 +3109,7 @@ return;
                             onchange="updateMaterialQty(${idx}, this.value)"> ${m.usageUnit}
                         <br><small class="text-muted">${m.quantityStandar.toFixed(3)} ${m.satuanStandar}</small>
                     </td>
-                    <td>${formatRupiah(m.total)}</td>
+                    <td style="text-align: right;">${formatRupiah(m.total)}</td>
                     <td>
                         <button class="btn btn-sm btn-danger" onclick="deleteMaterial(${idx})">
                             <i class="fas fa-trash"></i>
@@ -2688,7 +3123,7 @@ return;
             <tfoot>
                 <tr>
                     <th colspan="3">Total Biaya Bahan Baku</th>
-                    <th id="totalMaterial">Rp 0</th>
+                    <th style="text-align: right;" id="totalMaterial">Rp 0</th>
                     <th></th>
                 </tr>
             </tfoot>
@@ -2763,7 +3198,7 @@ return;
                     <td>${l.costType === 'per_jam' ? 'Per Jam' : 'Per Unit'}</td>
                     <td>${formatRupiah(l.cost)}</td>
                     <td>${l.time} ${l.timeUnit}</td>
-                    <td>${formatRupiah(l.total)}</td>
+                    <td style="text-align: right;">${formatRupiah(l.total)}</td>
                     <td>
                         <button class="btn btn-sm btn-danger" onclick="deleteLabor(${idx})">
                             <i class="fas fa-trash"></i>
@@ -2827,7 +3262,7 @@ return;
                     <td>${o.type}</td>
                     <td>${o.method === 'manual' ? 'Manual' : 'Persentase'}</td>
                     <td>${o.method === 'manual' ? formatRupiah(o.value) : o.value + '%'}</td>
-                    <td>${formatRupiah(total)}</td>
+                    <td style="text-align: right;">${formatRupiah(total)}</td>
                     <td>
                         <button class="btn btn-sm btn-danger" onclick="deleteOverhead(${idx})">
                             <i class="fas fa-trash"></i>
@@ -2970,8 +3405,6 @@ return;
         updateTotals();
     }
 
-    // ========== HISTORY FUNCTIONS ==========
-
     function getHistory() {
         const all = JSON.parse(localStorage.getItem('costify_history') || '[]');
         return all.filter(h => h.userId === currentUser.id);
@@ -2994,8 +3427,8 @@ return;
                     <td>${date}</td>
                     <td>${h.productName}</td>
                     <td>${h.quantity} unit</td>
-                    <td>${formatRupiah(h.totalHPP)}</td>
-                    <td>${formatRupiah(h.hppPerUnit)}</td>
+                    <td style="text-align: right;">${formatRupiah(h.totalHPP)}</td>
+                    <td style="text-align: right;">${formatRupiah(h.hppPerUnit)}</td>
                     <td>
                         <button class="btn btn-sm btn-warning" onclick="editHPP(${h.id}, ${h.productId})" title="Edit HPP">
                             <i class="fas fa-edit"></i>
